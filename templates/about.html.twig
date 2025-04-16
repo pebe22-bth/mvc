@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <h1>Om kursen</h1>
+    <div class="row">
+        <div class="column">
+            <p>
+                Kursen Objektorienterade webbteknologier, a.k.a. mvc, 
+                fokuserar på objektorienterade programmeringstekniker i programmeringsspråket PHP. 
+                Klassiska objektorienterade konstruktioner hanteras tillsammans med objektorienterad 
+                programmering i webbaserat ramverk tillsammans med databaser samt enhetstestning..
+            </p>
+        </div>
+        <div class="column repos">
+            <p>
+                Länkar till kursens och mitt GIT repo.
+            </p>
+            <ul> 
+                <li >             
+                <a href="https://github.com/dbwebb-se/mvc" title="Länk till kursens github-repo" target="_blank">
+                    <img src="https://dbwebb.se/image/theme/leaf_256x256.png" width="50px" alt="">
+                </a></li>
+                <li>
+                <a href="https://github.com/pebe22-bth/mvc" title="Länk till sidans github-repo" role="button">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a></li>
+            </ul>   
+        </div>
+    </div>
+{% endblock %}

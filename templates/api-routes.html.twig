@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JSON Routes</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}
+                {{ importmap('app') }}
+            {% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+    <h1>JSON Routes</h1>
+    <div class="routes">
+        <code>
+ -------------------------- -------- -------- ------ -------<br>
+  Name                       Method   Scheme   Host   Path  <br>
+ -------------------------- -------- -------- ------ -------<br>
+ api_quote                  ANY      ANY      ANY    /api/quote    <br>
+</code> 
+</div>
+</body>
+</html>

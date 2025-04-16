@@ -1,0 +1,14 @@
+.footer {
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.footer ul {
+    list-style-type: none;
+    display: flex;
+    padding: 2px;
+    margin: 1px;
+}
+
+.footer ul li {
+    margin: 0px;
+}

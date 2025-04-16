@@ -1,0 +1,18 @@
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    padding: 2px;
+    margin: 1px;
+}
+
+.navbar ul li {
+    margin: 10px;
+}
+
+.header {
+    /*    flex: 0 0 auto;*/
+        padding-top: 3px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid #ddd;
+}
