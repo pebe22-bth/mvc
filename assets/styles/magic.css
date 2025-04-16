@@ -1,4 +1,11 @@
 
+.magic {
+    border: 5px solid #ff0000; 
+    padding: 20px;
+    margin: 20px;
+    animation: color-change 3s infinite;
+    text-align: center;
+}
 
 .magic-number {
     font-size: 3rem;
@@ -7,12 +14,7 @@
     animation: color-change 3s infinite; 
 }
 
-.magic-border {
-    border: 5px solid #ff0000; 
-    padding: 20px;
-    margin: 20px;
-    animation: color-change 3s infinite;
-}
+
 
 @keyframes color-change {
     0% {

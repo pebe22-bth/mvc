@@ -23,7 +23,12 @@ class APIController
 
         $quoteList = $this -> getQuotes();
         $quote = $quoteList[random_int(0, count($quoteList) - 1)];
-        $quote["attribition"] = 'Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a>';
+        $quote["attribution"] = 'Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a>';
+        //dagens datum och en tidsstämpel 
+        // set the default timezone to use.
+        date_default_timezone_set('CET');
+        $quote["date"] = date("Y-m-d");
+        $quote["timestamp"] = date("H:i:s (T)");
         
         $response = new JsonResponse($quote);
         $response->setEncodingOptions(
