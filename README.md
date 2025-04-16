@@ -1,5 +1,5 @@
 # MVC kurs repo
-logo
+
 ![BTH](https://dbwebb.se/image/theme/leaf_256x256.png)
 
 ## Om innehållet
