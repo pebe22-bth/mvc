@@ -1,6 +1,7 @@
 # MVC kurs repo
-
+logo
 ![BTH](https://dbwebb.se/image/theme/leaf_256x256.png)
+
 ## Om innehållet
 Repot innehåller den kod som utvecklas i kursen 
 [MVC](https://dbwebb.se/kurser/mvc-v2).
