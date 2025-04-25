@@ -16,13 +16,14 @@ git clone https://github.com/pebe22-bth/mvc
 ```
 ## Fontawesome
 Fonter - dvs några brand-ikoner bl.a. github icon ligger inte med i repot utan det behövs access till mitt kit på fontawesome.com.
-Så länge du kör på en webplats med privat IP (10.*, 192.168.*) eller *.bth.se så kommr det fungera, men inte annars.
+Så länge du kör på en webplats med privat IP (10.*, 192.168.*) eller *.bth.se så kommer det fungera, men inte annars.
 Du kan enkelt registrera ditt eget kit på fontawesome där du inkluderar "brands" free styles och uppdatera
 base.html.twig
 ```
 <script src="https://kit.fontawesome.com/<ditt unika id>
 ```
 om du har behov att köra på annan domän.
+
 
 ## Komma igång 
 ```bash

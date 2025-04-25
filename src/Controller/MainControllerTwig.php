@@ -36,7 +36,7 @@ class MainControllerTwig extends AbstractController
     {
         return $this->render('report.html.twig');
     }
-    
+
     #[Route("/api", name: "api")]
     public function apiRoutes(): Response
     {

@@ -12,7 +12,7 @@ class APIController
     {
         $filename = "../assets/data/quotes.json";
         $jsonData = file_get_contents($filename);
-        
+
         return json_decode($jsonData, true);
     }
 
@@ -24,17 +24,17 @@ class APIController
         $quoteList = $this -> getQuotes();
         $quote = $quoteList[random_int(0, count($quoteList) - 1)];
         $quote["attribution"] = 'Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a>';
-        //dagens datum och en tidsstämpel 
+        //dagens datum och en tidsstämpel
         // set the default timezone to use.
         date_default_timezone_set('CET');
         $quote["date"] = date("Y-m-d");
         $quote["timestamp"] = date("H:i:s (T)");
-        
+
         $response = new JsonResponse($quote);
         $response->setEncodingOptions(
-        $response->getEncodingOptions() | JSON_PRETTY_PRINT
-    );
-    return $response;
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
-    
+
 }
