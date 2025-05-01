@@ -1,0 +1,20 @@
+
+{% block main %}
+<h1>Roll dices</h1>
+
+<p>You rolled dices. Here is the value of the dices.</p>
+
+<ul>
+{% for dice in diceroll %}
+    <li>{{ dice }}</li>
+{% endfor %}
+
+</ul>
+
+<p>Try to roll 
+    <a href="{{ path('test_roll_dices', {num: 5}) }}">5</a>
+    or 
+    <a href="{{ path('test_roll_dices', {num: 10}) }}">10</a>
+    dices.
+</p>
+{% endblock %}

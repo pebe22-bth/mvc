@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Spelkort{% endblock %}
+
+{% block main %}
+<h1>Draget kort</h1>
+
+<p>Kort draget ut kortleken är..</p>
+{{ card }}
+
+<p>Antal kort kvar i kortleken:
+{{ cards_left }}
+</p>
+<p></p>
+
+{{ include('card/flash.html.twig') }}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block main %}
+<h1>Card game</h1>
+
+<p>card game info</p>
+
+<p>Play cards
+    <a href="{{ path('card_deck') }}">Show deck</a>
+</p>
+
+<p></p>
+
+{{ include('card/flash.html.twig') }}
+{% endblock %}

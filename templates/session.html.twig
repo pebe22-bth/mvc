@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Session information{% endblock %}
+
+{% block body %}
+    <h1>Session</h1>
+    <div class="session">
+        <p>
+            <h2>Session content</h2>
+          <ul>
+                <li> Session Data: {{ dump(sessionData) }}</li>
+                <li> Meta Session Data: {{ dump(metaData) }}</li>
+                
+            </ul>
+
+        </p>
+        <p>
+            <a href="{{ path('session_delete')}}"> Delete session data </a>
+        </p>
+    </div>
+    {{ include('card/flash.html.twig') }}
+{% endblock %}

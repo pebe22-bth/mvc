@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Deck{% endblock %}
+
+{% block main %}
+<h1>Card deck contents</h1>
+
+<p>This is the contents of the deck</p>
+
+<ul>
+    {% for card in deck %}
+        <li>{{ card }}</li>
+    {% endfor %}
+    </ul>
+
+<p>{{ dump(deck) }}</p>
+<p></p>
+
+{{ include('card/flash.html.twig') }}
+{% endblock %}
