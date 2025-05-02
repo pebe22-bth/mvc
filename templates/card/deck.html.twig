@@ -7,13 +7,16 @@
 
 <p>This is the contents of the deck</p>
 
-<ul>
     {% for card in deck %}
-        <li>{{ card }}</li>
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+    {{ card }}
+    </div>
     {% endfor %}
-    </ul>
 
-<p>{{ dump(deck) }}</p>
 <p></p>
 
 {{ include('card/flash.html.twig') }}

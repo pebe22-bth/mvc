@@ -6,12 +6,17 @@
 <h1>Dragna kort</h1>
 
 <p>Korten dragna ur kortleken är..</p>
-<ul>
     {% for card in cardsStr %}
-        <li>{{ card }}</li>
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+            {{ card }}
+            </div>
     {% endfor %}
-</ul>
-{{ dump(cardsStr) }}
+</div>
+<p></p>
 
 <p>Antal kort kvar i kortleken:
 {{ cards_left }}
