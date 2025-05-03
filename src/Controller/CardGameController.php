@@ -122,7 +122,7 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response {
         date_default_timezone_set('CET');
-        $session->set("last_check", date('D M j G:i:s T Y'));
+        //        $session->set("last_check", date('D M j G:i:s T Y'));
         $sessionMetadata = $session->getMetadataBag();
 
         $sessionData = $session->all();
@@ -135,7 +135,7 @@ class CardGameController extends AbstractController
 
         $data = [
             "sessionData" => $sessionData,
-            "metaData" => $metaData
+//            "metaData" => $metaData
         ];
 
         return $this->render('session.html.twig', $data);
