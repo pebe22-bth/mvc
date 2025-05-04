@@ -5,8 +5,7 @@
 {% block body %}
     <h1>Redovisningstexter</h1>
     <p></p>
-
-
+  
     <h2 id="kmom01">Kmom01</h2>
     <p>Mina förkunskaper i objektorienterad programmering är begränsade, 
         har programmerat enkla grejer i C++ och java bland annat, 
@@ -45,9 +44,24 @@
     <li>Bra med repetition av dagligt arbete med git. De behövs för en icke-programmerare.</li>
 </p>
 
+<h2 id="kmom02">Kmom02</h2>
+  
+{% apply markdown_to_html %}
+    ### PHPdoc
+    Jag ville hitta ett sätt att generera klass-dokumentationen, så jag har använt [phpDocumentor](https://www.phpdoc.org/)
+    för att generera dokumentation baserat på phpdoc kommentarer i koden - jag lagrar den i report/docs som markdown. 
+    Jag ville generera den i markdown för det känns mest naturligt att inkludera i github README.md men krävde även att jag installerade
+    markdown stöd i symfony för att länka in i rapport-sidan.
+    För att få tabeller att fungera krävdes även tillägg i services.yaml
+    
+    ``` 
+    League\CommonMark\Extension\Table\TableExtension:
+        tags: [ 'twig.markdown.league_extension' ]
+    ```
 
-    <h2 id="kmom02">Kmom02</h2>
-    <p>Redovisningstext</p>
+    {{ include('card/docs/Home.md') | raw }}
+{% endapply %}
+
     <h2 id="kmom03">Kmom03</h2>
     <p>Redovisningstext</p> 
     <h2 id="kmom04">Kmom04</h2>

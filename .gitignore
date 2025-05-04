@@ -1,4 +1,5 @@
 .DS_Store
+.phpdoc
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -36,3 +37,6 @@ yarn-error.log
 /tools/**/vendor/
 /tools/**/composer.lock
 .php-cs-fixer.cache
+
+
+

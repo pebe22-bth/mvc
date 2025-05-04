@@ -1,15 +1,112 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Card Game{% endblock %}
+{% block title %}Kortspel{% endblock %}
 
 {% block main %}
-<h1>Card game</h1>
 
-<p>card game info</p>
+{% include 'card/nav.html.twig' %}
 
-<p>Play cards
-    <a href="{{ path('card_deck') }}">Show deck</a>
-</p>
+
+<h1>Kortspel</h1>
+
+<p>Hur implementeras grundfunktioner för att generera och blanda en kortlek och därefter kunna dra valfritt antal kort från "högen".</p>
+<h2>Klasser</h2></p>
+
+
+<ul>
+    <li>
+        <strong>Card</strong>: 
+        <ul>
+            <li><em>Attribut:</em>
+                <ul>
+                    <li><code>protected $value</code>: Kortets värde.</li>
+                </ul>
+            </li>
+            <li><em>Metoder:</em>
+                <ul>
+                    <li><code>set($value): int</code> - Sätter kortets värde.</li>
+                    <li><code>getValue(): ?int</code> - Hämtar kortets värde.</li>
+                    <li><code>getAsString(): string</code> - Returnerar kortets värde som en sträng.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>CardGraphic</strong>: 
+        <ul>
+            <li><em>Attribut:</em>
+                <ul>
+                    <li><code>private $colors</code>: Färgerna på korten (♠, ♥, ♦, ♣).</li>
+                    <li><code>private $values</code>: Värdena på korten (A, 2, 3, ..., K).</li>
+                    <li><code>private $representation</code>: Grafiska representationer av korten.</li>
+                </ul>
+            </li>
+            <li><em>Metoder:</em>
+                <ul>
+                    <li><code>getAsString(): string</code> - Returnerar kortets grafiska representation (t.ex. "A♠").</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>DeckOfCards</strong>: 
+        <ul>
+            <li><em>Attribut:</em>
+                <ul>
+                    <li><code>private $deck</code>: En array som innehåller kortleken.</li>
+                </ul>
+            </li>
+            <li><em>Metoder:</em>
+                <ul>
+                    <li><code>__construct()</code> - Skapar en ny kortlek och bygger den.</li>
+                    <li><code>shuffle()</code> - Blandar kortleken.</li>
+                    <li><code>drawCard(): CardGraphic</code> - Drar ett kort från kortleken.</li>
+                    <li><code>getNumberOfCards(): int</code> - Returnerar antalet kort kvar i kortleken.</li>
+                    <li><code>getDeckAsValues(): array</code> - Returnerar kortlekens värden som en array.</li>
+                    <li><code>getDeck(): array</code> - Returnerar kortlekens grafiska representationer som en array.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>CardHand</strong>: 
+        <ul>
+            <li><em>Attribut:</em>
+                <ul>
+                    <li><code>private $hand</code>: En array som innehåller korten i handen.</li>
+                </ul>
+            </li>
+            <li><em>Metoder:</em>
+                <ul>
+                    <li><code>add(Card $card): void</code> - Lägger till ett kort i handen.</li>
+                    <li><code>roll(): void</code> - Utför en "roll" på korten i handen (om tillämpligt).</li>
+                    <li><code>getNumberCards(): int</code> - Returnerar antalet kort i handen.</li>
+                    <li><code>getValues(): array</code> - Returnerar kortens värden i handen som en array.</li>
+                    <li><code>getString(): array</code> - Returnerar kortens grafiska representationer i handen som en array.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>CardGameController</strong>: 
+        <ul>
+            <li><em>Metoder:</em>
+                <ul>
+                    <li><code>home(SessionInterface $session): Response</code> - Visar startsidan för kortspelet.</li>
+                    <li><code>deck(SessionInterface $session): Response</code> - Skapar en ny kortlek och visar den.</li>
+                    <li><code>shuffle(SessionInterface $session): Response</code> - Blandar kortleken.</li>
+                    <li><code>draw(SessionInterface $session): Response</code> - Drar ett kort från kortleken.</li>
+                    <li><code>draw_multiple(int $num, SessionInterface $session): Response</code> - Drar flera kort från kortleken.</li>
+                    <li><code>cardsleft(SessionInterface $session): Response</code> - Visar antalet kort kvar i kortleken.</li>
+                    <li><code>session(SessionInterface $session): Response</code> - Visar sessionsdata.</li>
+                    <li><code>deleteSession(SessionInterface $session): Response</code> - Rensar sessionen.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<h3>UML diagram</h3>
+
 
 <p></p>
 

@@ -33,7 +33,11 @@ npm run build
 ```bash
 symfony server:start --allow-all-ip
 ```
+## PHPdoc
+[Class dokumentation](docs/Home.md)
 
 ## Ramverk
 [Symfony](https://symfony.com/)
+[PHP Documentor](https://docs.phpdoc.org/)
+
 
