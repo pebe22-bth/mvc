@@ -1,0 +1,37 @@
+@startuml class-diagram
+  class "Card\n<b>Card representes a playing card in a standard deck of cards</b>" as Card {
+    #value : 
+    +__construct()
+    +set(value)
+    +getValue()
+    +getAsString()
+  }
+  class "CardGraphic\n<b>CardGraphic represents a playing card represented as a string conaining color and value (2 characters)</b>" as CardGraphic {
+    -colors : array
+    -values : array
+    -representation : array
+    +__construct()
+    -buildArrayOfCards()
+    +getAsString()
+  }
+  class "DeckOfCards" as DeckOfCards {
+    -deck : 
+    +__construct()
+    -buildDeck()
+    +shuffle()
+    +drawCard()
+    +getNumberOfCards()
+    +getDeckAsValues()
+    +getDeck()
+  }
+  class "CardHand" as CardHand {
+    -hand : 
+    +add(card)
+    +getNumberCards()
+    +getValues()
+    +getString()
+  }
+  Card <|-- CardGraphic
+  CardHand ..> CardGraphic
+  DeckOfCards ..> CardGraphic
+@enduml

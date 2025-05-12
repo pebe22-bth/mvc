@@ -2,22 +2,15 @@
 
 namespace App\Card;
 
-use App\Card\Card;
+use App\Card\CardGraphic;
 
 class CardHand
 {
     private $hand = [];
 
-    public function add(Card $card): void
+    public function add(CardGraphic $card): void
     {
         $this->hand[] = $card;
-    }
-
-    public function roll(): void
-    {
-        foreach ($this->hand as $card) {
-            $card->roll();
-        }
     }
 
     public function getNumberCards(): int

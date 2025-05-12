@@ -57,9 +57,14 @@
     ``` 
     League\CommonMark\Extension\Table\TableExtension:
         tags: [ 'twig.markdown.league_extension' ]
+    League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension:
+        tags: [ 'twig.markdown.league_extension' ]
+    League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkRenderer:
+        tags: [ 'twig.markdown.league_extension' ]
+    League\CommonMark\Normalizer\SlugNormalizer:
+        tags: [ 'twig.markdown.league_extension' ]
     ```
 
-    {{ include('card/docs/Home.md') | raw }}
 {% endapply %}
 
     <h2 id="kmom03">Kmom03</h2>

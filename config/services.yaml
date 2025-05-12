@@ -24,6 +24,14 @@ services:
     # please note that last definitions always *replace* previous ones
 
 
-    # To make tables work in markdown
+    # To make markdown work..
+    League\CommonMark\GithubFlavoredMarkdownConverter:
+        tags: [ 'twig.markdown.converter' ]
     League\CommonMark\Extension\Table\TableExtension:
         tags: [ 'twig.markdown.league_extension' ]
+    League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension:
+        tags: [ 'twig.markdown.league_extension' ]
+#    League\CommonMark\Extension\TableOfContents\TableOfContentsExtension:
+#        tags: [ 'twig.markdown.league_extension' ]
+
+

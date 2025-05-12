@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
 use App\Card\CardGraphic;
 use App\Card\DeckOfCards;
-use App\Card\CardHand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -18,7 +17,7 @@ class CardGameController extends AbstractController
     public function home(
         SessionInterface $session
     ): Response {
-        $session->set("status", "Started");
+//        $session->set("status", "Started");
 
         return $this->render('card/home.html.twig');
     }
@@ -122,7 +121,7 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response {
         date_default_timezone_set('CET');
-        //        $session->set("last_check", date('D M j G:i:s T Y'));
+//        $session->set("last_check", date('D M j G:i:s T Y'));
         $sessionMetadata = $session->getMetadataBag();
 
         $sessionData = $session->all();
