@@ -25,5 +25,18 @@
 </p>
 <p></p>
 
+<p>Korten på hand är..</p>
+    {% for card in hand %}
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+            {{ card }}
+            </div>
+    {% endfor %}
+</div>
+<p></p>
+
 {{ include('card/flash.html.twig') }}
 {% endblock %}

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
 use App\Card\CardGraphic;
+use App\Card\CardHand;
 use App\Card\DeckOfCards;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -26,7 +27,13 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response {
 
+        $session->clear("card_deck");
+        $session->clear("hand");
         $deck = new DeckOfCards();
+        $this->addFlash(
+            'notice',
+            'Full deck restored!'
+        );
 
         $session->set("card_deck", $deck);
         $data = [
@@ -42,7 +49,12 @@ class CardGameController extends AbstractController
         $deck = $session->get("card_deck");
         if ($deck === null || $deck->getNumberOfCards() < 52) {
             $session->clear("card_deck");
+            $session->clear("hand");
             $deck = new DeckOfCards();
+            $this->addFlash(
+                'notice',
+                'Full deck restored!'
+            );
         }
         $deck->shuffle();
         $session->set("card_deck", $deck);
@@ -62,13 +74,21 @@ class CardGameController extends AbstractController
         if ($deck == null) {
             throw new \Exception("Ingen kortlek finns. Skapa en ny kortlek innan du drar ett kort.");
         }
-
+        $hand = $session->get("hand");
+        if ($hand == null) {
+            $hand = new CardHand();
+        }
+        
         $card = $deck->drawCard();
         $cardsStr[] = $card->getAsString();
         $session->set("card_deck", $deck);
+        $hand->add($card);
+        $session->set("hand", $hand);
+      
         $data = [
             "cardsStr" => $cardsStr,
-            "cards_left" => $deck->getNumberOfCards()
+            "cards_left" => $deck->getNumberOfCards(),
+            "hand" => $hand->getString()
         ];
 
         return $this->render('card/cards.html.twig', $data);
@@ -87,16 +107,24 @@ class CardGameController extends AbstractController
         if ($num > $cardsleft) {
             throw new \Exception("Du kan inte dra fler kort än det finns kvar i kortleken! (" . $cardsleft . " st)");
         }
+
+        $hand = $session->get("hand");
+        if ($hand == null) {
+            $hand = new CardHand();
+        }
         $cards = [];
         $cardsStr = [];
         for ($i = 0; $i < $num; $i++) {
             $cards[] = $deck->drawCard();
             $cardsStr[] = $cards[$i]->getAsString();
+            $hand->add($cards[$i]);
         }
         $session->set("card_deck", $deck);
+        $session->set("hand", $hand);
         $data = [
             "cardsStr" => $cardsStr,
-            "cards_left" => $deck->getNumberOfCards()
+            "cards_left" => $deck->getNumberOfCards(),
+            "hand" => $hand->getString()
         ];
 
         return $this->render('card/cards.html.twig', $data);
