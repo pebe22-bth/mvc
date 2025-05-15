@@ -1,7 +1,7 @@
 
-# CardHand
+## CardHand
 
-
+CardHand - holds the card drawn from the deck by a player
 
 
 
@@ -32,10 +32,10 @@ private $hand
 
 ### add
 
-
+add - adds a card to the hand
 
 ```php
-public add(\App\Card\Card $card): void
+public add(mixed $card): void
 ```
 
 
@@ -47,28 +47,7 @@ public add(\App\Card\Card $card): void
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$card` | **\App\Card\Card** |  |
-
-
-
-
-
-***
-
-### roll
-
-
-
-```php
-public roll(): void
-```
-
-
-
-
-
-
-
+| `$card` | **mixed** |  |
 
 
 
@@ -78,7 +57,7 @@ public roll(): void
 
 ### getNumberCards
 
-
+getNumberCards - returns the number of cards in the hand
 
 ```php
 public getNumberCards(): int
@@ -99,7 +78,7 @@ public getNumberCards(): int
 
 ### getValues
 
-
+getValues - returns the values of the cards in the hand
 
 ```php
 public getValues(): array
@@ -120,7 +99,7 @@ public getValues(): array
 
 ### getString
 
-
+getString - returns the string representation of the cards in the hand
 
 ```php
 public getString(): array

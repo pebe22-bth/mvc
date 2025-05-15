@@ -1,7 +1,7 @@
 
-# Card
+## Card
 
-Card representes a playing card in a standard deck of cards
+Card representes a playing card
 
 
 
@@ -73,7 +73,7 @@ public set(mixed $value): int
 
 **Return Value:**
 
-The value of the card that was just set
+The value of the card
 
 
 

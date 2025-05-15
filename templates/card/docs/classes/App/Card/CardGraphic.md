@@ -1,5 +1,5 @@
 
-# CardGraphic
+## CardGraphic
 
 CardGraphic represents a playing card represented as a string conaining color and value (2 characters)
 
@@ -84,7 +84,7 @@ public __construct(): void
 
 ### buildArrayOfCards
 
-buildArrayOfCards
+buildArrayOfCards - fills the representation array with all cards
 
 ```php
 private buildArrayOfCards(): void
@@ -109,7 +109,7 @@ Builds the array of card representation based on color and value
 
 ### getAsString
 
-getAsString
+getAsString - return the value of the card as a graphical string
 
 ```php
 public getAsString(): string
@@ -179,7 +179,7 @@ public set(mixed $value): int
 
 **Return Value:**
 
-The value of the card that was just set
+The value of the card
 
 
 

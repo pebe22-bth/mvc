@@ -1,7 +1,7 @@
 
-# DeckOfCards
+## DeckOfCards
 
-
+DeckOfCards - represents a deck of Cards
 
 
 
@@ -53,10 +53,10 @@ public __construct(): mixed
 
 ### buildDeck
 
-
+buildDeck - fills the deck with 52 cards
 
 ```php
-private buildDeck(): mixed
+private buildDeck(): void
 ```
 
 
@@ -74,10 +74,10 @@ private buildDeck(): mixed
 
 ### shuffle
 
-
+shuffle - shuffles the deck of cards
 
 ```php
-public shuffle(): mixed
+public shuffle(): void
 ```
 
 
@@ -95,7 +95,7 @@ public shuffle(): mixed
 
 ### drawCard
 
-
+drawCard -
 
 ```php
 public drawCard(): \App\Card\CardGraphic
@@ -116,7 +116,7 @@ public drawCard(): \App\Card\CardGraphic
 
 ### getNumberOfCards
 
-
+getNumberOfCards - returns the number of remaining cards in the deck
 
 ```php
 public getNumberOfCards(): int
@@ -137,7 +137,7 @@ public getNumberOfCards(): int
 
 ### getDeckAsValues
 
-
+getDeckAsValues - returns the values of the cards in the deck
 
 ```php
 public getDeckAsValues(): array
@@ -158,7 +158,7 @@ public getDeckAsValues(): array
 
 ### getDeck
 
-
+getDeck - returns the string representation of the cards in the deck
 
 ```php
 public getDeck(): array

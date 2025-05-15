@@ -9,11 +9,15 @@
     <h1>Kortspel</h1>
 
     <p>Här implementeras grundfunktioner för att generera och blanda en kortlek och därefter kunna dra valfritt antal kort från "högen".</p>
-    <h2>UML diagram</h3>
 
-    <h2>Klasser</h2></p>
-    De klasser som används i kortspelet nedan.
-    (Genererat med hjälp av phpdoc comments och phpDocumentor)
+    <h2>Klasser</h2>
+    <p>De klasser som används i kortspelet enligt nedan. "Card" definierar ett spelkot med numerärt värde 0-51.
+    "CardGraphic" ärver "Card" med tillågg av en grafisk representation av kortet.
+    "CardHand" och "DeckOfCards" är kompositioner som bygger på "CardGraphic" och representerar en hand respektive kortleken - 
+    som till en början innehåller alla 52 spelkorten</p>
+    <p><img src="{{ asset('images/card.png') }}" width="400px" alt="Class diagram">
+    </p>
+    Nedan detaljerad dokumentation av respektive klass.
     <div class="phpdoc">
     {% apply markdown_to_html %}
     {{ include('card/docs/Home.md') | raw }}

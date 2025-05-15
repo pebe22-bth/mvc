@@ -4,6 +4,9 @@ namespace App\Card;
 
 use App\Card\CardGraphic;
 
+/**
+ * DeckOfCards - represents a deck of Cards
+ */
 class DeckOfCards
 {
     private $deck = [];
@@ -13,6 +16,11 @@ class DeckOfCards
         $this->deck = [];
         $this->buildDeck();
     }
+    /**
+     * buildDeck - fills the deck with 52 cards
+     *
+     * @return void
+     */
     private function buildDeck()
     {
         for ($i = 0; $i < 52; $i++) {
@@ -20,11 +28,21 @@ class DeckOfCards
             $this->deck[$i]->set($i);
         }
     }
+    /**
+     * shuffle - shuffles the deck of cards
+     *
+     * @return void
+     */
     public function shuffle()
     {
         shuffle($this->deck);
     }
 
+    /**
+     * drawCard -
+     *
+     * @return CardGraphic
+     */
     public function drawCard(): CardGraphic
     {
         $card = array_pop($this->deck);
@@ -32,11 +50,21 @@ class DeckOfCards
     }
 
 
+    /**
+     * getNumberOfCards - returns the number of remaining cards in the deck
+     *
+     * @return int
+     */
     public function getNumberOfCards(): int
     {
         return count($this->deck);
     }
 
+    /**
+     * getDeckAsValues - returns the values of the cards in the deck
+     *
+     * @return array
+     */
     public function getDeckAsValues(): array
     {
         $values = [];
@@ -46,6 +74,11 @@ class DeckOfCards
         return $values;
     }
 
+    /**
+     * getDeck - returns the string representation of the cards in the deck
+     *
+     * @return array
+     */
     public function getDeck(): array
     {
         $values = [];

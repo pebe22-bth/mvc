@@ -1,7 +1,7 @@
 
-# CardAPIController
+## CardAPIController
 
-
+CardAPIController - defines the JSON API endpoints for the Card game
 
 
 
@@ -15,10 +15,10 @@
 
 ### deck
 
-
+deck - Creates a new deck of cards and returns it
 
 ```php
-public deck(\Symfony\Component\HttpFoundation\Session\SessionInterface $session): \Symfony\Component\HttpFoundation\Response
+public deck(\Symfony\Component\HttpFoundation\Session\SessionInterface $session): void
 ```
 
 
@@ -40,10 +40,10 @@ public deck(\Symfony\Component\HttpFoundation\Session\SessionInterface $session)
 
 ### shuffle
 
-
+shuffle - Shuffles an existing deck of cards and returns it
 
 ```php
-public shuffle(\Symfony\Component\HttpFoundation\Session\SessionInterface $session): \Symfony\Component\HttpFoundation\Response
+public shuffle(\Symfony\Component\HttpFoundation\Session\SessionInterface $session): void
 ```
 
 
@@ -65,10 +65,10 @@ public shuffle(\Symfony\Component\HttpFoundation\Session\SessionInterface $sessi
 
 ### draw
 
-
+draw - Draws a card from the deck and returns it
 
 ```php
-public draw(\Symfony\Component\HttpFoundation\Session\SessionInterface $session): \Symfony\Component\HttpFoundation\Response
+public draw(\Symfony\Component\HttpFoundation\Session\SessionInterface $session): void
 ```
 
 
@@ -90,10 +90,10 @@ public draw(\Symfony\Component\HttpFoundation\Session\SessionInterface $session)
 
 ### draw_multiple
 
-
+draw_multiple - draws multiple cards from the deck and returns them
 
 ```php
-public draw_multiple(int $num, \Symfony\Component\HttpFoundation\Session\SessionInterface $session): \Symfony\Component\HttpFoundation\Response
+public draw_multiple(int $num, \Symfony\Component\HttpFoundation\Session\SessionInterface $session): void
 ```
 
 

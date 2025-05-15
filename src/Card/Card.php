@@ -2,15 +2,13 @@
 
 namespace App\Card;
 
-
-
 /**
- * Card representes a playing card in a standard deck of cards
+ * Card representes a playing card
  */
 class Card
 {
     protected $value;
-    
+
     /**
      * __construct sets the value of the card to null
      *
@@ -20,19 +18,19 @@ class Card
     {
         $this->value = null;
     }
-    
+
     /**
      * set sets the value of the card
      *
      * @param  mixed $value
-     * @return int The value of the card that was just set
+     * @return int The value of the card
      */
     public function set($value): int
     {
         $this->value = $value;
         return $this->value;
     }
-    
+
     /**
      * getValue returns the value of the card
      *
@@ -42,7 +40,7 @@ class Card
     {
         return $this->value;
     }
-    
+
     /**
      * getAsString returns the value of the card as a string
      *

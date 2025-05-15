@@ -6,19 +6,19 @@ namespace App\Card;
  * CardGraphic represents a playing card represented as a string conaining color and value (2 characters)
  */
 class CardGraphic extends Card
-{    
+{
     /**
      * colors
      *
      * @var array The color of the card
      */
-    private $colors = ['♠', '♥', '♦', '♣'];    
+    private $colors = ['♠', '♥', '♦', '♣'];
     /**
      * values
      *
      * @var array The value of the card
      */
-    private $values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];    
+    private $values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
     /**
      * representation
      *
@@ -31,9 +31,9 @@ class CardGraphic extends Card
         parent::__construct();
         $this->buildArrayOfCards();
     }
-    
+
     /**
-     * buildArrayOfCards
+     * buildArrayOfCards - fills the representation array with all cards
      *
      * @return void Builds the array of card representation based on color and value
      */
@@ -45,9 +45,9 @@ class CardGraphic extends Card
             }
         }
     }
-    
+
     /**
-     * getAsString
+     * getAsString - return the value of the card as a graphical string
      *
      * @return string The value of the card as a graphical string
      */

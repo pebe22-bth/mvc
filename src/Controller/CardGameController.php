@@ -18,7 +18,7 @@ class CardGameController extends AbstractController
     public function home(
         SessionInterface $session
     ): Response {
-//        $session->set("status", "Started");
+        //        $session->set("status", "Started");
 
         return $this->render('card/home.html.twig');
     }
@@ -78,13 +78,13 @@ class CardGameController extends AbstractController
         if ($hand == null) {
             $hand = new CardHand();
         }
-        
+
         $card = $deck->drawCard();
         $cardsStr[] = $card->getAsString();
         $session->set("card_deck", $deck);
         $hand->add($card);
         $session->set("hand", $hand);
-      
+
         $data = [
             "cardsStr" => $cardsStr,
             "cards_left" => $deck->getNumberOfCards(),
@@ -149,7 +149,7 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response {
         date_default_timezone_set('CET');
-//        $session->set("last_check", date('D M j G:i:s T Y'));
+        //        $session->set("last_check", date('D M j G:i:s T Y'));
         $sessionMetadata = $session->getMetadataBag();
 
         $sessionData = $session->all();

@@ -11,8 +11,16 @@ use App\Card\DeckOfCards;
 use App\Card\CardHand;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * CardAPIController - defines the JSON API endpoints for the Card game
+ */
 class CardAPIController
 {
+    /**
+     * deck - Creates a new deck of cards and returns it
+     *
+     * @return void
+     */
     #[Route("/api/deck", name: "api_deck", methods: ['GET'])]
     public function deck(
         SessionInterface $session
@@ -31,6 +39,11 @@ class CardAPIController
         return $response;
     }
 
+    /**
+     * shuffle - Shuffles an existing deck of cards and returns it
+     *
+     * @return void
+     */
     #[Route("/api/deck/shuffle", name: "api_deck_shuffle", methods: ['POST'])]
     public function shuffle(
         SessionInterface $session
@@ -51,6 +64,11 @@ class CardAPIController
         );
         return $response;
     }
+    /**
+     * draw - Draws a card from the deck and returns it
+     *
+     * @return void
+     */
     #[Route("/api/deck/draw", name: "api_deck_draw", methods: ['POST'])]
     public function draw(
         SessionInterface $session
@@ -76,6 +94,11 @@ class CardAPIController
         );
         return $response;
     }
+    /**
+     * draw_multiple - draws multiple cards from the deck and returns them
+     *
+     * @return void
+     */
     #[Route("/api/deck/draw/{num<\d+>}", name: "api_deck_draw_multiple", methods: ['POST'])]
     public function draw_multiple(
         int $num,
