@@ -34,7 +34,7 @@ npm run build
 symfony server:start --allow-all-ip
 ```
 ## PHPdoc
-[Class dokumentation](docs/Home.md)
+[Class dokumentation for Card game](templates/card/docs/Home.md)
 
 ## Ramverk
 [Symfony](https://symfony.com/)

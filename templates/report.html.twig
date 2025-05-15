@@ -5,6 +5,7 @@
 {% block body %}
     <h1>Redovisningstexter</h1>
     <p></p>
+
   
     <h2 id="kmom01">Kmom01</h2>
     <p>Mina förkunskaper i objektorienterad programmering är begränsade, 
@@ -47,9 +48,27 @@
 <h2 id="kmom02">Kmom02</h2>
   
 {% apply markdown_to_html %}
-    ### PHPdoc
+
+### Objektorieterad PHP
+Kort förklaring av vad objektorienterad PHP bestårt av;
+#### "Arv"
+En klass kan ärva en annan redan definierad klass genom "extends" i definitionen, t.ex ```class CardGraphic extends Card```. Den nya klassen ärver alla medlemsvariabler och metoder från den gamla klassen plus att man definiera ytterligare. I det här kursmomentet ärver  
+"CardGraphic" "Card" och är kompletterad med en ny metod "getAsString" som då ersätter motsvarande metod i klassen "Card".
+#### "Komposition"
+En komposition innebär att en klass består ev en eller fler andra klasser. I det här kursmomentet är "DeckOfCards" och "CardHand" kompositioner 
+av klassen "CardGraphic".
+#### "Interfaces" 
+Interface är ett sätt att definiera de interface en klass har, Rent praktiskt defineras det med ```interface``` i PHP. Interfacet implementeras sedan i klassen med 
+```implements```, t.ex ```class CardGraphic implements CardInterface```. 
+#### "Trait"
+Trait används i PHP för att åstadkomma arv från flera klasser, så kallat multipelt arv. Trait består likt en klass av metoder och medlemsvariabler.
+Trait definieras i php med ```trait``` och kan sedan användas i klasser med "use".
+### Implementationén
+Jag har implementerat en kortlek med klasserna Card, CardGraphic, DeckOfCards och CardHand. CardGraphic ärver den enklasre Card-klassen och
+DeckOfCards och CardHand är kompositioner av CardGraphic.
+Jag har implementerat CardController och CardAPIController för att hantera websidor och API.
     Jag ville hitta ett sätt att generera klass-dokumentationen, så jag har använt [phpDocumentor](https://www.phpdoc.org/)
-    för att generera dokumentation baserat på phpdoc kommentarer i koden - jag lagrar den i report/docs som markdown. 
+    för att generera dokumentation baserat på phpdoc kommentarer i koden - jag lagrar den i templates/card/docs som markdown. 
     Jag ville generera den i markdown för det känns mest naturligt att inkludera i github README.md men krävde även att jag installerade
     markdown stöd i symfony för att länka in i rapport-sidan.
     För att få tabeller att fungera krävdes även tillägg i services.yaml
@@ -64,6 +83,28 @@
     League\CommonMark\Normalizer\SlugNormalizer:
         tags: [ 'twig.markdown.league_extension' ]
     ```
+### Förbättringspotential
+Att skapa markdown med php Documentor blir sådär och jag skrev ett eget enkel templkate för att bara få ut det viktigaste. 
+Markdown stödet i symfone med commonmark är begränsat i funktionalitet och svåranvänt och jag ville inte lägga mer tid på att få det snyggt,
+så där finns det förbättringspotential - förmodligen genom att generera html som man vill ha den direkt från phpDocumentor.
+Jag skulle så klart också kunan använda svg-bilderna för att generera bilderna i CardGraphic istället för text, men det funkar iallafall.
+Jag är även nöjd med att jag implementerade CardHand som fyller på med de kort som dras från kortleken.
+
+Själva programmering med klasser var basic och det svåra har legat i layout, phpdoc, markdown samt även förstå sessionshanteringen i symfony.
+
+### Reflektioner på symfony och kod enligt MVC
+Jag har inte fattat vad MVC står för - förkortningen känns inte logisk och jag får slå upp på dbwebb vad den står för (och dbwebb är inte sökbar).
+När jag letar i andra källor vad MVC är förstår jag att det är ett vanligt arkitekturmönster inim applikationsutveckling: Model, View, Controller. 
+Vyer och Controller tycker jag blir tydligt i symfony. Hur modelleringen kommer in i bilden antar jag klarnar senare.
+
+### TIL
+* Jag har lärt mig lite om objektoritering i PHP, vilket är bra.
+* Jag borde intte spendera så mycket tid på att få markdown att fungera i symfony, det är inte värt det.
+
+
+
+
+
 
 {% endapply %}
 
