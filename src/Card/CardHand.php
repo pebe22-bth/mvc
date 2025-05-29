@@ -15,9 +15,8 @@ class CardHand
      * add - adds a card to the hand
      *
      * @param  mixed $card
-     * @return void
      */
-    public function add(CardGraphic $card): void
+    public function add(CardGraphic $card)
     {
         $this->hand[] = $card;
     }
@@ -58,5 +57,9 @@ class CardHand
             $values[] = $card->getAsString();
         }
         return $values;
+    }
+    public function getHand(): array
+    {
+        return $this->hand;
     }
 }

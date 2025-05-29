@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Spelkort{% endblock %}
+
+{% block main %}
+{% include 'game/nav.html.twig' %}
+{% include 'card/flash.html.twig' %}
+
+<h1>Dragna kort</h1>
+
+<p>Korten dragna ur kortleken är..</p>
+    {% for card in cardsStr %}
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+            {{ card }}
+            </div>
+    {% endfor %}
+</div>
+<p></p>
+
+<p>Antal kort kvar i kortleken:
+{{ cards_left }}
+</p>
+<p></p>
+
+<p>Korten på hand är..</p>
+    {% for card in game_hand %}
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+            {{ card }}
+            </div>
+    {% endfor %}
+</div>
+<p></p>
+
+{% endblock %}

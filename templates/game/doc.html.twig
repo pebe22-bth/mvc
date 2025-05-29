@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Dokumentation{% endblock %}
+
+{% block main %}
+
+{% include 'game/nav.html.twig' %}
+{%include('card/flash.html.twig') %}
+
+    <h1>Kortspelet 21</h1>
+
+    <p></p>
+    {% apply markdown_to_html %}
+    ![Flödesdiagram]({{ asset('images/21_flow_diagram.png') }})
+    
+    ## Pseudokod över bankens logik
+    ```
+    
+    spelarens_poäng = x
+    bankens_poäng = dra_kort()
+    while ( bankens_poäng < 17 ) {
+        bankens_poäng += dra_kort()
+    }
+    if ( bankens_poäng > 21) {
+        winner = spelaren
+    }
+    if ( bankens_poäng > spelarens_poäng ){
+        winner = banken
+        }
+    else {
+        winner = spelaren
+    }
+
+    ```
+    ## Klasser
+    - Card - befintlig klass som representerar ett kort
+    Behöver lägga till en metod som returnerar kortets värde 1-14
+    - DeckOfCards - befintlig klass som representerar kortleken
+    - CardHand - befintlig klass som representerar spelarens och bankens hand
+    Behövs främst för att visa korten, utan grafik hade vi klarat oss utan.
+    - Game21 - klass som representerar spelet 21
+    {% endapply %}
+
+    
+
+<p></p>
+
+
+{% endblock %}

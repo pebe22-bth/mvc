@@ -7,7 +7,7 @@ namespace App\Card;
  */
 class Card
 {
-    protected $value;
+    protected ?int $value;
 
     /**
      * __construct sets the value of the card to null
@@ -20,21 +20,21 @@ class Card
     }
 
     /**
-     * set sets the value of the card
+     * sets the value of the card
      *
-     * @param  mixed $value
+     * @param  int $value
      * @return int The value of the card
      */
-    public function set($value): int
+    public function set(int $value): int
     {
         $this->value = $value;
         return $this->value;
     }
 
     /**
-     * getValue returns the value of the card
+     * getValue returns the array position of the card (0-51)
      *
-     * @return int The value of the card
+     * @return int The value of the card (0-51)
      */
     public function getValue(): ?int
     {
@@ -49,5 +49,14 @@ class Card
     public function getAsString(): string
     {
         return "[{$this->value}]";
+    }
+    /**
+     * getNumber returns the rank of the card (1-13)
+     *
+     * @return int The rank of the card (1-13)
+     */
+    public function getRank(): int
+    {
+        return $this->value % 13 + 1;
     }
 }

@@ -1,0 +1,67 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Spelet 21{% endblock %}
+
+{% block main %}
+{% include 'game/nav.html.twig' %}
+{% include 'card/flash.html.twig' %}
+
+
+<h1>Spelet 21 </h1>
+
+{% if turn == "player" %}
+    <p>Din tur!</p>
+{% else %}
+    <p>Bankens tur</p>
+{% endif %}
+
+{% if player_hand %}
+    <p>Spelarens hand</p>
+
+    {% for card in player_hand %}
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+    {{ card }}
+    </div>
+    {% endfor %}
+    <p>Din poäng: {{ player_handValue }}</p>
+{% endif %}
+
+{% if bank_hand %}
+    <p>Bankens hand</p>
+    {% for card in bank_hand %}
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+    {{ card }}
+    </div>
+    {% endfor %}
+    <p>Bankens poäng: {{ bank_handValue }}</p>
+{% endif %}
+
+{% if winner %}
+    {% if winner == "player" %}
+
+        <h2>Grattis, du vann!</h2>
+    {% else %}
+        <h2>Banken vann!</h2>
+    {% endif %}
+    <button onclick = window.location.href="{{ path('game_start') }}">Spela igen</button>
+{% else %}
+    {% if turn == "player" %}
+        <p>
+        <button onclick = window.location.href="{{ path('game_player_draw') }}">Dra kort</button>
+        <button onclick = window.location.href="{{ path('game_bank_draw') }}">Stanna</button>
+        </p>
+    {% else %}
+        <p>
+        <button onclick = window.location.href="{{ path('game_bank_draw') }}">Fortsätt</button>
+        </p>
+    {% endif %}
+{% endif %}
+{% endblock %}

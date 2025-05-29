@@ -1,0 +1,32 @@
+
+@startuml
+(*) --> "Starta spelet"
+--> "Skapa kortlek"
+--> "Blanda kortleken"
+--> "Dra kort till din hand"
+--> if "Tjock?" then
+        -->[Ja] "Du förlorade"
+    else
+        -->[Nej] if "Dra kort ?" then
+                    -up-> [Ja] "Dra kort till din hand"
+                else
+                    -->[Nej] "Stanna"
+    endif
+--> "Bankens tur"
+--> "Dra kort till bankens hand"
+    if "Banken tjock?" then
+        -->[Ja] "Du vann"
+    else
+        -->[Nej] if "Bankens hand < 17 " then
+                    -up->[Ja] "Dra kort till bankens hand"
+                else
+                    -->[Nej] "Banken stannar"
+                endif
+    endif
+    --> if "Din hand > bankens hand" then
+            -->[Ja] "Du vann"
+        else
+            -->[Nej] "Du förlorade"
+        endif
+
+@enduml
