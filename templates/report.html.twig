@@ -110,6 +110,38 @@ Vyer och Controller tycker jag blir tydligt i symfony. Hur modelleringen kommer 
 
     <h2 id="kmom03">Kmom03</h2>
     <p>Redovisningstext</p> 
+    {% apply markdown_to_html %}
+
+### Flödesschema och pseudokod 
+Det gick bra att flödesmodellera och skriva lite pseudokod - det var inget nytt och inet svårt, men något jag i min vardag ägnar för lite tid åt '
+så bra lärdom att det faktiskt är väl investerad tid för att hjälpa till med struktur och hjälpa till att hitta okända utmaningar tidigt.
+I verkligheten där flera personer är inbölandade i förvalting av kod är det nog också ett stöd för andra att sätta sig in i koden.
+### Implementation
+Jag hade en ganska god bild av hur jag skulle lösa uppgiften och vilken logik som behövde implementeras - det var den enkla delen. Jag fastnade
+en del på hur jag skulle minimera koden i controllern och förenkla så mycket som möjligt med oberoende klasser med väl defiierade gränssnitt.
+Lintningen tog också ganska lång tid då jag behövde lära mig mer om hård typning där det är möjligt i php. Jag har inte kodat klasser i php tidigare 
+och inte varit någa med att deklarera alla variabler, vilket jag nu behövde göra.
+Jag hade lite problem med att en linter i VS code rödmarkerade vissa problem som phpstan tyckte var ok och jag lyckades inte få phpdoc hinters att 
+fungera, vilket jag till slut gav upp. 
+En utmaningDet handlade om att jag sparade klassobjekt i sessionen och vid inläsning är de inte typade. Jag klurade ut hur jag kan kontrollera om den 
+inlästa variabeln är en instans av en klass och på så sätt säkerställa kvalitet (och bli av med lint-felen).
+**Jag ägande inte tid åt att fixa till koden från tidigare kursmoment** så där varnar phpstan fortfarande.
+Jag är hyfsat nöjd med resultatet - det löser uppgiften men går att förbättra - framförallt snyggare spelkort.
+Jag har inte implementerat valfria krav.
+### Känsla för symfony
+Symfony funkar helt ok för ändamålet och har bra stöd för den designstruktur vi eftersträvar med MVC.
+Dock är det en del overhead med ett stort ramverk där det tar tid att sätta sig in i detaljer - som egentligen inte skulle behövas för att
+lösa uppgifterna i kursen - men å andra sidan kan vi inte lösa allt från grunden själva så behöver ramverk att stötta oss på.
+Det man kan fundera på tycker jag är om man borde separera utvecklingsverktygen från "produktionsplattform". I verligheten skulle det inte vara önskvärt
+att ha composer och php-moduler i symfony utan bara de som behövs. Linters och annat som bara behövs under utveckling skulle man vilja hantera helt separat 
+från symfony.
+### TIL
+* Jag har bättre förståelse för klasser och möjligheter till hårdare typning i php.
+* Mer kunskap om kodstandard och lintning i php.
+
+
+
+{% endapply %}
     <h2 id="kmom04">Kmom04</h2>
     <p>Redovisningstext</p>
     <h2 id="kmom05">Kmom05</h2>
