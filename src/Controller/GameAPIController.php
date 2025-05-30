@@ -22,7 +22,7 @@ class GameAPIController
 
         $game = $session->get("game");
         if (($game instanceof Game21) === false) {
-            throw new Exception("Game not found in session, starting a new game.");
+            throw new Exception("Game not found in session");
         }
 
         $playerHand = $game->getPlayerHand();
