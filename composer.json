@@ -97,7 +97,9 @@
             "@csfix",
             "@phpmd",
             "@phpstan"
-        ]
+        ],
+        "phpdoc": "tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml",
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -109,6 +111,7 @@
         }
     },
     "require-dev": {
+        "phpstan/phpstan-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",

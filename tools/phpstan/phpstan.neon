@@ -1,8 +1,11 @@
 parameters:
-    level: 9
+    level: max
     paths:
         - ../../config
         - ../../src
         - ../../tests
     bootstrapFiles:
         #- .phpstan.constants.php
+includes:
+    - ../../vendor/phpstan/phpstan-phpunit/extension.neon
+
