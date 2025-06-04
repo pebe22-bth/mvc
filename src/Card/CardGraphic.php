@@ -10,21 +10,21 @@ class CardGraphic extends Card
     /**
      * colors
      *
-     * @var array The color of the card
+     * @var array<string> $colors
      */
-    private $colors = ['♠', '♥', '♦', '♣'];
+    private array $colors = ['♠', '♥', '♦', '♣'];
     /**
      * values
      *
-     * @var array The value of the card
+     * @var array<string> $values
      */
-    private $values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    private array $values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
     /**
      * representation
      *
-     * @var array The representation of the card based on color and value
+     * @var array<?string> The representation of the card based on color and value
      */
-    private $representation = [];
+    private array $representation = [];
 
     public function __construct()
     {
@@ -53,6 +53,10 @@ class CardGraphic extends Card
      */
     public function getAsString(): string
     {
+        if (!isset($this->representation[$this->value])) {
+            return "[{$this->value}]";
+        }
         return $this->representation[$this->value];
+
     }
 }

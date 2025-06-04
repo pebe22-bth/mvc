@@ -3,13 +3,19 @@
 namespace App\Card;
 
 use App\Card\CardGraphic;
+use Exception;
 
 /**
  * DeckOfCards - represents a deck of Cards
  */
 class DeckOfCards
 {
-    private $deck = [];
+    /**
+     * deck
+     *
+     * @var array<CardGraphic> $deck
+     */
+    private array $deck = [];
 
     public function __construct()
     {
@@ -21,7 +27,7 @@ class DeckOfCards
      *
      * @return void
      */
-    private function buildDeck()
+    private function buildDeck(): void
     {
         for ($i = 0; $i < 52; $i++) {
             $this->deck[] = new CardGraphic();
@@ -33,7 +39,7 @@ class DeckOfCards
      *
      * @return void
      */
-    public function shuffle()
+    public function shuffle(): void
     {
         shuffle($this->deck);
     }
@@ -45,6 +51,9 @@ class DeckOfCards
      */
     public function drawCard(): CardGraphic
     {
+        if (count($this->deck) === 0) {
+            throw new Exception("Error: Deck of cards is empty");
+        }
         $card = array_pop($this->deck);
         return $card;
     }
@@ -62,8 +71,7 @@ class DeckOfCards
 
     /**
      * getDeckAsValues - returns the values of the cards in the deck
-     *
-     * @return array
+     * @return array<int|null> $values
      */
     public function getDeckAsValues(): array
     {
@@ -76,8 +84,7 @@ class DeckOfCards
 
     /**
      * getDeck - returns the string representation of the cards in the deck
-     *
-     * @return array
+     * @return array<string|null> $values
      */
     public function getDeck(): array
     {

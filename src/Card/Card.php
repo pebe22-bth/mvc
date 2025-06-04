@@ -57,6 +57,9 @@ class Card
      */
     public function getRank(): int
     {
-        return $this->value % 13 + 1;
+        if (is_null($this->value)) {
+            return 0;
+        }
+        return (int)($this->value % 13 + 1);
     }
 }

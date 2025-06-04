@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
  */
 class DeckOfCardsTest extends TestCase
 {
-    public function testDeck():void
+    public function testDeck(): void
     {
         $deck = new DeckOfCards();
-//        $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
+        //        $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
 
         $res = $deck->getNumberOfCards();
         $exp = 52;

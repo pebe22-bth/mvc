@@ -9,22 +9,22 @@ use PHPUnit\Framework\TestCase;
  */
 class DiceTest extends TestCase
 {
-    public function testCreateDice():void
+    public function testCreateDice(): void
     {
         $dice = new Dice();
-        $this->assertInstanceOf("\App\Dice\Dice", $dice);
+        //        $this->assertInstanceOf("\App\Dice\Dice", $dice);
         $res = $dice->getValue();
         $exp = null;
         $this->assertEquals($exp, $res);
     }
 
-    public function testCreatedDiceRoll():void
+    public function testCreatedDiceRoll(): void
     {
         $dice = new Dice();
-        $this->assertInstanceOf("\App\Dice\Dice", $dice);
+        //       $this->assertInstanceOf("\App\Dice\Dice", $dice);
 
         $res = $dice->roll();
-        $this->assertIsInt($res);
+        $this->assertTrue($res >= 1 && $res <= 6);
 
         $res = $dice->getValue();
         $this->assertTrue($res >= 1 && $res <= 6);

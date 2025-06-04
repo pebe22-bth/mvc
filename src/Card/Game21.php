@@ -46,7 +46,7 @@ class Game21
 
 
         foreach ($hand->getHand() as $card) {
-            $value = (int)$card->getRank();
+            $value = $card->getRank();
             if ($value == 1) {
                 $aceCount++;
             }

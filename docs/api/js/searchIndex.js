@@ -98,12 +98,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AgetHand\u0028\u0029",
             "name": "getHand",
-            "summary": "",
+            "summary": "getHand",
             "url": "classes/App-Card-CardHand.html#method_getHand"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003A\u0024hand",
             "name": "hand",
-            "summary": "",
+            "summary": "hand\u0020\u002D\u0020comntains\u0020the\u0020cards\u0020in\u0020a\u0020hand",
             "url": "classes/App-Card-CardHand.html#property_hand"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards",
@@ -148,7 +148,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003A\u0024deck",
             "name": "deck",
-            "summary": "",
+            "summary": "deck",
             "url": "classes/App-Card-DeckOfCards.html#property_deck"
         },                {
             "fqsen": "\\App\\Card\\Game21",

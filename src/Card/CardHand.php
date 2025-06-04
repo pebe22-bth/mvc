@@ -9,14 +9,19 @@ use App\Card\CardGraphic;
  */
 class CardHand
 {
-    private $hand = [];
+    /**
+     * hand - comntains the cards in a hand
+     *
+     * @var array<CardGraphic> $hand
+     */
+    private array $hand = [];
 
     /**
      * add - adds a card to the hand
      *
-     * @param  mixed $card
+     * @param  CardGraphic $card
      */
-    public function add(CardGraphic $card)
+    public function add(CardGraphic $card): void
     {
         $this->hand[] = $card;
     }
@@ -33,8 +38,7 @@ class CardHand
 
     /**
      * getValues - returns the values of the cards in the hand
-     *
-     * @return array
+     * @return list<int|null>
      */
     public function getValues(): array
     {
@@ -48,7 +52,7 @@ class CardHand
     /**
      * getString - returns the string representation of the cards in the hand
      *
-     * @return array
+     * @return list<string|null>
      */
     public function getString(): array
     {
@@ -58,6 +62,11 @@ class CardHand
         }
         return $values;
     }
+    /**
+     * getHand
+     *
+     * @return array<CardGraphic>
+     */
     public function getHand(): array
     {
         return $this->hand;

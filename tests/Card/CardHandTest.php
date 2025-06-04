@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  */
 class CardHandTest extends TestCase
 {
-    public function testCardHand():void
+    public function testCardHand(): void
     {
         $hand = new CardHand();
         foreach ([1,12,23,34,45] as $i) {
@@ -17,7 +17,7 @@ class CardHandTest extends TestCase
             $res = $card->set($i);
             $hand->add($card);
         }
-//        $this->assertInstanceOf("\App\Card\CardHand", $hand);
+        //        $this->assertInstanceOf("\App\Card\CardHand", $hand);
         $res = $hand->getNumberCards();
         $exp = 5;
         $this->assertEquals($exp, $res);
@@ -31,10 +31,10 @@ class CardHandTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
-    public function testCardGraphic():void
+    public function testCardGraphic(): void
     {
         $card = new CardGraphic();
-//        $this->assertInstanceOf("\App\Card\CardGraphic", $card);
+        //        $this->assertInstanceOf("\App\Card\CardGraphic", $card);
 
         $res = $card->getValue();
         $exp = null;

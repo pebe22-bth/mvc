@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
  */
 class CardGraphicTest extends TestCase
 {
-    public function testCard():void
+    public function testCard(): void
     {
         $card = new Card();
-//        $this->assertInstanceOf("\App\Card\Card", $card);
+        //        $this->assertInstanceOf("\App\Card\Card", $card);
 
         $res = $card->set(10);
         $exp = 10;
@@ -23,13 +23,17 @@ class CardGraphicTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
-    public function testCardGraphic():void
+    public function testCardGraphic(): void
     {
         $card = new CardGraphic();
-//        $this->assertInstanceOf("\App\Card\CardGraphic", $card);
+        //        $this->assertInstanceOf("\App\Card\CardGraphic", $card);
 
         $res = $card->getValue();
         $exp = null;
+        $this->assertEquals($exp, $res);
+
+        $res = $card->getAsString();
+        $exp = '[]';
         $this->assertEquals($exp, $res);
 
         $res = $card->set(10);

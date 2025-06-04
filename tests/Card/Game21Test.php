@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
  */
 class Game21Test extends TestCase
 {
-    public function testCreateGame21():void
+    public function testCreateGame21(): void
     {
         $game = new Game21();
-        $this->assertInstanceOf("\App\Card\Game21", $game);
+        //        $this->assertInstanceOf("\App\Card\Game21", $game);
 
         $res = $game->getTurn();
         $exp = "player";
@@ -23,13 +23,13 @@ class Game21Test extends TestCase
         $this->assertEquals($exp, $res);
     }
 
-    public function testPlayerAndBankDraw():void
+    public function testPlayerAndBankDraw(): void
     {
         $game = new Game21();
-        $this->assertInstanceOf("\App\Card\Game21", $game);
+        //        $this->assertInstanceOf("\App\Card\Game21", $game);
 
         $res = $game->playerDraw();
-        $this->assertIsInt($res);
+        $this->assertTrue($res >= 1 && $res <= 36);
 
         $game->playerStop();
         $res = $game->getTurn();
@@ -37,54 +37,49 @@ class Game21Test extends TestCase
         $this->assertEquals($exp, $res);
 
         $res = $game->bankDraw();
-        $this->assertIsInt($res);
+        $this->assertTrue($res >= 1 && $res <= 36);
 
         $res = $game->getWinner();
         $exp = null;
         $this->assertEquals($exp, $res);
     }
 
-    public function testBankDrawTooEarly():void
+    public function testBankDrawTooEarly(): void
     {
         $game = new Game21();
         $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Player has not stopped");
         $res = $game->bankDraw();
-        $exp = expectExceptionMessage("Player has not stopped");
-        $this->assertEquals($exp, $res);
 
     }
 
-    public function testPlayerDrawTooLate():void
+    public function testPlayerDrawTooLate(): void
     {
         $game = new Game21();
-        $res = $game->playerDraw();
-        $res = $game->playerStop();
+        $game->playerDraw();
+        $game->playerStop();
         $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Player has stopped or game not started");
         $res = $game->playerDraw();
-        $exp = expectExceptionMessage("Player has stopped or game not started");
-        $this->assertEquals($exp, $res);
-
     }
 
-    public function testGetPlayerAndBankHand()
+    public function testGetPlayerAndBankHand(): void
     {
         $game = new Game21();
         $res = $game->playerDraw();
         $hand = $game->getPlayerHand();
-        $this->assertInstanceOf("\App\Card\CardHand", $hand);
 
         $res = $game->getHandValue($hand);
         $this->assertTrue($res >= 2 && $res <= 14);
 
-        $res = $game->playerStop();
-        $res = $game->bankDraw();
+        $game->playerStop();
+        $game->bankDraw();
         $hand = $game->getBankHand();
-        $this->assertInstanceOf("\App\Card\CardHand", $hand);
         $res = $game->getHandValue($hand);
         $this->assertTrue($res >= 2 && $res <= 14);
 
     }
-    public function testPlayerWinner()
+    public function testPlayerWinner(): void
     {
         $game = new Game21();
         for ($i = 0; $i < 10; $i++) {
@@ -94,13 +89,13 @@ class Game21Test extends TestCase
         $exp = "bank";
         $this->assertEquals($exp, $res);
     }
-    public function testBankWinner()
+    public function testBankWinner(): void
     {
         $game = new Game21();
         $res = $game->playerDraw();
-        $res = $game->playerStop();
+        $game->playerStop();
         for ($i = 0; $i < 10; $i++) {
-            $res = $game->bankDraw();
+            $game->bankDraw();
         }
         $res = $game->getWinner();
         $exp = "player";
