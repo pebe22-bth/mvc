@@ -142,34 +142,34 @@ från symfony.
 
 
 {% endapply %}
-    <h2 id="kmom04">Kmom04</h2>
-     {% apply markdown_to_html %}
-     Kursmomentet handlade mycket om att bygga automatiserad enhetstestning med hjälp av PHPUnit. jag tycker det var mycket intressant och lärorikt,
-     och faktiskt enklare än vad jag trodde att skriva tester som blir hyfsat heltäckande.
-     Jag lyckades utan större problem få mer än 90% kodtäckning i min Game21 kod och även underliggande Card* klasser. Jag brydde mig inte om att skriva tester
-     för Dice och Controller klasserna.
-     Anledningen att det snabbt blev ganska heltäckande var att koden är ganska okomplicerad och den mesta koden körs igenom i och med att jag inte tagit
-     höjd för alla eventuella specialfall, vilket man borde om det ska användas på riktigt.
-     phpdoc hade jag redan installerat i tidigare kursmoment döär det skulle dokumenteras klasser och jag ville inte göra det manuellt utan nyttja docblocks i koden,
-    så det blev lite dubbeljobb.
+<h2 id="kmom04">Kmom04</h2>
+{% apply markdown_to_html %}
+Kursmomentet handlade mycket om att bygga automatiserad enhetstestning med hjälp av PHPUnit. jag tycker det var mycket intressant och lärorikt,
+och faktiskt enklare än vad jag trodde att skriva tester som blir hyfsat heltäckande.
+Jag lyckades utan större problem få mer än 90% kodtäckning i min Game21 kod och även underliggande Card* klasser. Jag brydde mig inte om att skriva tester
+för Dice och Controller klasserna.
+Anledningen att det snabbt blev ganska heltäckande var att koden är ganska okomplicerad och den mesta koden körs igenom i och med att jag inte tagit
+höjd för alla eventuella specialfall, vilket man borde om det ska användas på riktigt.
+phpdoc hade jag redan installerat i tidigare kursmoment där det skulle dokumenteras klasser och jag ville inte göra det manuellt utan nyttja docblocks i koden,
+så det blev lite dubbeljobb.
 
-    Den mesta tiden i kursmomentet ägnade jag åt att jobba bort lint-varningar från phpstan. Då PHP inte är ett starkt typat språk så känns det lite bakvänt
-    att behöva lägga in tydligare typning på variabler och returvärden i docblocks för att komma igenom med 0 fel i lintningen. Men jag körde på max-level så 
-    får skulla mig själv - det var lärorikt. Jag brydde mig inte om att rätta upp Dice och Controller-klasser.
-    Lintvarningarna gjorde att jag la till en checkar i koden för att säkerställa att returnerade värden är avsedda typer - mest att hantera null på rätt sätt.
+Den mesta tiden i kursmomentet ägnade jag åt att jobba bort lint-varningar från phpstan. Då PHP inte är ett starkt typat språk så känns det lite bakvänt
+att behöva lägga in tydligare typning på variabler och returvärden i docblocks för att komma igenom med 0 fel i lintningen. Men jag körde på max-level så 
+får skulla mig själv - det var lärorikt. Jag brydde mig inte om att rätta upp Dice och Controller-klasser.
+Lintvarningarna gjorde att jag ändrade lite kod och la till checkar för att säkerställa att returnerade värden är avsedda typer - mest att hantera null på rätt sätt.
 
-    Jag behövde installera phpstan/phpstan-phpunit för att slippe en del lint varningar på testklasserna.
+Jag behövde installera phpstan/phpstan-phpunit för att slippa en del lint varningar på testklasserna.
 
-    ### TIL
-    * Finns bra ramverk för enhetstestning i PHP
-    * Skriv bra kod med stark typning och felhantering från start så slipper man extrajobb vid lintning. Kör lintning ofta då du har koden färskt i minnet.
-    * Enabla en bra realtids-lintning i din IDE.
+### TIL
+* Finns smidiga ramverk för enhetstestning i PHP
+* Skriv bra kod med stark typning och felhantering från start så slipper man extrajobb vid lintning. Kör lintning ofta då du har koden färskt i minnet.
+* Enabla en bra realtids-lintning i din IDE.
 
-    {% endapply %}
+{% endapply %}
 
-    <h2 id="kmom05">Kmom05</h2>
-    <p>Redovisningstext</p>
-    <h2 id="kmom06">Kmom06</h2>
-    <p>Redovisningstext</p>
+<h2 id="kmom05">Kmom05</h2>
+<p>Redovisningstext</p>
+<h2 id="kmom06">Kmom06</h2>
+<p>Redovisningstext</p>
 
 {% endblock %}
