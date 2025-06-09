@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Bibliotek{% endblock %}
+
+{% block main %}
+
+{% include 'book/nav.html.twig' %}
+
+    <h1>Bibliotek </h1>
+
+    <p>
+       Bibliotek
+    </p>
+    <form method="post" action="">
+    <input type="text" name="title" value="<Title>">
+    <input type="text" name="isbn" value="<ISBN>">
+    <input type="text" name="author" value="<Author>">
+    <input type="text" name="image" value="<Image filename>">
+    <input type="submit" name="do_it" value="Create Book">
+    </form> 
+
+    
+
+<p></p>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Bibliotek{% endblock %}
+
+{% block main %}
+
+{% include 'book/nav.html.twig' %}
+
+    <h1>Bibliotek </h1>
+
+    <p>
+       
+        <button onclick = window.location.href="{{ path('library_create_get') }}">Lägg till en bok</button>
+   
+    </p>
+    
+
+<p></p>
+
+
+{% endblock %}

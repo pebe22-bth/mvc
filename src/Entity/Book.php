@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\LibraryRepository;
+use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: LibraryRepository::class)]
-class Library
+#[ORM\Entity(repositoryClass: BookRepository::class)]
+class Book
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,6 +21,9 @@ class Library
 
     #[ORM\Column(length: 255)]
     private ?string $author = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
 
     public function getId(): ?int
     {
@@ -59,6 +62,18 @@ class Library
     public function setAuthor(string $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
