@@ -11,14 +11,31 @@
     <p>
        Bibliotek
     </p>
-    <form method="post" action="">
-    <input type="text" name="title" value="<Title>">
-    <input type="text" name="isbn" value="<ISBN>">
-    <input type="text" name="author" value="<Author>">
-    <input type="text" name="image" value="<Image filename>">
-    <input type="submit" name="do_it" value="Create Book">
-    </form> 
+    <div class="bookupdate">
 
+        <form method="post" action="">
+            <fieldset>
+            <legend>Lägga till bokinformation</legend>
+            <div>
+                <label for="title">Titel</label>
+                <input type="text" name="title" value="<Titel>">
+            </div><div>
+                <label for="isbn">ISBN</label>
+                <input type="text" name="isbn" value="<ISBN>">
+            </div><div>
+                <label for="image">Bild</label>
+                <input type="text" name="image" value="<Bild filnamn>">
+            </div><div>
+                <label for="author">Författare</label>
+                <input type="text" name="author" value="<Författare>">
+            </div>  
+            </fieldset>
+        <p>
+        <input type="submit" name="do_it" value="Skapa bok">
+        </p>
+        </form> 
+
+    </div>
     
 
 <p></p>

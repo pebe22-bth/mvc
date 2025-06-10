@@ -54,15 +54,14 @@ final class BookController extends AbstractController
         $entityManager->flush();
         $this->addFlash(
                 'notice',
-                'Book "' . $title . ' " added to library!'
+                'Boken "' . $title . ' " är inlagd i biblioteket!'
             );
 
-        return new Response('Saved new book with id '.$book->getId());
+        return $this->redirectToRoute('library_show_all');
     }
     #[Route('/library/show', name: 'library_show_all', methods:['GET'])]
     public function showAllBook(
-        BookRepository $bookRepository,
-        SessionInterface $session
+        BookRepository $bookRepository
     )  : Response {
         $books = $bookRepository->findAll();
         $data = [
@@ -75,83 +74,98 @@ final class BookController extends AbstractController
             BookRepository $bookRepository,
             int $id
         ): Response {
-            $book = $bookRepository
-                ->find($id);
+            $book = $bookRepository->find($id);
+            $data = [
+            "book" => $book
+            ];
         
-            return $this->json($book);
+            return $this->render('book/single-view.html.twig', $data);
         }
-#[Route('/library/delete/{id}', name: 'library_delete_by_id', methods:['POST'])]
+#[Route('/library/delete', name: 'library_delete', methods:['POST'])]
 public function deleteBookById(
     ManagerRegistry $doctrine,
-    int $id
+    Request $request,
+    SessionInterface $session
 ): Response {
     $entityManager = $doctrine->getManager();
-    $book = $entityManager->getRepository(Library::class)->find($id);
+    $id = (int) $request->request->get('id');
+    $book = $entityManager->getRepository(Book::class)->find($id);
 
     if (!$book) {
         throw $this->createNotFoundException(
-            'No product found for id '.$id
+            'No book found with id '.$id
         );
     }
 
     $entityManager->remove($book);
     $entityManager->flush();
+    $this->addFlash(
+                'notice',
+                'Boken "' . $book->getTitle() . ' " borttagen från biblioteket!'
+            );
 
     return $this->redirectToRoute('library_show_all');
 }
-#[Route('/library/update/{id}/{value}', name: 'library_update', methods:['POST'])]
-public function updateBook(
+#[Route('/library/update/{id}', name: 'library_update_get', methods:['GET'])]
+    public function updateBookById(
+            BookRepository $bookRepository,
+            int $id
+        ): Response {
+            $book = $bookRepository->find($id);
+            $data = [
+            "book" => $book
+            ];
+        
+            return $this->render('book/update.html.twig', $data);
+        }
+#[Route('/library/update', name: 'library_update_post', methods:['POST'])]
+public function updateBookPost(
     ManagerRegistry $doctrine,
-    int $id,
-    int $value
+    Request $request,
+    SessionInterface $session
 ): Response {
     $entityManager = $doctrine->getManager();
-    $book = $entityManager->getRepository(Library::class)->find($id);
+    $id = (int) $request->request->get('id');
+    $title = $request->request->get('title');
+    $isbn = $request->request->get('isbn');
+    $author = $request->request->get('author');
+    $image = $request->request->get('image');
+    $book = $entityManager->getRepository(Book::class)->find($id);
+    $book->setTitle($title);
+    $book->setIsbn($isbn);
+    $book->setAuthor($author);
+    $book->setimage($image);
 
-    if (!$book) {
-        throw $this->createNotFoundException(
-            'No product found for id '.$id
-        );
-    }
+    $entityManager->persist($book);
 
-    $book->setValue($value);
     $entityManager->flush();
+    $this->addFlash(
+                'notice',
+                'Boken "' . $title . ' " är uppdaterad.'
+            );
 
     return $this->redirectToRoute('library_show_all');
 }
-#[Route('/library/view', name: 'library_view_all')]
-public function viewAllBook(
-    BookRepository $bookRepository
-): Response {
-    $books = $bookRepository->findAll();
 
-    $data = [
-        'products' => $books
-    ];
+#[Route('/library/reset', name: 'library_reset_really', methods: ['GET'])]
+    public function reallyReset(): Response
+    {
+        return $this->render('book/reset.html.twig');
+    }
 
-    return $this->render('library/view.html.twig', $data);
-}
-#[Route('/library/view/{value}', name: 'library_view_minimum_value', methods:['GET'])]
-public function viewBookWithMinimumValue(
+#[Route('/library/reset', name: 'library_reset_database', methods:['POST'])]
+public function resetDatabase(
     BookRepository $bookRepository,
-    int $value
-): Response {
-    $books = $bookRepository->findByMinimumValue($value);
+    SessionInterface $session
+    ): Response 
+    {
+        $bookRepository->reset();
 
-    $data = [
-        'products' => $books
-    ];
+        $this->addFlash(
+                    'notice',
+                    'Databasen är återställd!'
+                );
 
-    return $this->render('library/view.html.twig', $data);
-}
-#[Route('/library/show/min/{value}', name: 'library_by_min_value', methods:['GET'])]
-public function showBookByMinimumValue(
-    BookRepository $bookRepository,
-    int $value
-): Response {
-    $books = $bookRepository->findByMinimumValue2($value);
-
-    return $this->json($books);
-}
-
+        return $this->redirectToRoute('library_show_all');
+    }
 }

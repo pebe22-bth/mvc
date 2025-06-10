@@ -5,8 +5,23 @@
     display: block;
 }
 
-.books table {
-    
+.bookupdate form {
+  display: table;
 }
+
+.bookupdate div {
+  display: table-row;
+}
+
+.bookupdate label, input {
+  display: table-cell;
+  margin-bottom: 10px;
+}
+
+.bookupdate label {
+  padding-right: 10px;
+}
+
+
 
 

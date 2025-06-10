@@ -22,6 +22,7 @@ phpdoc \
     -d src/game \
     -t $TARGET  \
     --template=$TEMPLATE
+
 # phpdoc -d src/Card -d src/Controller -t $TARGET  --template=$TEMPLATE
 # Cleanup
 cd $PWD

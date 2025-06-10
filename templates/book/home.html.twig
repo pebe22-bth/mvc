@@ -9,9 +9,18 @@
     <h1>Bibliotek </h1>
 
     <p>
-       
-        <button onclick = window.location.href="{{ path('library_create_get') }}">Lägg till en bok</button>
-   
+        Här kan du titta på information om böcker i databasen, lägga till, ändra och ta bort böcker.
+        Reset återställer databasen.
+
+    </p>
+    <p>
+       <button onclick = window.location.href="{{ path('library_show_all') }}">Böcker</button>
+    </p>
+    <p>
+        <button onclick = window.location.href="{{ path('library_create_get') }}">Ny bok</button>
+    </p>
+    <p>
+        <button onclick = window.location.href="{{ path('library_reset_really') }}">Reset</button>
     </p>
     
 

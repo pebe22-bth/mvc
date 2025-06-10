@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bok{% endblock %}
+
+
+{% block body %}
+{% include 'book/nav.html.twig' %}
+
+
+<div class="book">
+
+    <img src="/img/book/{{ book.getImage|e }}" alt="{{ book.getTitle|e }}" /></a>
+
+<ul>
+        <li>Titel: {{ book.getTitle|e }}</li>
+        <li>Författare: {{ book.getAuthor|e }} </li>
+        <li>ISBN: {{ book.getIsbn|e }}</li>
+</ul>
+
+
+
+{% endblock %}

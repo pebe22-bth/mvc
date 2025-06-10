@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Bibliotek{% endblock %}
+
+{% block main %}
+
+{% include 'book/nav.html.twig' %}
+
+    <h1>Återställ databas </h1>
+    <p>
+        Vill du verkligen återställa databasen ?  De böcker du lagt in manuellt kommer att raderas.
+    </p>
+    <p>
+    <form method="post" action="/library/reset" >
+            <button type="submit" name="id" value="doit"> Ja</button>
+    </form>
+    </p>
+    <p>
+    <button onclick = window.location.href="{{ path('library_home') }}">Nej</button>
+    </p>
+    
+
+<p></p>
+
+
+{% endblock %}
