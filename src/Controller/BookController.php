@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\BookRepository;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class BookController extends AbstractController
 {
@@ -30,6 +31,7 @@ final class BookController extends AbstractController
     #[Route('/library/create', name: 'library_create_post', methods: ['POST'])]
     public function createBook(
     Request $request,
+    SessionInterface $session,
     ManagerRegistry $doctrine
     ): Response {
     $entityManager = $doctrine->getManager();
@@ -50,6 +52,10 @@ final class BookController extends AbstractController
 
     // actually executes the queries (i.e. the INSERT query)
     $entityManager->flush();
+    $this->addFlash(
+            'notice',
+            'Book "' . $title . ' " added to library!'
+        );
 
     return new Response('Saved new book with id '.$book->getId());
 }
