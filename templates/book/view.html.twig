@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Library view!{% endblock %}
+{% block title %}Bibliotek{% endblock %}
 
 {% block body %}
 <style>
@@ -8,10 +8,29 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-<ul>
-    {% for book in library %}
-        <li>{{ book.getName|e }} ({{ product.getId|e }}) {{ product.getValue|e }}</li>
-    {% endfor %}
-</ul>
+<div class="books">
+<table>
+    <tr>
+        <th>Bild</th>
+        <th>Titel</th>
+        <th>Författare</th>
+        <th>ISBN</th>
+    </tr>
+{% for book in books %}
+    <tr>
+        <td>
+            <a href="/library/show/{{ book.getId|e }}">
+            <img src="/img/book/{{ book.getImage|e }}" alt="{{ book.getTitle|e }}" /></a>
+        </td>
+        <td>
+             <a href="/library/show/{{ book.getId|e }}">{{ book.getTitle|e }}</a>
+        </td>
+        <td>{{ book.getAuthor|e }}                      </td>
+        <td>{{ book.getIsbn|e }}                        </td>
+    </tr>
+{% endfor %}
+</table>
+
+
+
 {% endblock %}

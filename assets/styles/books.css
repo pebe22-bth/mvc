@@ -1,0 +1,12 @@
+.books td:first-child img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    display: block;
+}
+
+.books table {
+    
+}
+
+
