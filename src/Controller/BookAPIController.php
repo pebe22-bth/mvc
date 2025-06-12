@@ -16,19 +16,19 @@ final class BookAPIController extends AbstractController
     #[Route('/api/library/books', name: 'api_library_show_all', methods:['GET'])]
     public function apiShowAllBook(
         BookRepository $bookRepository,
-    )  : Response {
+    ): Response {
         $books = $bookRepository->findAll();
         return $this->json($books);
     }
     #[Route('/api/library/book/{isbn}', name: 'api_library_by_isbn', methods:['GET'])]
     public function apiShowBookByIsbn(
-            BookRepository $bookRepository,
-            string $isbn
-        ): Response {
-            $book = $bookRepository->findByIsbn($isbn);
-        
-            return $this->json($book);
-        }
+        BookRepository $bookRepository,
+        string $isbn
+    ): Response {
+        $book = $bookRepository->findByIsbn($isbn);
+
+        return $this->json($book);
+    }
 
 
 

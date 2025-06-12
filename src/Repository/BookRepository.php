@@ -15,17 +15,18 @@ class BookRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Book::class);
     }
-       public function findByIsbn($isbn): ?Book
-       {
-           return $this->createQueryBuilder('b')
-               ->andWhere('b.isbn = :val')
-               ->setParameter('val', $isbn)
-               ->getQuery()
-               ->getOneOrNullResult()
-           ;
-       }
-       public function reset(): void
-        {   
+    public function findByIsbn(string $isbn): ?Book
+    {
+        /** @phpstan-ignore-next-line */
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.isbn = :val')
+            ->setParameter('val', $isbn)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    public function reset(): void
+    {
         $conn = $this->getEntityManager()->getConnection();
         $sql = "
             DELETE FROM book;
@@ -37,9 +38,9 @@ class BookRepository extends ServiceEntityRepository
                 ('Krig och fred. Vol 3, 1812','978-9174619263','Leo Tolstoy','kf3.jpg'),
                 ('Krig och fred. Vol 4, 1812-1813 / Epilog','978-9174619270','Leo Tolstoy','kf4.jpg');
             ";
-            $conn->executeQuery($sql);
+        $conn->executeQuery($sql);
 
-        }
+    }
 
     //    /**
     //     * @return Book[] Returns an array of Book objects
