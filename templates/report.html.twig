@@ -168,7 +168,30 @@ Jag behövde installera phpstan/phpstan-phpunit för att slippa en del lint varn
 {% endapply %}
 
 <h2 id="kmom05">Kmom05</h2>
-<p>Redovisningstext</p>
+
+{% apply markdown_to_html %}
+
+Det gick bra att jobba igenom uppgiften med doctrine.  Gick även bra att sätta upp mysql på studentserver och spara lösen i vault. Bra att det tas 
+med i kursen att secrets inte ska checkas in i repot. Det skulle vara bra att lägga till i kursmaterialet hur man säkerställer att käsnliga filer inte 
+kommer med i commits - kan tänka mig några missar det och inte tydligt exakt vilken fil som innehåller privata nyckeln.
+
+Kanske kommer i nsta kursmoment, men om inte borde ju sårbarhetsscanning och secrets-scanning vara del i testningen / pipelines. Om inte annat en artikel om hur man 
+använder Githubs funktion för att scanna efter och varna för incheckade secrets. 
+
+Man behöver nog hålla på en del med abstraktionslagret för doctrine för att lära sig syntaxen - inte självklart men med de exempel som finns var det inga problem
+att lägga till de funktioner som behövdes.
+I implementationen tänkte jag att jag gör ungefär lika som i eshopen i databas-kursen och återanvände en del från de templates som vi använde där.
+Implementationen av bild löste jag på samma sätt med att lagra filnamnet och förutsätta att filen finns på plats. Ingen uppladdningsfunktion av bildfil med andra ord 
+- känns som överkurs i denna uppgiften.
+Inga problem att använda doctrine genererade funktioner för crud-operationer, smidigt sätt att få heltäckande funktioner för att uppdatera databasen.
+
+Fördelen med att använda ORM är ju att man får en inbyggd kontroll med endast automatiskt genererade SQL'er och förmodligen även bättre skydd mot SQL-injections från inmatningsfält.
+Att det går att kombinera med egen SQL i lägen då detta är lämpligare är ju smidigt.
+
+### TIL
+-  Var noga med dina secrets!
+
+{% endapply %}
 <h2 id="kmom06">Kmom06</h2>
 <p>Redovisningstext</p>
 
