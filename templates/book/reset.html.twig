@@ -11,7 +11,7 @@
         Vill du verkligen återställa databasen ?  De böcker du lagt in manuellt kommer att raderas.
     </p>
     <p>
-    <form method="post" action="/library/reset" >
+    <form method="post" action="{{ path('library_reset_database') }}" >
             <button type="submit" name="id" value="doit"> Ja</button>
     </form>
     </p>

@@ -9,7 +9,7 @@
 
 <div class="book">
 
-    <img src="/img/book/{{ book.getImage|e }}" alt="{{ book.getTitle|e }}" /></a>
+    <img src="{{ asset('img/book/') }}{{ book.getImage|e }}" alt="{{ book.getTitle|e }}" /></a>
 
 <ul>
         <li>Titel: {{ book.getTitle|e }}</li>

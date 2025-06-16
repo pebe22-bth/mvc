@@ -18,6 +18,8 @@ final class BookController extends AbstractController
     public function index(): Response
     {
         return $this->render('book/home.html.twig', [
+    'app_env' => $_ENV['APP_ENV'] ?? null,
+    'database_url' => $_ENV['DATABASE_URL'] ?? null,
             'controller_name' => 'BookController',
         ]);
     }
