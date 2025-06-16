@@ -175,23 +175,33 @@ Det gick bra att jobba igenom uppgiften med doctrine.  Gick även bra att sätta
 med i kursen att secrets inte ska checkas in i repot. Det skulle vara bra att lägga till i kursmaterialet hur man säkerställer att känsliga filer inte 
 kommer med i commits - kan tänka mig några missar det och inte tydligt exakt vilken fil som innehåller privata nyckeln + vad gör man när man av misstag 
 checkat in secrets.
-
+  
 Kanske kommer i nästa kursmoment, men om inte borde ju sårbarhetsscanning och secrets-scanning vara del i testningen / pipelines. Om inte annat en artikel om hur man 
 använder Githubs funktion för att scanna efter och varna för incheckade secrets. 
-
+  
+Fick problem med att rätt dotenv variabler inte användes i webben på studentservern, men funkade i CLI på studentservern. Jag dumpade variabeln i twig vyn pch såg att databasserver
+127.0.0.1 användes fast jag rensat bort .env.student.local och kollat att ingen fil överhuvudtaget innehåll localhost - ändå användes den i webgränssnittet.
+I CLI såg allt rätt ut med bin/console debug:dotenv samt att accessa databasen. 
+Jag tror felet låg i nån cache. Jag rensade med bin/console cache:clear och tog även bort allt i var/ på studentservern men det hjälpte inte. 
+När jag rensat hela report katalogen och gjort en ny uppladdning funkade det så jag misstänker nån cache i apache webservern.
+  
 Man behöver nog hålla på en del med abstraktionslagret för doctrine för att lära sig syntaxen - inte självklart men med de exempel som finns var det inga problem
 att lägga till de funktioner som behövdes i kursmomentet.
-
+  
 I implementationen tänkte jag att jag gör ungefär lika som i eshopen i databas-kursen och återanvände en del kod från de templates som vi använde där.
 Implementationen av bilder löste jag på samma sätt med att lagra filnamnet och förutsätta att filen finns på plats. Ingen uppladdningsfunktion av bildfil med andra ord, 
 känns som överkurs i denna uppgiften.
 Inga problem att använda doctrine genererade funktioner för crud-operationer, smidigt sätt att få heltäckande funktioner för att uppdatera databasen.
-
+  
 Fördelen med att använda ORM är ju att man får en inbyggd kontroll med endast automatiskt genererade SQL'er och förmodligen även bättre skydd mot SQL-injections från inmatningsfält.
 Att det går att kombinera med egen SQL i lägen då detta är lämpligare är ju smidigt.
-
+  
+Jag gjorde optionen att resetta databasen.
+  
 ### TIL
--  Var noga med dina secrets!
+-  Var noga med dina secrets! Checka inte in dem. Om du av misstag gör det så behöver de bytas. Räcker inte att uppdatera eller ändra filen då git history innehåller din secret.
+- Lita inte på symfonys rensning av cache. Lita inte på överliggande apache webserver cache.
+
 
 {% endapply %}
 <h2 id="kmom06">Kmom06</h2>
