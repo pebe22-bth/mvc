@@ -6,7 +6,7 @@ filter:
 
 build:
 #    image: default-bionic
-    image: default
+    image: default-jammy
 
     nodes:
         my-tests:
