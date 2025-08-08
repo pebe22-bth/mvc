@@ -1,5 +1,6 @@
 # script to run php documenter and create html file for documentation inline
 # usage: build-docs.sh
+# author: Pelle
 
 PWD=`pwd`
 cd `dirname $0`/..

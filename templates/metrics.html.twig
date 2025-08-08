@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Metrics </title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}
+                {{ importmap('app') }}
+            {% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+    <h1>Metrics</h1>
+    <div class="routes">
+        <code>
+ -------------------------- -------- -------- ------ -------<br>
+  Name                       Method   Scheme   Host   Path  <br>
+ -------------------------- -------- -------- ------ -------<br>
+ api_quote                  ANY      ANY      ANY    /api/quote    <br>                    
+ api_deck                   GET      ANY      ANY    /api/deck         <br>                 
+ api_deck_shuffle           POST     ANY      ANY    /api/deck/shuffle     <br>             
+ api_deck_draw              POST     ANY      ANY    /api/deck/draw            <br>         
+ api_deck_draw_multiple     POST     ANY      ANY    /api/deck/draw/{num}    <br>
+ api_game                   GET      ANY      ANY    /api/game <br>
+ api_library_show_all       GET      ANY      ANY    /api/library/books        <br>         
+ api_library_by_isbn        GET      ANY      ANY    /api/library/book/{isbn}  <br>
+                                                    
+ ISBN lookup example: 
+ https://www.student.bth.se/~pebe22/dbwebb-kurser/mvc/me/report/public/api/library/book/978-9174619270
+</code> 
+</div>
+<h2>Klasser</h2></p>
+Klassdefinitioner enligt nedan.
+(Genererat med hjälp av phpdoc comments och phpDocumentor)
+<div class="phpdoc">
+{% apply markdown_to_html %}
+{{ include('game/docs/classes/App/Card/Game21.md') | raw }}
+
+{{ include('card/docs/classes/App/Controller/CardAPIController.md') | raw }}
+
+{% endapply %}
+</div>
+
+</body>
+</html>

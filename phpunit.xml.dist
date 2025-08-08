@@ -39,5 +39,9 @@
 
     <extensions>
     </extensions>
+<!-- Logging added for metrics in kmom06 -->
+    <logging>
+        <junit outputFile="docs/junit.xml" />
+    </logging>
     
 </phpunit>
