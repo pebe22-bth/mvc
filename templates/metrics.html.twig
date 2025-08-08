@@ -16,33 +16,47 @@
     </head>
     <body>
     <h1>Metrics</h1>
-    <div class="routes">
-        <code>
- -------------------------- -------- -------- ------ -------<br>
-  Name                       Method   Scheme   Host   Path  <br>
- -------------------------- -------- -------- ------ -------<br>
- api_quote                  ANY      ANY      ANY    /api/quote    <br>                    
- api_deck                   GET      ANY      ANY    /api/deck         <br>                 
- api_deck_shuffle           POST     ANY      ANY    /api/deck/shuffle     <br>             
- api_deck_draw              POST     ANY      ANY    /api/deck/draw            <br>         
- api_deck_draw_multiple     POST     ANY      ANY    /api/deck/draw/{num}    <br>
- api_game                   GET      ANY      ANY    /api/game <br>
- api_library_show_all       GET      ANY      ANY    /api/library/books        <br>         
- api_library_by_isbn        GET      ANY      ANY    /api/library/book/{isbn}  <br>
-                                                    
- ISBN lookup example: 
- https://www.student.bth.se/~pebe22/dbwebb-kurser/mvc/me/report/public/api/library/book/978-9174619270
-</code> 
-</div>
-<h2>Klasser</h2></p>
-Klassdefinitioner enligt nedan.
-(Genererat med hjälp av phpdoc comments och phpDocumentor)
+   
 <div class="phpdoc">
 {% apply markdown_to_html %}
-{{ include('game/docs/classes/App/Card/Game21.md') | raw }}
+## Introduktion
 
-{{ include('card/docs/classes/App/Controller/CardAPIController.md') | raw }}
+där du förklarar de sex C:na och hur de kan påverka kodens kvalitet. Exemplifiera, där det passar, med några mätvärden som är kopplad till din egen kod och ge en kort förklaring av mätvärdet relaterat till kodkvalitet.
 
+## Phpmetrics 
+analysera dess rapport för din kod. Använd mätvärdena för att hitta flaskhalsar och svaga punkter i din kod (minst 3 stycken). Du vill hitta kod som har förbättringspotential. Visualisera med någon representativ bild från rapporten.
+
+## Scrutinizer
+
+analysera dess rapport för din kod. Gör på samma sätt som du gjorde med Phpmetrics.
+
+Inkludera klickbara Scrutinizer badges i din rapport för build, coverage och quality.
+Placera samma badges i din README.md.
+I ovan analys så kopplar du dina “findings” till 6C. Använd gärna något ytterligare mättal som du finner relevant och intressant.
+
+## Förbättringar
+
+där du väljer minst 3 förbättringar som du vill göra med din kod (gärna fler).
+
+Exempel på förbättringar kan vara:
+
+Fixa issues
+Öka kodtäckning
+Fokusera på kvalitetsindex i Scrutinizer
+Minska komplexiteten i class/metod
+Börja med att skriva om förbättringarna, vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka mätvärdena för kvalitet.
+
+Implementera sedan förbättringarna.
+Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
+Gör det tydligt hur mätvärdena såg ut innan och efter dina förbättringar.
+
+## Diskussion
+
+där du diskuterar kort kring det du nyss gjort.
+
+Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?
+Finns det fördelar och kanske nackdelar?
+Ser du andra möjligheter att jobba mot “clean code”?
 {% endapply %}
 </div>
 
