@@ -27,5 +27,35 @@ class BookTest extends TestCase
         $exp = "phpUnitTest";
         $this->assertEquals($exp, $res);
     }
+    
+    public function testBookIsbn(): void
+    {
+        $book = new Book();
+        
+        $res = $book->setIsbn("12345678");
+        $res = $book->getIsbn();
+        $exp = "12345678";
+        $this->assertEquals($exp, $res);
+    }
+    
+    public function testBookAuthor(): void
+    {
+        $book = new Book();
+        
+        $res = $book->setAuthor("Author");
+        $res = $book->getAuthor();
+        $exp = "Author";
+        $this->assertEquals($exp, $res);
+    }
+    
+    public function testBookImage(): void
+    {
+        $book = new Book();
+        
+        $res = $book->setImage("path/to/image/12345678");
+        $res = $book->getImage();
+        $exp = "path/to/image/12345678";
+        $this->assertEquals($exp, $res);
+    }
 
 }
