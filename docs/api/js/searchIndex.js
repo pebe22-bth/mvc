@@ -501,6 +501,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-MainControllerTwig.html#method_apiRoutes"
         },                {
+            "fqsen": "\\App\\Controller\\MainControllerTwig\u003A\u003Ametrics\u0028\u0029",
+            "name": "metrics",
+            "summary": "",
+            "url": "classes/App-Controller-MainControllerTwig.html#method_metrics"
+        },                {
             "fqsen": "\\App\\Dice\\Dice",
             "name": "Dice",
             "summary": "",
