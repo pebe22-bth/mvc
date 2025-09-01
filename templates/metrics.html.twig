@@ -170,21 +170,12 @@ så bestämer mig för att inte lägga möda på att försöka förbättra dem.
 
 - Game21 har hög cyclomatic complexity och behöver ses över.
 ![Game21]({{ asset('images/metrics/game21-before.png') }})
-- CardGameController har en funktion med CRAP 30 som behöver ses över.
-![CardGameController]({{ asset('images/metrics/CRAP-CardGameController.png') }})
 
+- CardHand har enligt Scrutinizer buggar med major severity som behöver fixas.
+![CardHand]({{ asset('images/metrics/CardHand-before.png') }})
 
-Överblick innan förändringar:
-![Overview before]({{ asset('images/metrics/PhpMetrics_maintainability_complexity-before.png') }})
-
-Börja med att skriva om förbättringarna, 
-vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka mätvärdena för kvalitet.
-
-Implementera sedan förbättringarna.
-Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
-Gör det tydligt hur mätvärdena såg ut innan och efter dina förbättringar.
-
-- BookEntity code coverage efter att tests lagts till i BookEntity.
+### Resultat efter förändringar
+- BookEntity code coverage är nu 100% efter att tests lagts till.
 ![BookEntity]({{ asset('images/metrics/coverage-after.png') }})
 
 - Game21. 
@@ -196,16 +187,31 @@ WMC har ökat från 15 till 17 - antagligen för att antal funktioner i klassen 
 Jag bestämmer mig ändå för att behålla ändringarna: Koden är renare och lättare att förstå.
 
 ![Game21]({{ asset('images/metrics/game21-after.png') }})
-- CardGameController med lägre CRAP värde.
-![CardGameController]({{ asset('images/metrics/CRAP-CardGameController-after.png') }})
+
+
+- CardHand bug fix. Den här klassen innehåll 3 major issues innan förändringen, vilket nu fixats till. Man
+kan se att totala antal issues minskat från 24 till 21.
+![CardHand]({{ asset('images/metrics/CardHand-after.png') }})
 
 ## Diskussion
 
-där du diskuterar kort kring det du nyss gjort.
+Bra övning för att se vilken analys man enkelt kan få på "köpet". Väldigt enkelt att använda Scrutinizer när den 
+körs automatiskt vid commit av kod, dessutom bra med grafik för att snabbt se proportioner på felen.
+Analysen gör mer nytta med större kodbas. Jag försökte få ned komplexitetem på mitt 21-spel, men det gick inte bra av
+den enkla anledningen att det nog inte gick att förenkla så mycket - spelets logik behöver implementeras på någåt sätt
+och det finns en gräns hur förenklad den logiken kan vara.
+Jag hittade några fel som var rena buggar - iofs i phpdoc men ändå, det var fel som upptäcktes.
 
-Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?
-Finns det fördelar och kanske nackdelar?
-Ser du andra möjligheter att jobba mot “clean code”?
+Som professionell utvecklare borde man absolut jobba med den här typen av verktyg för att höja kvaliteten, dock ska man
+inte förlita sig för mycket då det ändå är "statisk" analys och det kan finnas andra ställen att investera sin tid som
+löser problem som inte hittas här. Nackdelen som sagt innan att man ägnar för mycket tid åt för små problem, som i fallet 
+med min Game21 klass ovan. Jag gillar CRAP värdet som faktiskt tar hänsyn till hur mycket det kostar att åtgärda potentiella 
+problem.
+
+Andra sätt att jobba mot clean code är parprogrammering, pull requests förfaranden och andra typer av samarbeten och granskning 
+av kod så man lär av varandra. 
+
+
 {% endapply %}
 </div>
 
