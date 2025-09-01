@@ -87,8 +87,8 @@ Tips är att se över unit tests för klassen.
 
 
 ## Scrutinizer
-
-Scurinizer rapportem visar följande övergripande information:
+Analysera Scrutinizer rapporten för din kod. Använd mätvärdena för att hitta flaskhalsar och svaga punkter i din kod (minst 3 stycken).
+Scurinizer rapporten visar följande övergripande information:
 ![Scrutinizer overview]({{ asset('images/metrics/scrutinizer-before.png') }})
 ..vilket ju ser ganska bra ut vid en första anblick, förutom att code coverage är låg . 
 Detta vista jag om redan och anledningen är att jag inte skrivit test för de tidiga delmomenten i kursen innan vi hade lärt oss jUnit.
@@ -96,8 +96,8 @@ Detta vista jag om redan och anledningen är att jag inte skrivit test för de t
 Jag vill ändå titta på vilka issues som identifierats och hittar följande:
 ![Scrutinizer issues]({{ asset('images/metrics/scrutinizer-issues-before.png') }})
 
-**Analys**
 
+### Analys
 
 Här är klickbara Scrutinizer badges för build, coverage och quality.
 
@@ -110,18 +110,73 @@ Här är klickbara Scrutinizer badges för build, coverage och quality.
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/pebe22-bth/mvc/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
 
 Dessa är även placerade i README.md i Github repot.
-I ovan analys så kopplar du dina “findings” till 6C. Använd gärna något ytterligare mättal som du finner relevant och intressant.
+
+I bilden ovan listar Scrutinizer de issues den hittat. Sammanfattningsvis är det:
+|Typ|Antal|
+|-|-|
+|Unused code |17|
+|Bug |9|
+|Best practice |7|
+|Comprehencibility |1|
+
+9 av dessa är Major severity, 18 är Minor och 1 uknown.
+
+Exkluderar jag Controller och testklasserna, blir egentligen bara två klasser kvar: 
+- CardHand
+- Game21
+
+vilka riskerar att innehålla buggar, inte följa best practice och innehåller oanvänd kod.
+
+(.php-cs-fixer.dist.php rapporteras vara ett major problem, men jag ignorerar denna då det är en fil som genererats av csfixer.
+BookTest och Game21Test är testklasser som enligt Scrutinizer innehåller oavänd kod. Jag bestämmer mig för att ignorera dessa varningar då
+jag tror det är False-Positive)
+
+
+
+## Findings
+
+Först tittade jag på **codestyle**. Detta hjälper min IDE till med redan under kodskapandet + csfix, phpstan. Jag ser inte resultat av detta tydligt i phpmetrics,
+däremot rapporterar scrutinizer om oanvänd kod, oanvända variabler och typdeklarationer som är fel eller saknas.
+
+Gällande **coverage** så hittar jag data både i phpmetrics och scrutinizer. 
+I phpmetrics ser jag tydligt vilka klasser som inte har några tester och även vilka som är mest troliga att vara buggiga då de saknar tester och
+har hög komplexitet. Detta ger mig en bra prioritering var jag borde komplettera med tester. phpmetrics pekar på mina controller klasser
+i första hand. Scrutiner ger en liknande rapport med coverage i kombination med copemplicity i första hand pekar ut mina controller klasser.
+
+**Complexity** var vi redan inne på då det i kombination med coverage ger en bra bild på var risk för buggar finns. phpmetrics har även en specifik vy
+för complexitet som ger detaljerad info om de olika mätvärdena för komplexitet. Här toppar Game21 och BookRepository WMC (Weighted Method Count) 
+som är en summering av cyclomatic complexity för alla metoder i klassen. Scrutinizer ger inte en lika tydlig bild, men jag kan ana att den behöver
+mer statistik efter fler körningar.
+
+**Cohesion** rapporteras i phpmetrics och tittar jag på LCOM så toppar CardAPIController och BookRepository. 
+I Scrutinizer hittar jag inte tydligt rapportering om cohesion.
+
+** Coupling** I phpmetrics toppar mina kontroller klasser Efferrent coupling (Ce), vilke visar att de är beroende av många andra klasser.
+De har 0 på Afferebt coupling (Ca) vilket visar att ingen annan klass är beroende av dem.
+
+**CRAP** värdet i scrutinizer ger en hint om hur mycket jobb det är att fixa problem. Högst värden (=mest jobb för att fixa problemen) 
+så toppar en del funktioner i mina controller klasser, viklet ger en hint om att det kanske inte är värt mödan att fixa problem där. 
+Högsta värdet 30 finns i "CardGameController::draw_multiple()". Vid 30 går brytgränsen om det är värt att lägga tid - det indikerar ändå 
+att det skulle vara mödan värt då alla andra värden är lägre.
+
+Jag ser generellt att controller klasserna sticker ut, men givet deras speciella funktio tror jag inte värdena är så representaiva egentligen 
+så bestämer mig för att inte lägga möda på att försöka förbättra dem.
+
 
 ## Förbättringar
 
-där du väljer minst 3 förbättringar som du vill göra med din kod (gärna fler).
+- BookRepository har tydligt dåligt test coverage vilket behöver fixas.
+![BookEntity]({{ asset('images/metrics/CoverageBookEntity-before.png') }})
 
-Exempel på förbättringar kan vara:
+- Game21 har hög komplexitet och behöver ses över.
+![Game21]({{ asset('images/metrics/game21-before.png') }})
+- CardGameController har en funktion med CRAP 30 som behöver ses över.
+![CardGameController]({{ asset('images/metrics/CRAP-CardGameController.png') }})
 
-Fixa issues
-Öka kodtäckning
-Fokusera på kvalitetsindex i Scrutinizer
-Minska komplexiteten i class/metod
+
+Överblick innan förändringar:
+![Overview before]({{ asset('images/metrics/PhpMetrics_maintainability_complexity-before.png') }})
+
 Börja med att skriva om förbättringarna, 
 vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka mätvärdena för kvalitet.
 
