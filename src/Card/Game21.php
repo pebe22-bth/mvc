@@ -33,6 +33,27 @@ class Game21
     }
 
     /**
+     * isBust - checks if player is bust (value over 21)
+     *
+     * @param  int $value
+     * @return bool
+     */
+    private function isBust(int $value): bool
+    {
+        return $value > 21;
+    }
+    /**
+     * is17 - checks if player has 17 or over
+     *
+     * @param  int $value
+     * @return bool
+     */
+    private function is17(int $value): bool
+    {
+        return $value > 16;
+    }
+
+    /**
      * getHandValue - returns the best value of the hand
      *
      * @param  CardHand $hand
@@ -70,7 +91,7 @@ class Game21
         }
         $this->playerHand->add($this->deck->drawCard());
         $handValue = $this->getHandValue($this->playerHand);
-        if ($handValue > 21) {
+        if (this->isBust($handValue)) {
             $this->winner = "bank";
         }
         return $handValue;
@@ -83,16 +104,20 @@ class Game21
         }
         $this->bankHand->add($this->deck->drawCard());
         $handValue = $this->getHandValue($this->bankHand);
-        if ($handValue > 21) {
+        if (this->isBust($handValue)) {
             $this->winner = "player";
-        } elseif ($handValue >= 17) {
-            if ($handValue >= $this->getHandValue($this->playerHand)) {
-                $this->winner = "bank";
-            } else {
-                $this->winner = "player";
-            }
+            return $handValue;
         }
+        if !(this->is17($handValue)) { // Bank has not drawn to 17
+            return $handValue;
+        }
+        if ($handValue >= $this->getHandValue($this->playerHand)) {
+            $this->winner = "bank";
+            return $handValue;
+        }
+        $this->winner = "player";
         return $handValue;
+        
     }
     /**
      * stop - Player stops drawing cards, banks turn
