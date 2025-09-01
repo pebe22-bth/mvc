@@ -38,7 +38,7 @@ class CardHand
 
     /**
      * getValues - returns the values of the cards in the hand
-     * @return list<int|null>
+     * @return array<int|null>
      */
     public function getValues(): array
     {
@@ -52,7 +52,7 @@ class CardHand
     /**
      * getString - returns the string representation of the cards in the hand
      *
-     * @return list<string|null>
+     * @return array<string|null>
      */
     public function getString(): array
     {

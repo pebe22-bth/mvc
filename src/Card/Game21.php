@@ -91,7 +91,7 @@ class Game21
         }
         $this->playerHand->add($this->deck->drawCard());
         $handValue = $this->getHandValue($this->playerHand);
-        if (this->isBust($handValue)) {
+        if ($this->isBust($handValue)) {
             $this->winner = "bank";
         }
         return $handValue;
@@ -104,11 +104,11 @@ class Game21
         }
         $this->bankHand->add($this->deck->drawCard());
         $handValue = $this->getHandValue($this->bankHand);
-        if (this->isBust($handValue)) {
+        if ($this->isBust($handValue)) {
             $this->winner = "player";
             return $handValue;
         }
-        if !(this->is17($handValue)) { // Bank has not drawn to 17
+        if (!$this->is17($handValue)) { // Bank has not drawn to 17
             return $handValue;
         }
         if ($handValue >= $this->getHandValue($this->playerHand)) {
@@ -117,7 +117,7 @@ class Game21
         }
         $this->winner = "player";
         return $handValue;
-        
+
     }
     /**
      * stop - Player stops drawing cards, banks turn

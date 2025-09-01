@@ -161,6 +161,16 @@ Search.appendIndex(
             "summary": "__construct\u0020sets\u0020the\u0020value\u0020of\u0020the\u0020card\u0020to\u0020null",
             "url": "classes/App-Card-Game21.html#method___construct"
         },                {
+            "fqsen": "\\App\\Card\\Game21\u003A\u003AisBust\u0028\u0029",
+            "name": "isBust",
+            "summary": "isBust\u0020\u002D\u0020checks\u0020if\u0020player\u0020is\u0020bust\u0020\u0028value\u0020over\u002021\u0029",
+            "url": "classes/App-Card-Game21.html#method_isBust"
+        },                {
+            "fqsen": "\\App\\Card\\Game21\u003A\u003Ais17\u0028\u0029",
+            "name": "is17",
+            "summary": "is17\u0020\u002D\u0020checks\u0020if\u0020player\u0020has\u002017\u0020or\u0020over",
+            "url": "classes/App-Card-Game21.html#method_is17"
+        },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetHandValue\u0028\u0029",
             "name": "getHandValue",
             "summary": "getHandValue\u0020\u002D\u0020returns\u0020the\u0020best\u0020value\u0020of\u0020the\u0020hand",

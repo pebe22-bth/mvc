@@ -9,49 +9,48 @@ use PHPUnit\Framework\TestCase;
  */
 class BookTest extends TestCase
 {
-
     public function testBookCreate(): void
     {
         $book = new Book();
-        
-        $res = $book->getId(); 
-        $this->assertNull($res,"value is not null");
+
+        $res = $book->getId();
+        $this->assertNull($res, "value is not null");
     }
 
     public function testBookTitle(): void
     {
         $book = new Book();
-        
+
         $book->setTitle("phpUnitTest");
         $res = $book->getTitle();
         $exp = "phpUnitTest";
         $this->assertEquals($exp, $res);
     }
-    
+
     public function testBookIsbn(): void
     {
         $book = new Book();
-        
+
         $book->setIsbn("12345678");
         $res = $book->getIsbn();
         $exp = "12345678";
         $this->assertEquals($exp, $res);
     }
-    
+
     public function testBookAuthor(): void
     {
         $book = new Book();
-        
+
         $book->setAuthor("Author");
         $res = $book->getAuthor();
         $exp = "Author";
         $this->assertEquals($exp, $res);
     }
-    
+
     public function testBookImage(): void
     {
         $book = new Book();
-        
+
         $book->setImage("path/to/image/12345678");
         $res = $book->getImage();
         $exp = "path/to/image/12345678";

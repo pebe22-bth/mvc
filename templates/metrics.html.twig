@@ -30,7 +30,7 @@ scrutinizers UI.
 - **Complexity**, som avser hur komplex koden är. Önskvärt är att inte ha onödigt komplex kod och om den är det blir den svår att förstå 
 och förvalta. ett mätetal som mäter komplexitet är cyclomatic complexity som anger antalet olika väger exekveringen kan ta genom koden.
 Många IF/ELSE satser ökar kompplexiteten.
-Exempel fråm pmpmetrics rapport nedan där min klass Game21 har en cycklomatic complexitet på 11.
+Exempel fråm phpmetrics rapport nedan där min klass Game21 har en cyclomatic complexity på 11.
 
 ![Complexity]({{ asset('images/metrics/complexity.png') }})
 
@@ -165,10 +165,10 @@ så bestämer mig för att inte lägga möda på att försöka förbättra dem.
 
 ## Förbättringar
 
-- BookEntity har tydligt dåligt test coverage vilket behöver fixas.
+- BookEntity har tydligt dåligt test coverage vilket behöver fixas. Resultatet borde bli ökad code coverage.
 ![BookEntity]({{ asset('images/metrics/coverage-before.png') }})
 
-- Game21 har hög komplexitet och behöver ses över.
+- Game21 har hög cyclomatic complexity och behöver ses över.
 ![Game21]({{ asset('images/metrics/game21-before.png') }})
 - CardGameController har en funktion med CRAP 30 som behöver ses över.
 ![CardGameController]({{ asset('images/metrics/CRAP-CardGameController.png') }})
@@ -183,6 +183,21 @@ vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka
 Implementera sedan förbättringarna.
 Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
 Gör det tydligt hur mätvärdena såg ut innan och efter dina förbättringar.
+
+- BookEntity code coverage efter att tests lagts till i BookEntity.
+![BookEntity]({{ asset('images/metrics/coverage-after.png') }})
+
+- Game21. 
+Trots att jag lagt till "early returns" i alla IF satser, brutit ut IF satserna i helper functions 
+(har spelaren blivit tjock, 
+har banken dragit till 17, är spearens värde högre än bankens, osv) samt tagit bort ett par IF satser som var onödiga
+har jag inte lyckats sänka cyclomatic complexity. Den är fortfarande 11. Dessutom har den totala komplixitetenm ökat:
+WMC har ökat från 15 till 17 - antagligen för att antal funktioner i klassen har ökat.
+Jag bestämmer mig ändå för att behålla ändringarna: Koden är renare och lättare att förstå.
+
+![Game21]({{ asset('images/metrics/game21-after.png') }})
+- CardGameController med lägre CRAP värde.
+![CardGameController]({{ asset('images/metrics/CRAP-CardGameController-after.png') }})
 
 ## Diskussion
 
