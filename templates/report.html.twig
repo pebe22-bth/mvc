@@ -205,6 +205,45 @@ Jag gjorde optionen att resetta databasen.
 
 {% endapply %}
 <h2 id="kmom06">Kmom06</h2>
-<p><a href="{{ path('metrics') }}">Se Metrics Analys</a></p>
+<p><a href="{{ path('metrics') }}">Länk till Metrics Analys</a></p>
+
+
+{% apply markdown_to_html %}
+
+Phpmetrics var lätt att få igång och alltid skänt med ett webgränssnitt att klicka runt i jämfört med metrics i filer. Jag
+tycker det funkar bra - inge direkta problem vad jag kan minnas. Man skulle kunna önske lite mer användarhjälp i websidorna,
+det är mycket förkortningar på de olika mätetalen och finns ingen förklaring i gränssnittet.
+Jag uppskattar att få en samlad bedömning vad som är mer kritiskt att fixa jämfört med annat och det får man i lite olika
+vyer och tabeller så funkar fint och man får värde av det direkt.
+
+
+Scrutinizer var inte heller några problem egentligen att få på plats med den instruktion som fanns.
+Jag var tvungen att ändra lite i konfigurationen .scutinizer.yml vilken image som skulle köras och php versioner
+både i första noden som startas och även analys-noden annars spårade det ur.
+Hade dessutom otur att scrutinier hade störningar precis när jag skulle göra klart och det tog en stund innan jag förstod
+att problemet inte låg hos mig.
+Väldigt smidigt med CI som triggas på commits och badges där man kan se status utan att behöva gå in i verktyget.
+Även fint att den rapporterar data över tid så man kan se förändring.
+Min egen kodvalitet hamnade på 10 direkt och coverage ökade från 19% till 22% under korsmomentet.
+
+
+Jag tycker att badges ger en bra bild av kodkvaliteten - om inte annat visar det att utvecklaren bryr sig om det och 
+även nyttjar moderna CI pipelines för automatisering av tester och mätning av kodkvaliteten. Delar man med sig av
+mätvärden över tid kan man absolut använda det för att visa för t.ex kunder att man har koll på det man håller på med.
+Jag har själv varit kravställare i upphandlingar där man ställer krav på att utvecklare ska följa best practice och 
+kanske pekar på vissa ramverk - speciellt inom säkerhet: OWASP t.ex och då finns ju faktiskt data som bevis för hur 
+man arbetar iställer för att man bara bekräftar i ett dokument att man uppfyller krav.
+
+
+
+
+
+
+### TIL
+- Scrutinizer användbart verktyg
+- Använd en del mätetal med sunt förnuft - funkar koden och du redan är nöjd med kvaliteten kanske du inte ska in 
+och pilla i onödan bara för att få upp en del statistik.
+
+{% endapply %}
 
 {% endblock %}
