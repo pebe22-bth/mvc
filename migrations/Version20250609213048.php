@@ -21,7 +21,13 @@ final class Version20250609213048 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            CREATE TABLE book (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, isbn VARCHAR(17) NOT NULL, author VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
+            CREATE TABLE book (
+                id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                title VARCHAR(255) NOT NULL, 
+                isbn VARCHAR(17) NOT NULL, 
+                author VARCHAR(255) NOT NULL, 
+                image VARCHAR(255) NOT NULL, 
+                PRIMARY KEY(id))
         SQL);
     }
 

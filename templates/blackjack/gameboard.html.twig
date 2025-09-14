@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Black Jack{% endblock %}
+
+{% block main %}
+{% include 'blackjack/nav.html.twig' %}
+{% include 'card/flash.html.twig' %}
+
+
+<h1>Spelet Black Jack </h1>
+
+{% if turn == "player" %}
+    <p>Din tur!</p>
+{% else %}
+    <p>Bankens tur</p>
+{% endif %}
+
+{% for i, hand in player_hand %}
+    <p>Spelarens hand {{ i }} 
+        {% if i == current_hand %}
+            (Aktiv)
+        {% endif %}
+    </p>
+
+    {% for card in hand %}
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+    {{ card }}
+    </div>
+    {% endfor %}
+    <p>Din poäng: {{ player_handValue[i] }}</p>
+    {% if winner[i] is defined %}
+        <p>Vinnare: {{ winner[i] }}</p>
+    {% endif %}
+{% endfor %}
+
+{% if bank_hand %}
+    <p>Bankens hand</p>
+    {% for card in bank_hand %}
+        {% if '♥' in card or '♦' in card %}
+            <div class="card red">
+        {% else %}
+            <div class="card black">
+        {% endif %}
+    {{ card }}
+    </div>
+    {% endfor %}
+    <p>Bankens poäng: {{ bank_handValue }}</p>
+{% endif %}
+
+        <p>
+    <button onclick = window.location.href="{{ path('blackjack_start') }}">Spela igen</button>
+
+   
+{% if turn == "player" %}
+        <p>
+        <button onclick = window.location.href="{{ path('blackjack_draw') }}">Dra kort</button>
+        <button onclick = window.location.href="{{ path('blackjack_player_stop') }}">Stanna</button>
+        </p>
+{% elseif turn == "bank" %}
+        <p>
+        <button onclick = window.location.href="{{ path('blackjack_draw') }}">Fortsätt</button>
+        </p>
+{% elseif turn == "gamover" %}
+        <p>
+        <button onclick = window.location.href="{{ path('blackjack_start') }}">Spela igen</button>
+        </p>
+   
+{% endif %}
+
+{{ dump(bank_hand) }}
+{{ dump() }}
+
+{% endblock %}

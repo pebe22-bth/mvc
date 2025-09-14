@@ -1,0 +1,22 @@
+@startuml Player
+
+' configuration
+hide circle
+skinparam linetype ortho
+
+' comment
+entity "player" as player {
+ id: number
+ --
+ name: varchar2(128)
+}
+entity "account" as account {
+ id: number
+ player_id: number
+ --
+ amount: int(32)
+ highscore: int(32)
+}
+player ||--|| account
+
+@enduml

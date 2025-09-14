@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Black Jack{% endblock %}
+
+{% block main %}
+
+{% include 'blackjack/nav.html.twig' %}
+{% include('card/flash.html.twig') %}
+
+    <h1>Kortspelet Black Jack</h1>
+
+    <p>
+        Black Jack är ett klassiskt kortspel där målet är att komma så nära 21 som möjligt utan att bli "tjock".</p>
+        <p>
+        Du väljer mellan att spela 1-3 händer, drar ett kort i taget tills du väljer att stanna eller blir tjock - 
+        då vinner banken</p>
+        <p>
+        Du spelar mot datorn som är "bank". Banken vet inte vad du får för kort och kommer alltid att dra kort 
+        till den når minst 17 och då stanna. Vid lika poäng vinner banken.</p>
+        <p>
+        Spelets regler finns på <a href="https://en.wikipedia.org/wiki/Blackjack" target="_blank">Wikipedia</a>
+        </p>
+
+        <form method="post" action="{{ path('blackjack_start_post') }}">
+        <fieldset>
+            <label for="playerName">Spelare:</label>
+            <input id="playerName" type="text" name="PlayerName" value="<Ditt namn>">
+                <label for="numberOfDecks">Antal korlekar:</label>
+            <input id="numberOfDecks" type="number" name="numberOfDecks" value="3">
+        </fieldset>
+
+        <p>Hur många händer vill du spela (1-3) ?</p>
+
+        <input type="submit" name="numberOfHands" value=1>
+        <input type="submit" name="numberOfHands" value=2>
+        <input type="submit" name="numberOfHands" value=3>
+        </form>
+    
+    </p>
+
+    
+
+<p></p>
+
+
+{% endblock %}

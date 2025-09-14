@@ -1,0 +1,39 @@
+
+@startuml
+(*) --> "Starta spelet"
+--> "Völj antal kortlekar 1-8"
+--> "Skapa total kortlek"
+--> "Blanda kortlekarna"
+--> "Välj antal händer 1-3"
+--> "Dra kort till hand #"
+--> if "Tjock?" then
+        -->[Ja] "Du förlorar hand #"
+        --> ===NEXTHAND===
+    else
+        -->[Nej] if "Dra kort ?" then
+                    -up-> [Ja] "Dra kort till hand #"
+                else
+                    -->[Nej] "Stanna"
+                    --> ===NEXTHAND===
+    endif
+
+--> if "Fler händer?" then
+        -up->[Ja] "Dra kort till hand #"
+    else 
+        -->[Nej] "Bankens tur"
+    endif
+--> "Dra kort till bankens hand"
+    if "Banken tjock?" then
+        -->[Ja] "Du vann de händer som ej är tjocka"
+        --> "Presentera vilka händer som vann eller förlorade"
+    else
+        -->[Nej] if "Bankens hand < 17 " then
+                    -up->[Ja] "Dra kort till bankens hand"
+                else
+                    -->[Nej] "Banken stannar"
+                    --> "Beräkna vinnare för resterande händer"
+                endif
+    endif
+    --> "Presentera vilka händer som vann eller förlorade"
+
+@enduml

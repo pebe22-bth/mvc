@@ -1,0 +1,36 @@
+~/bth/me/report$ symfony server:start --allow-all-ip
+                                                                                          
+ [WARNING] run "symfony server:ca:install" first if you want to run the web server with   
+ TLS support, or use "--p12" or "--no-tls" to avoid this warning                          
+                                                                                          
+
+Following Web Server log file (/home/pelle/.symfony5/log/668e7c6425882c2d586152d1bf71679c0a36fa93.log)
+Following PHP log file (/home/pelle/.symfony5/log/668e7c6425882c2d586152d1bf71679c0a36fa93/7daf403c7589f4927632ed3b6af762a992f09b78.log)
+                                                                                          
+ [WARNING] The local web server is optimized for local development and MUST never be use  
+ d in a production setup.                                                                 
+                                                                                          
+
+                                                                                          
+ [OK] Web server listening                                                                
+      The Web server is using PHP CLI 8.3.24                                              
+      http://127.0.0.1:8000                                                               
+                                                                                          
+
+[Web Server ] Sep 14 20:27:53 |DEBUG  | PHP    Reloading PHP versions 
+[Web Server ] Sep 14 20:27:53 |DEBUG  | PHP    Using PHP version 8.3.24 (from default version in $PATH) 
+[Application] Jun 10 21:25:43 |DEBUG  | SECURI Checking for authenticator support. authenticators=0 firewall_name="main"
+[Application] Jun 10 21:25:43 |INFO   | DOCTRI Connecting with parameters array{"use_savepoints":true,"driver":"pdo_mysql","idle_connection_ttl":600,"host":"127.0.0.1","port":3306,"user":"pebe22","password":"<redacted>","driverOptions":[],"defaultTableOptions":[],"dbname":"pebe22","serverVersion":"10.11.11-MariaDB","charset":"utf8mb4"} params={"charset":"utf8mb4","dbname":"pebe22","defaultTableOptions":[],"driver":"pdo_mysql","driverOptions":[],"host":"127.0.0.1","idle_connection_ttl":600,"password":"\u003credacted\u003e","port":3306,"serverVersion":"10.11.11-MariaDB","use_savepoints":true,"user":"pebe22"}
+[Application] Jun 10 21:25:43 |DEBUG  | DOCTRI Executing statement: SELECT b0_.id AS id_0, b0_.title AS title_1, b0_.isbn AS isbn_2, b0_.author AS author_3, b0_.image AS image_4 FROM book b0_ WHERE b0_.isbn = ? (parameters: array{"1":"978-9174619270"}, types: array{"1":2}) params={"1":"978-9174619270"} sql="SELECT b0_.id AS id_0, b0_.title AS title_1, b0_.isbn AS isbn_2, b0_.author AS author_3, b0_.image AS image_4 FROM book b0_ WHERE b0_.isbn = ?" types={"1":2}
+[Application] Jun 10 21:25:43 |INFO   | DOCTRI Disconnecting 
+[Application] Sep  5 11:18:39 |INFO   | REQUES Matched route "session". method="GET" request_uri="http://10.20.10.119:8000/session" route="session" route_parameters={"_controller":"App\\Controller\\CardGameController::session","_route":"session"}
+[Application] Sep  5 11:18:39 |DEBUG  | SECURI Checking for authenticator support. authenticators=0 firewall_name="main"
+[Application] Sep  5 11:18:39 |CRITICA| REQUES Uncaught PHP Exception Symfony\Component\DependencyInjection\Exception\EnvNotFoundException: "Environment variable not found: "DATABASE_PASSWORD"." at EnvVarProcessor.php line 221 
+[Application] Sep  5 11:18:39 |CRITICA| REQUES Exception thrown when handling an exception (Symfony\Component\DependencyInjection\Exception\EnvNotFoundException: Environment variable not found: "DATABASE_PASSWORD". at EnvVarProcessor.php line 221) 
+[Application] Sep  5 11:18:39 |CRITICA| REQUES Uncaught PHP Exception Symfony\Component\DependencyInjection\Exception\EnvNotFoundException: "Environment variable not found: "DATABASE_PASSWORD"." at EnvVarProcessor.php line 221 
+[Application] Sep  5 11:18:39 |CRITICA| REQUES Exception thrown when handling an exception (Symfony\Component\DependencyInjection\Exception\EnvNotFoundException: Environment variable not found: "DATABASE_PASSWORD". at EnvVarProcessor.php line 221) 
+[Web Server ] Sep 14 20:27:53 |INFO   | PHP    listening path="/usr/bin/php8.3" php="8.3.24" port=34171
+[Web Server ] Sep 14 20:27:53 |DEBUG  | PHP    Using PHP version 8.3.24 (from default version in $PATH) 
+[PHP        ] Sep 14 20:27:53 |DEBUG  | RUNNER Waiting for channels (first boot) cmd="PHP"
+[PHP        ] [Sun Sep 14 20:27:53 2025] PHP 8.3.24 Development Server (http://127.0.0.1:34171) started
+[PHP        ] Sep 14 20:27:55 |DEBUG  | RUNNER Received timer message (first boot) cmd="PHP"

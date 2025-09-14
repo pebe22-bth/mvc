@@ -8,4 +8,3 @@ VALUES
     ('Krig och fred. Vol 2, 1806-1812','978-9174619256','Leo Tolstoy','kf2.jpg'),
     ('Krig och fred. Vol 3, 1812','978-9174619263','Leo Tolstoy','kf3.jpg'),
     ('Krig och fred. Vol 4, 1812-1813 / Epilog','978-9174619270','Leo Tolstoy','kf4.jpg');
-";

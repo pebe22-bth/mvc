@@ -30,6 +30,10 @@ class BookRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
         $sql = "
             DELETE FROM book;
+            ";
+        $conn->executeQuery($sql);
+
+        $sql = "
             INSERT INTO book (title, isbn, author, image) 
             VALUES
                 ('Around the World in Eighty Days','978-1949460858','Jules Verne','80days.jpg'),
