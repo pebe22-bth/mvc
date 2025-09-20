@@ -10,7 +10,8 @@ use Exception;
  */
 class MultiDeckOfCards
 {
-    private array $deck = [];
+    private array $deck;
+    private int $numberOfDecks;
 
     public function __construct()
     {
@@ -29,6 +30,7 @@ class MultiDeckOfCards
             for ($i = 0; $i < 52; $i++) {
                 $this->deck[] = new CardGraphic();
                 $this->deck[$i + ($j * 52)]->set($i);
+                $this->numberOfDecks = $number;
             }
         }
     }
@@ -88,5 +90,8 @@ class MultiDeckOfCards
             $values[] = $card->getAsString();
         }
         return $values;
+    }
+    public function getNumberOfDecks() {
+        return $this->numberOfDecks;
     }
 }

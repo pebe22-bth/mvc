@@ -7,21 +7,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Player;
 use App\Entity\Highscore;
-use App\Repository\HighscoreRepository;
-use App\Repository\PlayerRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Card\BlackJack;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Psr\Log\LoggerInterface;
 
 class BlackJackController extends AbstractController
 {
     #[Route("/proj", name: "blackjack_home")]
     public function game(): Response
     {
-        return $this->redirectToRoute('blackjack_start');
+        return $this->render('blackjack/home.html.twig');
     }
     #[Route("/proj/about", name: "blackjack_about")]
     public function doc(): Response
@@ -33,7 +30,7 @@ class BlackJackController extends AbstractController
     public function blackJackInit(
         ManagerRegistry $doctrine
     ): Response {
-        $players = [];
+        
         $players = $doctrine->getRepository(Player::class)->findAll();
 
         $data = [
@@ -46,36 +43,19 @@ class BlackJackController extends AbstractController
     public function blackJackStart(
         Request $request,
         SessionInterface $session,
-        ManagerRegistry $doctrine,
-        PlayerRepository $playerRepository
-    //    LoggerInterface $logger 
+        ManagerRegistry $doctrine
     ): Response {
-        $postData = $request->request->all();
-    // $logger->info('POST data:', $postData);
-
         $entityManager = $doctrine->getManager();
+        $playerName = $request->request->get('playerName');
+        $player = new Player();
+        $player->setName($playerName);
+        $player->setCoins(10);
+        $highscore = new Highscore();
+        $highscore->setCoins(10);
+        $player->setHighscore($highscore);
         
-        $playerId = $request->request->get('playerId');
-        if ( $playerId ){ // existing player
-            $player = $doctrine->getRepository(Player::class)->find($playerId);
-            $playerName = $player->getName();
-        }
-        else { // New player
-            $playerName = $request->request->get('playerName');
-            $player = $playerRepository->findName($playerName);
-            if ( $player !== null ){
-                throw new Exception("Player name already exists.");
-            }
-            $player = new Player();
-            $player->setName($playerName);
-            $player->setCoins(10);
-            $highscore = new Highscore();
-            $highscore->setCoins(10);
-            $player->setHighscore($highscore);
-            $entityManager->persist($player);
-            $entityManager->flush();
-            
-        }
+        $entityManager->persist($player);
+        $entityManager->flush();
         
         $numberOfDecks = $request->request->get('numberOfDecks');
         $numberOfHands = $request->request->get('numberOfHands');
@@ -121,9 +101,6 @@ class BlackJackController extends AbstractController
         if ($game->getPlayer()) {
             $player = $doctrine->getRepository(Player::class)->find($game->getPlayer());
         }
-        else {
-             throw new Exception("Player in session doesn't exist in the database, or database problem.");
-        }
 
         if ($game instanceof BlackJack === false) {
             throw new Exception("BlackJack game not found in session, starting a new game.");
@@ -131,7 +108,7 @@ class BlackJackController extends AbstractController
         if ($game->getTurn() == "player"){
             $game->playerDraw();
         }
-        elseif ($game->getTurn() == "bank"){
+        else {
             $profit = $game->bankDraw();
         }
         
@@ -141,28 +118,12 @@ class BlackJackController extends AbstractController
         $bankValue = $game->getHandValue($bankHand);
         $winner = $game->getWinner();
         $turn = $game->getTurn();
-        $profit = $game->getProfit();
-        if ( $turn === "gameover" ){
-            
-            $coins = $player->getCoins() + $profit;
-            $player->setCoins($coins);
-            $highscore = $player->getHighscore();
-            if ( ($player->getHighscore()->getCoins()) < $coins)
-                {
-                $highscore->setCoins($coins);
-                $player->setHighscore($highscore);
-            }
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($player);
-            $entityManager->flush();
-        }
         $currentHand = $game->getCurrentHand();
 
         $session->set("blackjack", $game);
         
         $data = [
             "player" => $player->getName(),
-            "player_id" => $player->getId(),
             "player_hand" =>  $playerHand,
             "player_handValue" => $playerValue,
             "bank_hand" => $bankHand->getString(),
@@ -170,10 +131,7 @@ class BlackJackController extends AbstractController
             "winner" => $winner,
             "turn" => $turn,
             "current_hand" => $currentHand,
-            "profit" => $profit,
-            "coins" => $player->getCoins(),
-            "numberOfDecks" => $game->getNumberOfDecks(),
-            "numberOfHands" => $game->getNumberOfHands()
+            "profit" => $game->getProfit()
         ];
         return $this->render('blackjack/gameboard.html.twig', $data);
     }
@@ -192,18 +150,17 @@ class BlackJackController extends AbstractController
             $player = $doctrine->getRepository(Player::class)->find($game->getPlayer());
         }
         $game->playerStop();
-        $session->set("blackjack", $game);
-
+        
         $playerHand = $game->getPlayerHandsAsString();
         $playerValue = $game->getPlayerValue();
         $bankHand = $game->getBankHand();
         $bankValue = $game->getHandValue($bankHand);
         $winner = $game->getWinner();
         $turn = $game->getTurn();
-        $profit = $game->getProfit();
         $currentHand = $game->getCurrentHand();
 
-
+        $session->set("blackjack", $game);
+        
         $data = [
             "player" => $player->getName(),
             "player_hand" =>  $playerHand,
@@ -213,31 +170,23 @@ class BlackJackController extends AbstractController
             "winner" => $winner,
             "turn" => $turn,
             "current_hand" => $currentHand,
-            "profit" => $profit,
-            "coins" => $player->getCoins()
+            "profit" => $game->getProfit()
         ];
         return $this->render('blackjack/gameboard.html.twig', $data);
     }
-    
-    #[Route("/proj/highscore", name: "blackjack_highscore", methods: ['GET'])]
-    public function blackJackHighscore(
-        HighscoreRepository $highscoreRepository
-    //    LoggerInterface $logger 
+    #[Route("/blackjack/deck", name: "blackjack_deck")]
+    public function blackJackDeck(
+        SessionInterface $session
     ): Response {
+        $game = $session->get("blackjack");
         
-        $highscores = $highscoreRepository->getHighscores();
-         $data = [
-            "highscores" => $highscores
-         ];
+        $data = [
+            "deck" => $game->getDeck()
+        ];
 
-        return $this->render('blackjack/scoreboard.html.twig', $data);
+        return $this->render('blackjack/deck.html.twig', $data);
     }
-    #[Route("/proj/about/database", name: "blackjack_database", methods: ['GET'])]
-    public function blackJackDatabase(
-    ): Response {
-        
-        return $this->render('blackjack/database.html.twig');
-    }
+    
 
 
 }

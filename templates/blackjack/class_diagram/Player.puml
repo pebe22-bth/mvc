@@ -8,7 +8,7 @@ skinparam linetype ortho
 entity "player" as player {
  id: number
  --
- name: varchar2(128)
+ name: string(255)
 }
 entity "account" as account {
  id: number

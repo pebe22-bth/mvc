@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}">
+        <script src="https://kit.fontawesome.com/adc43962c6.js" crossorigin="anonymous"></script>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}
+                {{ importmap('app') }}
+            {% endblock %}
+        {% endblock %}
+    </head>
+    <body class="bj">
+        <nav class="navbar">
+            <ul>
+                <li><a href="{{ path('home') }}">Home</a></li>
+                <li><a href="{{ path('about') }}">About</a></li>
+                <li><a href="{{ path('report') }}">Report</a></li>
+                <li><a href="{{ path('lucky_number') }}">Lucky number</a></li>
+                <li><a href="{{ path('card_start') }}">Card</a></li>
+                <li><a href="{{ path('game_home') }}">Game</a></li>
+                <li><a href="{{ path('library_home') }}">Bibliotek</a></li>
+                <li><a href="{{ path('metrics') }}">Metrics analys</a></li>
+                <li><a href="{{ path('blackjack_home') }}">Project</a></li>
+            </ul>
+        </nav>
+        <header class="bj-site-header" >
+            <span class="bj-site-title">Blackjack</span>
+        </header>
+        <main class="bjmain">
+            {% block main %}
+            {% endblock %}
+            {% block body %}
+            {% endblock %}
+        </main>
+        <div class="footer">
+            {% block footer %}
+            <ul> 
+                    <li> 
+                        <a href="https://creativecommons.org/publicdomain/zero/1.0" title="No Copyright" target="_blank">
+                            <i class="fab fa-creative-commons-zero" aria-hidden="true"></i> 
+                        </a></li>
+                    <li >             
+                    <a href="https://github.com/dbwebb-se/mvc" target="_blank">
+                        <img src="https://dbwebb.se/image/theme/leaf_256x256.png" width="30px" alt="">
+                    </a></li>
+                    <li>
+                    <a href="https://github.com/pebe22-bth/mvc" title="Länk till sidans github repo" role="button">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    </a></li>
+                </ul>  
+            {% endblock %}
+        </div>
+    </body>
+</html>

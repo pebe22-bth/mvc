@@ -1,0 +1,14 @@
+@startuml database
+  entity "Player" {
+    * id
+    * name
+    * coins
+  }
+  entity "Highscore" {
+    * id 
+    * player_id
+    * coins
+  }
+
+  Player ||--|| Highscore
+@enduml

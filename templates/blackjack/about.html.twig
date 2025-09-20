@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "bjbase.html.twig" %}
 
 {% block title %}About{% endblock %}
 
@@ -8,14 +8,31 @@
 {%include('card/flash.html.twig') %}
 
 
-{{ dump(getenv('DATABASE_URL')) }}
+    <h1>Om kortspelet</h1>
+<p> Kmom10 implementerar kortspelet Blackjack. </p>
+    <p>Black Jack är ett klassiskt kortspel där målet är att komma så nära 21 som möjligt utan att bli "tjock".</p>
+        <p>
+        Du väljer mellan att spela 1-3 händer, drar ett kort i taget tills du väljer att stanna eller blir tjock - 
+        då vinner banken</p>
+        <p>
+        Du spelar mot datorn som är "bank". Banken vet inte vad du får för kort och kommer alltid att dra kort 
+        till den når minst 17 och då stanna.
+        Du skapar en spelare och får då 10 pengar. Insatsen för varje hand är 1 peng. Vid vinst behåller du insatsen och 
+        får en peng av banken, vid förlust förlorar du insatsen och vid oavgjort behåller du insatsen.
+        
+        </p>
+        <p>
+        Spelets regler finns på <a href="https://en.wikipedia.org/wiki/Blackjack" target="_blank">Wikipedia</a>
+        </p>
+    </p>
+    
 
+    <h2> Databasen</h2>
+    <a href="{{ path('blackjack_database') }}">Information om databasen som används hittar du här.</a>
 
-    <h1>Kortspelet Black Jack</h1>
-
-    <p></p>
     {% apply markdown_to_html %}
-    ![Flödesdiagram]({{ asset('images/blackjack_flow_diagram.png') }})
+   ## Flödesdiagram
+     ![Flödesdiagram]({{ asset('images/blackjack_flow_diagram.png') }})
     
     ## Pseudokod över bankens logik
     ```
@@ -27,13 +44,16 @@
     }
     if ( bankens_poäng > 21) {
         winner = spelaren
+        vinst = +1
     }
     if ( bankens_poäng > spelarens_poäng ){
         winner = banken
+        vinst = -1
         }
-    else {
-        winner = spelaren
-    }
+    if ( bankens_poäng = spelarens_poäng ){
+        winner = draw
+        vinst = 0
+        }  
 
     ```
     ## Klasser

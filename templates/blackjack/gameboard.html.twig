@@ -1,4 +1,5 @@
-{% extends "base.html.twig" %}
+
+{% extends "bjbase.html.twig" %}
 
 {% block title %}Black Jack{% endblock %}
 
@@ -7,71 +8,95 @@
 {% include 'card/flash.html.twig' %}
 
 
-<h1>Spelet Black Jack </h1>
-
+<p>
+    <h2> Spelare: {{ player }} </h2>
+</p>
 {% if turn == "player" %}
     <p>Din tur!</p>
 {% else %}
     <p>Bankens tur</p>
 {% endif %}
-
+<div class="bjhands-row"> 
 {% for i, hand in player_hand %}
-    <p>Spelarens hand {{ i }} 
-        {% if i == current_hand %}
-            (Aktiv)
-        {% endif %}
-    </p>
-
-    {% for card in hand %}
-        {% if '♥' in card or '♦' in card %}
-            <div class="card red">
-        {% else %}
-            <div class="card black">
-        {% endif %}
-    {{ card }}
-    </div>
-    {% endfor %}
-    <p>Din poäng: {{ player_handValue[i] }}</p>
-    {% if winner[i] is defined %}
-        <p>Vinnare: {{ winner[i] }}</p>
+    {% if i == current_hand %}
+          <div class="bjhand-active">      
+    {% else %}
+        <div class="bjhand-block">
     {% endif %}
+        <p>Spelarens hand {{ i + 1 }} 
+        </p>
+            <div class="bjcards">
+                {% for card in hand %}
+                    {% if '♥' in card or '♦' in card %}
+                        <div class="bjcard red">
+                    {% else %}
+                        <div class="bjcard black">
+                    {% endif %}
+                    {{ card }}
+                    </div>
+                {% endfor %}
+            </div>
+        <p>Din poäng: {{ player_handValue[i] }}</p>
+        {% if winner[i] is defined %}
+            <p>Vinnare: {{ winner[i] }}</p>
+        {% endif %}
+    </div>
 {% endfor %}
+</div>
 
 {% if bank_hand %}
-    <p>Bankens hand</p>
-    {% for card in bank_hand %}
-        {% if '♥' in card or '♦' in card %}
-            <div class="card red">
-        {% else %}
-            <div class="card black">
-        {% endif %}
-    {{ card }}
+<div class="bjhands-row"> 
+    {% if turn == "bank" %}
+          <div class="bjhand-active">      
+    {% else %}
+        <div class="bjhand-block">
+    {% endif %}
+        <p>Bankens hand
+        </p>
+        <div class="bjcards">
+            {% for card in bank_hand %}
+                {% if '♥' in card or '♦' in card %}
+                    <div class="bjcard red">
+                {% else %}
+                    <div class="bjcard black">
+                {% endif %}
+            {{ card }}
+            </div>
+            {% endfor %}
+        </div>
+        <p>Bankens poäng: {{ bank_handValue }}</p>
     </div>
-    {% endfor %}
-    <p>Bankens poäng: {{ bank_handValue }}</p>
+</div>
 {% endif %}
 
-        <p>
-    <button onclick = window.location.href="{{ path('blackjack_start') }}">Spela igen</button>
+    <p>Vinst: {{ profit }}</p>
 
-   
+ 
 {% if turn == "player" %}
-        <p>
+        
         <button onclick = window.location.href="{{ path('blackjack_draw') }}">Dra kort</button>
         <button onclick = window.location.href="{{ path('blackjack_player_stop') }}">Stanna</button>
-        </p>
+        
 {% elseif turn == "bank" %}
-        <p>
+        
         <button onclick = window.location.href="{{ path('blackjack_draw') }}">Fortsätt</button>
-        </p>
-{% elseif turn == "gamover" %}
-        <p>
-        <button onclick = window.location.href="{{ path('blackjack_start') }}">Spela igen</button>
-        </p>
+        
+{% elseif turn == "gameover" %}
+        <p>Pengar tillgodo: {{ coins }}</p>
+        
+        <form method="post" action="{{ path('blackjack_start_post') }}">
+            <input id="playerId" type="hidden" name="playerId" value="{{ player_id }}">
+            <input id="numberOfDecks" type="hidden" name="numberOfDecks" value="{{ numberOfDecks }}">
+            <input id="numberOfHands" type="hidden" name="numberOfHands" value="{{ numberOfHands }}">
+            
+            <button type="submit" name="doit" value="start">Ny giv</button>
+        </form>
+        
+        
+        <button onclick = window.location.href="{{ path('blackjack_start') }}">Starta om spelet</button>
+        
    
 {% endif %}
 
-{{ dump(bank_hand) }}
-{{ dump() }}
 
 {% endblock %}

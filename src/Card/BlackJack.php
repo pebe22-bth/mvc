@@ -18,6 +18,7 @@ class BlackJack
     private array $winner;
     private string $turn;
     private int $currenthand;
+    private int $playerId;
 
     /**
      * __construct sets the value of the card to null
@@ -30,6 +31,7 @@ class BlackJack
         $this->winner = [];
         $this->turn = "player";
         $this->currenthand = 0;
+        $this->profit = [];
     }    
     /**
      * initialDraw, two cards per hand + bank 1 card
@@ -136,7 +138,7 @@ class BlackJack
         if ($this->isBust($values[$this->currenthand])) {
             $this->winner[$this->currenthand] = "bank";
             $this->currenthand++;
-            if ( $this->currenthand > $this->getNumberOfHands()){
+            if ( $this->currenthand >= $this->getNumberOfHands()){
                 $this->turn = "bank";
             }
         }
@@ -165,22 +167,27 @@ class BlackJack
             $this->turn = "gameover";
             $this->calcWinner($bankValue);
         }
-    }    
+    }        
     /**
      * calcWinner
      * Note that any already busted player hands is already set as won by the bank.
      * Busted bank means bankValue is 0
-     * @return void
+     * @return int
      */
-    private function calcWinner(int $bankValue)
+    private function calcWinner(int $bankValue): void
     {
+        
         if ($this->turn !== "gameover") {
             throw new Exception("Game not finished. Cannot calculate results");
         }
+        $profit = 0;
         foreach ($this->getPlayerValue() as $i => $playerValue) {
             if (!isset($this->winner[$i])){
                 if ($playerValue > $bankValue ){
                     $this->winner[$i] = "player";
+                }
+                elseif ($playerValue === $bankValue ){
+                    $this->winner[$i] = "draw";
                 }
                 else{
                     $this->winner[$i] = "bank";
@@ -254,7 +261,12 @@ class BlackJack
     public function getWinner(): array
     {
         return $this->winner;
-    }
+    }    
+    /**
+     * getDeck
+     *
+     * @return array
+     */
     public function getDeck(): array
     {
         $values = [];
@@ -262,6 +274,33 @@ class BlackJack
             $values[] = $card->getAsString();
         }
         return $values;
+    }    
+    /**
+     * getPlayer
+     *
+     * @return int
+     */
+    public function getPlayer(): int
+    {
+        return $this->playerId;
+    }    
+    /**
+     * setPlayer
+     *
+     * @param  mixed $playerId
+     * @return void
+     */
+    public function setPlayer(int $playerId): void
+    {
+        $this->playerId = $playerId;
     }
-
+    public function getProfit(): int
+    {
+        $profit = array_count_values($this->winner);
+        return ($profit["player"] ?? 0) - ($profit["bank"] ?? 0);
+    }
+    public function getNumberOfDecks(): int
+    {
+        return $this->deck->getNumberOfDecks();
+    }
 }

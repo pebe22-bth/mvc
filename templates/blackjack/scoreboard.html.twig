@@ -1,0 +1,35 @@
+{% extends "bjbase.html.twig" %}
+
+{% block title %}Blackjack Highscores{% endblock %}
+
+{% block main %}
+{% include 'blackjack/nav.html.twig' %}
+{% include 'card/flash.html.twig' %}
+
+
+<h1>Highscores</h1>
+<p>
+    Tabellen visar de högsta poäng varje spelare haft (innan de eventuellt spelade bort pengarna igen).
+</p>
+<p></p>
+
+ <table>
+     <thead>
+             <tr>
+                 <th>Namn</th>
+                 <th>Highest score</th>
+             </tr>
+     </thead>
+     <tbody>
+         {% for i in highscores %}
+             <tr>
+                     <td>{{ i.player_name }} </td>
+                     <td>{{ i.coins }}</td>
+             </tr>
+         {% endfor %}
+     </tbody>
+ </table>
+ 
+
+
+{% endblock %}

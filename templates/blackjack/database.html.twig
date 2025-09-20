@@ -1,0 +1,78 @@
+{% extends "bjbase.html.twig" %}
+
+{% block title %}Database{% endblock %}
+
+{% block main %}
+
+{% include 'blackjack/nav.html.twig' %}
+{%include('card/flash.html.twig') %}
+
+
+    <h1>Databasen</h1>
+    <p> 
+        En bild på ett ER diagram av tabellerna.
+För varje tabell beskriv i en mening vad som sparas i tabellen.
+Förklara hur du löste eventuella relationer mellan tabellerna.
+Berätta om du använde SQLite eller någon annan databas.
+Berätta om du gjorde enhetstester mot databasen.
+Berätta om/hur du lyckades med enhetstester på Scrutinizer med databasen.
+Berätta med egna ord (cirka 15 meningar) om hur du ser på fördelar, nackdelar, likheter och skillnader mellan ORM och det sätt vi jobbade med databasen i databaskursen.
+
+    </p>
+    {% apply markdown_to_html %}
+    ![Flödesdiagram]({{ asset('images/blackjack/database.png') }})
+    ## player
+    Här sparas ett unikt id, namn och antal pengar som spelaren för tillfället har.
+    ## Highscore
+    Här sparas det högsta antal pengar respektive spelare har haft med en referens (player_id) till spelarens id i player-tabellen.
+
+    ## Relationer 
+    Highscore tabellens 'player_id' är en foreign key till player tabellens 'id'.
+
+    ## Databashanterare
+    SQLite används.
+
+    ## Enhetstester
+    Enhetstester har inte gjorts mot databasen
+
+    ## Enhetstester på scrutinizer med databasen
+
+    ## Erfarenheter av ORM respektive "direkt access" till databasen.
+    
+    ## Pseudokod över bankens logik
+    ```
+    
+    spelarens_poäng = x, y, z
+    bankens_poäng = dra_kort()
+    while ( bankens_poäng < 17 ) {
+        bankens_poäng += dra_kort()
+    }
+    if ( bankens_poäng > 21) {
+        winner = spelaren
+        vinst = +1
+    }
+    if ( bankens_poäng > spelarens_poäng ){
+        winner = banken
+        vinst = -1
+        }
+    if ( bankens_poäng = spelarens_poäng ){
+        winner = draw
+        vinst = 0
+        }  
+
+    ```
+    ## Klasser
+    - Card - befintlig klass som representerar ett kort
+    Behöver lägga till en metod som returnerar kortets värde 1-14
+    - DeckOfCards - befintlig klass som representerar kortleken
+    - CardHand - befintlig klass som representerar spelarens och bankens hand
+    Behövs främst för att visa korten, utan grafik hade vi klarat oss utan.
+    - BlackJack - klass som representerar spelet Black Jack
+    {% endapply %}
+
+    
+
+<p></p>
+
+
+{% endblock %}
