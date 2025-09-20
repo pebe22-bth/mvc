@@ -48,22 +48,19 @@ class BlackJackController extends AbstractController
         SessionInterface $session,
         ManagerRegistry $doctrine,
         PlayerRepository $playerRepository
-    //    LoggerInterface $logger 
+        //    LoggerInterface $logger
     ): Response {
-        $postData = $request->request->all();
-    // $logger->info('POST data:', $postData);
 
         $entityManager = $doctrine->getManager();
-        
+
         $playerId = $request->request->get('playerId');
-        if ( $playerId ){ // existing player
+        if ($playerId) { // existing player
             $player = $doctrine->getRepository(Player::class)->find($playerId);
             $playerName = $player->getName();
-        }
-        else { // New player
+        } else { // New player
             $playerName = $request->request->get('playerName');
             $player = $playerRepository->findName($playerName);
-            if ( $player !== null ){
+            if ($player !== null) {
                 throw new Exception("Player name already exists.");
             }
             $player = new Player();
@@ -74,12 +71,12 @@ class BlackJackController extends AbstractController
             $player->setHighscore($highscore);
             $entityManager->persist($player);
             $entityManager->flush();
-            
+
         }
-        
+
         $numberOfDecks = $request->request->get('numberOfDecks');
         $numberOfHands = $request->request->get('numberOfHands');
-        
+
         $game = new BlackJack();
         $game->startGame($numberOfDecks, $numberOfHands);
         $game->setPlayer($player->getId());
@@ -120,21 +117,19 @@ class BlackJackController extends AbstractController
         $player = null;
         if ($game->getPlayer()) {
             $player = $doctrine->getRepository(Player::class)->find($game->getPlayer());
-        }
-        else {
-             throw new Exception("Player in session doesn't exist in the database, or database problem.");
+        } else {
+            throw new Exception("Player in session doesn't exist in the database, or database problem.");
         }
 
         if ($game instanceof BlackJack === false) {
             throw new Exception("BlackJack game not found in session, starting a new game.");
         }
-        if ($game->getTurn() == "player"){
+        if ($game->getTurn() == "player") {
             $game->playerDraw();
-        }
-        elseif ($game->getTurn() == "bank"){
+        } elseif ($game->getTurn() == "bank") {
             $profit = $game->bankDraw();
         }
-        
+
         $playerHand = $game->getPlayerHandsAsString();
         $playerValue = $game->getPlayerValue();
         $bankHand = $game->getBankHand();
@@ -142,13 +137,12 @@ class BlackJackController extends AbstractController
         $winner = $game->getWinner();
         $turn = $game->getTurn();
         $profit = $game->getProfit();
-        if ( $turn === "gameover" ){
-            
+        if ($turn === "gameover") {
+
             $coins = $player->getCoins() + $profit;
             $player->setCoins($coins);
             $highscore = $player->getHighscore();
-            if ( ($player->getHighscore()->getCoins()) < $coins)
-                {
+            if (($player->getHighscore()->getCoins()) < $coins) {
                 $highscore->setCoins($coins);
                 $player->setHighscore($highscore);
             }
@@ -159,7 +153,7 @@ class BlackJackController extends AbstractController
         $currentHand = $game->getCurrentHand();
 
         $session->set("blackjack", $game);
-        
+
         $data = [
             "player" => $player->getName(),
             "player_id" => $player->getId(),
@@ -177,7 +171,7 @@ class BlackJackController extends AbstractController
         ];
         return $this->render('blackjack/gameboard.html.twig', $data);
     }
-    
+
     #[Route("/blackjack/player_stop", name: "blackjack_player_stop")]
     public function blackJackPlayerStop(
         SessionInterface $session,
@@ -218,24 +212,24 @@ class BlackJackController extends AbstractController
         ];
         return $this->render('blackjack/gameboard.html.twig', $data);
     }
-    
+
     #[Route("/proj/highscore", name: "blackjack_highscore", methods: ['GET'])]
     public function blackJackHighscore(
         HighscoreRepository $highscoreRepository
-    //    LoggerInterface $logger 
+        //    LoggerInterface $logger
     ): Response {
-        
+
         $highscores = $highscoreRepository->getHighscores();
-         $data = [
-            "highscores" => $highscores
-         ];
+        $data = [
+           "highscores" => $highscores
+        ];
 
         return $this->render('blackjack/scoreboard.html.twig', $data);
     }
     #[Route("/proj/about/database", name: "blackjack_database", methods: ['GET'])]
     public function blackJackDatabase(
     ): Response {
-        
+
         return $this->render('blackjack/database.html.twig');
     }
 

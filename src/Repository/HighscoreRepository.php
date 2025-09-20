@@ -16,7 +16,7 @@ class HighscoreRepository extends ServiceEntityRepository
         parent::__construct($registry, Highscore::class);
     }
 
-        
+
     /**
      * getHighscores
      *
@@ -24,13 +24,13 @@ class HighscoreRepository extends ServiceEntityRepository
      */
     public function getHighscores(): array
     {
-    return $this->createQueryBuilder('h')
-        ->select('p.name AS player_name', 'h.coins')
-        ->join('h.category', 'p') 
-        ->orderBy('h.coins', 'DESC')
-        ->setMaxResults(10)
-        ->getQuery()
-        ->getArrayResult();
+        return $this->createQueryBuilder('h')
+            ->select('p.name AS player_name', 'h.coins')
+            ->join('h.category', 'p')
+            ->orderBy('h.coins', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getArrayResult();
     }
 
     //    public function findOneBySomeField($value): ?Highscore

@@ -17,7 +17,7 @@ class MultiDeckOfCards
     {
         $this->deck = [];
     }
-    
+
     /**
      * buildMultiDeck
      *
@@ -34,7 +34,7 @@ class MultiDeckOfCards
             }
         }
     }
-        
+
     /**
      * shuffle
      *
@@ -79,10 +79,10 @@ class MultiDeckOfCards
         }
         return $values;
     }
-     /**
-     * getDeck - returns the string representation of the cards in the deck
-     * @return array<string|null> $values
-     */
+    /**
+    * getDeck - returns the string representation of the cards in the deck
+    * @return array<string|null> $values
+    */
     public function getDeck(): array
     {
         $values = [];
@@ -91,7 +91,8 @@ class MultiDeckOfCards
         }
         return $values;
     }
-    public function getNumberOfDecks() {
+    public function getNumberOfDecks()
+    {
         return $this->numberOfDecks;
     }
 }
