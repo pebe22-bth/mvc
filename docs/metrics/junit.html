@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2025-09-21 11:08:17        , with PHPMetrics v2.9.0 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2025-09-21 21:35:02        , with PHPMetrics v2.9.0 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -60,24 +60,24 @@
         <div class="bloc bloc-number">
             <div class="label">Test suites</div>
             <div class="number">
-                9            </div>
+                10            </div>
         </div>
     </div>
     <div class="column">
         <div class="bloc bloc-number">
             <div class="label">Assertions</div>
             <div class="number">
-                48            </div>
+                55            </div>
         </div>
     </div>
     <div class="column">
         <div class="bloc bloc-number">
             <div class="label">
                 classes never called by tests
-                <small>(62.96 %)</small>
+                <small>(59.26 %)</small>
             </div>
             <div class="number">
-                17            </div>
+                16            </div>
         </div>
     </div>
 </div>
@@ -133,17 +133,6 @@
                                                                     <td>
                                         <span class="badge"  style="background-color: hsla(203, 82%, 76%, 0.03);">
                                         0.03                                        </span>
-                                    </td>
-                                                            </tr>
-                                                        <tr>
-                                <td><span class="path">App\Card\MultiDeckOfCards</span></td>
-                                                                    <td>
-                                        <span class="badge"  style="background-color: hsla(203, 82%, 76%, 0.21);">
-                                        6                                        </span>
-                                    </td>
-                                                                    <td>
-                                        <span class="badge"  style="background-color: hsla(203, 82%, 76%, 0.09);">
-                                        0.09                                        </span>
                                     </td>
                                                             </tr>
                                                         <tr>
@@ -382,6 +371,17 @@
                                                                             <br>                                        <span class="badge" title="Cyclomatic complexity of class">
                                             11                                        </span>
                                         <span class="path">App\Card\Game21</span>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <td valign="top"><span class="path">App\Card\MultiDeckTest</span></td>
+                                <td style="padding-bottom: 1em;">
+                                                                                                                    <span class="badge" title="Cyclomatic complexity of class">
+                                            -                                        </span>
+                                        <span class="path">PHPUnit\Framework\TestCase</span>
+                                                                            <br>                                        <span class="badge" title="Cyclomatic complexity of class">
+                                            6                                        </span>
+                                        <span class="path">App\Card\MultiDeckOfCards</span>
                                                                     </td>
                             </tr>
                                                     <tr>
@@ -675,7 +675,7 @@
 
 
             
-            var json = {"name":"Execution time","children":[{"name":"App\\Card\\BlackJackTest","time":0.022334},{"name":"App\\Card\\CardGraphicTest","time":0.000419},{"name":"App\\Card\\CardHandTest","time":0.00057},{"name":"App\\Card\\DeckOfCardsTest","time":0.001773},{"name":"App\\Card\\Game21Test","time":0.01097},{"name":"App\\Dice\\DiceTest","time":0.00489},{"name":"App\\Entity\\BookTest","time":0.003437},{"name":"App\\Entity\\HighscoreTest","time":0.002728},{"name":"App\\Entity\\PlayerTest","time":0.00074}]};
+            var json = {"name":"Execution time","children":[{"name":"App\\Card\\BlackJackTest","time":0.024741},{"name":"App\\Card\\CardGraphicTest","time":0.000486},{"name":"App\\Card\\CardHandTest","time":0.000317},{"name":"App\\Card\\DeckOfCardsTest","time":0.001915},{"name":"App\\Card\\Game21Test","time":0.010593},{"name":"App\\Card\\MultiDeckTest","time":0.005479},{"name":"App\\Dice\\DiceTest","time":0.005812},{"name":"App\\Entity\\BookTest","time":0.003025},{"name":"App\\Entity\\HighscoreTest","time":0.002754},{"name":"App\\Entity\\PlayerTest","time":0.000663}]};
             root = json;
             var nodes = treemap.nodes(json)
                 .filter(function (d) {

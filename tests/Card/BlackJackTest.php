@@ -39,5 +39,32 @@ class BlackJackTest extends TestCase
 
 
     }
+    public function testgetPlayerValue(): void
+    {
+        $game = new BlackJack();
+        $game->startGame(1, 1);
+        $play = $game->playerDraw();
+        $values = $game->getPlayerValue();
+        $res = $values[0];
+        $this->assertTrue($res > 1 && $res < 22);
+
+
+    }
+    public function testgetNumberOfDecks(): void
+    {
+        $game = new BlackJack();
+        $game->startGame(1, 1);
+        $res = $game->getNumberOfDecks();
+        
+        $this->assertEquals(1, $res);
+    }
+    public function testgetNumberOfhands(): void
+    {
+        $game = new BlackJack();
+        $game->startGame(1, 1);
+        $res = $game->getNumberOfHands();
+        
+        $this->assertEquals(1, $res);
+    }
 
 }
