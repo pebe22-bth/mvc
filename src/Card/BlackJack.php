@@ -31,7 +31,6 @@ class BlackJack
         $this->winner = [];
         $this->turn = "player";
         $this->currenthand = 0;
-        $this->profit = [];
     }
     /**
      * initialDraw, two cards per hand + bank 1 card

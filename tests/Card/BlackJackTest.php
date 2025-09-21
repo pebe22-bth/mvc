@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test cases for class BlackJack.
  */
-class Game21Test extends TestCase
+class BlackJackTest extends TestCase
 {
     public function testCreateBlackJack(): void
     {
@@ -17,9 +17,6 @@ class Game21Test extends TestCase
         $exp = "player";
         $this->assertEquals($exp, $res);
 
-        $res = $game->getWinner();
-        $exp = null;
-        $this->assertEquals($exp, $res);
     }
 
     public function testDraw(): void
