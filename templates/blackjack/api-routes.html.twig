@@ -1,0 +1,110 @@
+{% extends "bjbase.html.twig" %}
+
+{% block title %}Black Jack{% endblock %}
+
+{% block main %}
+
+{% include 'blackjack/nav.html.twig' %}
+{% include 'card/flash.html.twig' %}
+
+<h1>JSON Routes</h1>
+<div class="bjstart">
+        <table>
+        <thead>
+            <tr>
+                <th>Namn</th>
+                <th>Metod</th>
+                <th>Path</th>
+                <th>Exempel</th>
+            </tr>
+        </thead>
+        <tbody> 
+            <tr>
+                <td>api_blackjack_users</td>
+                <td>GET</td>
+                <td>api/blackjack/users</td>
+                <td>
+                        <a href="{{ path('api_blackjack_users') }}" target="_blank">api_blackjack_users</a>
+                </td>
+            </tr>
+            <tr>
+                <td>api_blackjack_start</td>
+                <td>POST</td>
+                <td>api/blackjack/start</td>
+                <td>
+                    <form method="post" action="{{ path('api_blackjack_start') }}">
+                        <input type="hidden" name="numberOfDecks" value="3">
+                        <input type="hidden" name="numberOfHands" value="3">
+                        <input type="hidden" name="playerId" value="27">
+                        <button type="submit" name="doit" value="start">api_blackjack_start</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>api_blackjack_draw</td>
+                <td>GET</td>
+                <td>api/blackjack/draw</td>
+                <td>
+                        <a href="{{ path('api_blackjack_draw') }}" target="_blank">api_blackjack_draw</a>
+                </td>
+            </tr>
+            <tr>
+                <td>api_blackjack_stop</td>
+                <td>GET</td>
+                <td>api/blackjack/stop</td>
+                <td>
+                        <a href="{{ path('api_blackjack_stop') }}" target="_blank">api_blackjack_stop</a>
+                </td>
+            </tr>
+            <tr>
+                <td>api_blackjack_highscore</td>
+                <td>GET</td>
+                <td>api/blackjack/highscore</td>
+                <td>
+                        <a href="{{ path('api_blackjack_highscore') }}" target="_blank">api_blackjack_highscore</a>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+</div>
+
+{% apply markdown_to_html %}
+##  Att spela över API'et
+
+Du kan spela hela spelet över API'er. 
+Samma användardatabas används, men du kan inte lägga upp nya spelare.
+Pågående spel lagras i sessionen, så se till att enabla cookies om du kör CLI.
+api_blackjack_draw används både för att dra kort till spelaren och banken.
+
+## Metoder
+
+### api_blackjack_users
+Returns all defined users.
+|parameter|Type|Description|
+|--|--|--|
+|(none)|
+### api_blackjack_start
+Starts a new game (that is stored in the session)
+|parameter|Type|Description|
+|--|--|--|
+|numberOfDecks|integer|Valid values 1-8|
+|numberOfHands|integer|Valid values 1-3|
+|playerId|integer|Player Id as returned from api_blackjack_users|
+### api_blackjack_draw
+A new card is added to the active player hand, or bank hand if turn = "bank"
+|parameter|Type|Description|
+|--|--|--|
+|(none)|
+### api_blackjack_stop
+Player stops and next hand is made active. If last hand, the run goes to the bank.
+|parameter|Type|Description|
+|--|--|--|
+|(none)|
+### api_blackjack_highscore
+Returns the highest number of coins for all players 
+|parameter|Type|Description|
+|--|--|--|
+|(none)|
+
+{% endapply %}
+{% endblock %}

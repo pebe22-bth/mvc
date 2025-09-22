@@ -10,20 +10,16 @@
 
     <h1>Databasen</h1>
     <p> 
-        En bild på ett ER diagram av tabellerna.
-För varje tabell beskriv i en mening vad som sparas i tabellen.
-Förklara hur du löste eventuella relationer mellan tabellerna.
-Berätta om du använde SQLite eller någon annan databas.
-Berätta om du gjorde enhetstester mot databasen.
-Berätta om/hur du lyckades med enhetstester på Scrutinizer med databasen.
-Berätta med egna ord (cirka 15 meningar) om hur du ser på fördelar, nackdelar, likheter och skillnader mellan ORM och det sätt vi jobbade med databasen i databaskursen.
+        
 
     </p>
     {% apply markdown_to_html %}
+    ## ER
+    
     ![Flödesdiagram]({{ asset('images/blackjack/database.png') }})
-    ## player
+    ### Player-tabellen
     Här sparas ett unikt id, namn och antal pengar som spelaren för tillfället har.
-    ## Highscore
+    ### Highscore-tabellen
     Här sparas det högsta antal pengar respektive spelare har haft med en referens (player_id) till spelarens id i player-tabellen.
 
     ## Relationer 
@@ -33,46 +29,30 @@ Berätta med egna ord (cirka 15 meningar) om hur du ser på fördelar, nackdelar
     SQLite används.
 
     ## Enhetstester
-    Enhetstester har inte gjorts mot databasen
+    Enhetstester körs på tabellernas ORM Entities, fick dock inte till fungerande tester på funktionerna som 
+    finns definierade i ORM Repository.
 
     ## Enhetstester på scrutinizer med databasen
+    Scrutinizer verkar inte fånga uppkorrekt att enhetstester körts med ORM ramverket: 
+    Test coverage markeras med ett frågetecken.
 
     ## Erfarenheter av ORM respektive "direkt access" till databasen.
-    
-    ## Pseudokod över bankens logik
-    ```
-    
-    spelarens_poäng = x, y, z
-    bankens_poäng = dra_kort()
-    while ( bankens_poäng < 17 ) {
-        bankens_poäng += dra_kort()
-    }
-    if ( bankens_poäng > 21) {
-        winner = spelaren
-        vinst = +1
-    }
-    if ( bankens_poäng > spelarens_poäng ){
-        winner = banken
-        vinst = -1
-        }
-    if ( bankens_poäng = spelarens_poäng ){
-        winner = draw
-        vinst = 0
-        }  
+    Tanken med ORM är god och det fungerar bra, dock är det en startsträcka att lära sig var och hur 
+    funktioner i klasserna ska skrivas och Entities och Repositories förhåller sig till koden.
+    I databaskursen var vi tvungna att komponera sql, conatraints, foreign keys, etc själv, medan man
+    med ORM får en del gratis. man får desutom hjälp med funktioner i php istället för att skriva avancerad 
+    SQL, vilket kan vara bra för de som inte är så bevandrade i SQL. Förodliugen är det lättare att strukturera sina 
+    klasser med ORM och med det få ökad möjlighet till användbarhet, men det  skulle jag behöver mer erfarenhet 
+    för att förstå bättre så blir spekulation.
+    Genom att ORM har koll på RDBMS-specifik SQL så slipper man vara expert på vad som fungerar i olika miljöer.
+    Detta är dock inget man kan nyttja on-the-fly vilket är synd. När jag bytte från MariaDB till SQLite3 behövde jag 
+    generera om mina "migreringar" - det hade ju varit sjysst om ORM hade stöd för att migrera från en 
+    databashanterare till en annan med hjälp av att generera en migreringsfil för det.
+    Förmodligen begränsar ORM om man vill nyttja avancerat SQL.
 
-    ```
-    ## Klasser
-    - Card - befintlig klass som representerar ett kort
-    Behöver lägga till en metod som returnerar kortets värde 1-14
-    - DeckOfCards - befintlig klass som representerar kortleken
-    - CardHand - befintlig klass som representerar spelarens och bankens hand
-    Behövs främst för att visa korten, utan grafik hade vi klarat oss utan.
-    - BlackJack - klass som representerar spelet Black Jack
+    
     {% endapply %}
 
-    
-
-<p></p>
 
 
 {% endblock %}

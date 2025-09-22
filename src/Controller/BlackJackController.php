@@ -14,7 +14,7 @@ use App\Card\BlackJack;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Psr\Log\LoggerInterface;
+
 
 class BlackJackController extends AbstractController
 {
@@ -232,6 +232,11 @@ class BlackJackController extends AbstractController
 
         return $this->render('blackjack/database.html.twig');
     }
+    #[Route("/proj/api", name: "blackjack_api", methods: ['GET'])]
+    public function blackJackAPI(
+    ): Response {
 
+        return $this->render('blackjack/api-routes.html.twig');
+    }
 
 }

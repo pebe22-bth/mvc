@@ -137,3 +137,7 @@
 .bj p, table {
     margin: 0.5rem;
 }
+.bj input:read-only {
+  font-weight: bold;
+  opacity: 0.6; 
+}

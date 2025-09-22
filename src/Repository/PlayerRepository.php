@@ -25,6 +25,14 @@ class PlayerRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+    public function findAllPlayers(): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.id, p.name, p.coins')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
 
     //    /**
     //     * @return Player[] Returns an array of Player objects

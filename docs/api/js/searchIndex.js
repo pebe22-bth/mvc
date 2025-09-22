@@ -461,6 +461,36 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-APIController.html#method_jsonQuote"
         },                {
+            "fqsen": "\\App\\Controller\\BlackJackAPIController",
+            "name": "BlackJackAPIController",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackAPIController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\BlackJackAPIController\u003A\u003AapiBlackjackUsers\u0028\u0029",
+            "name": "apiBlackjackUsers",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackAPIController.html#method_apiBlackjackUsers"
+        },                {
+            "fqsen": "\\App\\Controller\\BlackJackAPIController\u003A\u003AapiBlackjackStart\u0028\u0029",
+            "name": "apiBlackjackStart",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackAPIController.html#method_apiBlackjackStart"
+        },                {
+            "fqsen": "\\App\\Controller\\BlackJackAPIController\u003A\u003AapiBlackJackDraw\u0028\u0029",
+            "name": "apiBlackJackDraw",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackAPIController.html#method_apiBlackJackDraw"
+        },                {
+            "fqsen": "\\App\\Controller\\BlackJackAPIController\u003A\u003AapiBlackJackStop\u0028\u0029",
+            "name": "apiBlackJackStop",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackAPIController.html#method_apiBlackJackStop"
+        },                {
+            "fqsen": "\\App\\Controller\\BlackJackAPIController\u003A\u003AapiBlackJackHighscore\u0028\u0029",
+            "name": "apiBlackJackHighscore",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackAPIController.html#method_apiBlackJackHighscore"
+        },                {
             "fqsen": "\\App\\Controller\\BlackJackController",
             "name": "BlackJackController",
             "summary": "",
@@ -505,6 +535,11 @@ Search.appendIndex(
             "name": "blackJackDatabase",
             "summary": "",
             "url": "classes/App-Controller-BlackJackController.html#method_blackJackDatabase"
+        },                {
+            "fqsen": "\\App\\Controller\\BlackJackController\u003A\u003AblackJackAPI\u0028\u0029",
+            "name": "blackJackAPI",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackController.html#method_blackJackAPI"
         },                {
             "fqsen": "\\App\\Controller\\BookAPIController",
             "name": "BookAPIController",
@@ -1100,6 +1135,11 @@ Search.appendIndex(
             "name": "findName",
             "summary": "",
             "url": "classes/App-Repository-PlayerRepository.html#method_findName"
+        },                {
+            "fqsen": "\\App\\Repository\\PlayerRepository\u003A\u003AfindAllPlayers\u0028\u0029",
+            "name": "findAllPlayers",
+            "summary": "",
+            "url": "classes/App-Repository-PlayerRepository.html#method_findAllPlayers"
         },                {
             "fqsen": "\\",
             "name": "\\",
