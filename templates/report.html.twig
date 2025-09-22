@@ -235,14 +235,117 @@ kanske pekar på vissa ramverk - speciellt inom säkerhet: OWASP t.ex och då fi
 man arbetar iställer för att man bara bekräftar i ett dokument att man uppfyller krav.
 
 
-
-
-
-
 ### TIL
 - Scrutinizer användbart verktyg
 - Använd en del mätetal med sunt förnuft - funkar koden och du redan är nöjd med kvaliteten kanske du inte ska in 
 och pilla i onödan bara för att få upp en del statistik.
+{% endapply %}
+
+<h2 id="kmom10">Kmom10</h2>
+
+{% apply markdown_to_html %}
+
+### Krav 1-3 Webbplats
+Krav 1-3 implementerades med hjälp av ett blackjack-spel. 
+De befinliga klasserna som användes för Card och 21 återanvändes med vissa kompletteringar som en MultiDeck-klass för att kunna 
+använda upp till 8 kortlekar i spelet. 
+  
+Man startar spelet genom att skapa en ny användare eller välja en befintlig. Nya spelare får alltid
+10 pengar och man kan inte själv sätta in fler eller ta ut det man vunnit ;(.  Vitsen med det är att man ska kunna jämföra med varandra
+i den Highscore-lista som är implementerad.
+  
+Spelets flöde och logiken för hur man vinner eller förlorar och hur många pengar man får/förlorar finns beskriven i proj/about.
+Endast grundfunktionaliteten i Blackjack är implementerad: Inga splittar eller andra specialare.
+Min projekt-site har en egen layout inspirerad av casino-färger och bakgrund. De url'er som beskrivs i kraven
+är implementerade och används i en projekt-specifik navbar.
+  
+Testfall är skapade med över 90% coverage på det som implementerats i kmom10. Docs är uppdaterat.
+README.fil finns i repot som innehåller scrutinizer badges.
+
+### Krav 4 JSON API
+Ett API finns implementerat för Blackjack-spelet och beskrivs på proj/api.
+
+Jag har impleneterat totalt 5 routes och de är listade i den ordning man förmodligen vill använda dem: Från att lista vilka 
+spelare som finns, att starta spelet som en av de användare som finns och 1-3  händer, att dra kort respektiva stanna när man är nöjd.
+  
+Förutom att lägga upp nya användare är det fullt möjligt att göra alla moment i spelet med de API anrop som finns implementerade.
+Man kan även lista Highscores.
+
+
+4 routes anropas med GET utan parametrar och den som startar spelet implementeras med POST och behöver innehålla 3 parametrar: Antal kortlekar,
+antal händer och spelarens ID.
+  
+För att testa API'et. valde jag att lägga in exempel-länkar samt en knapp för POST anrop i beskrivningen på proj/api.
+Data i pågående spel sparas i sessionen. Kör man i en browser så ordnar den det åt dig, men testar du via curl så behöver man hålla rätt på sin
+cookie-fil. API använder ett annat namn på sessionen, så man kan ha samtidiga spel i webläsare / API utan att det stör varandra.
+
+
+
+### Krav 5 ORM
+Jag valde att använda SQLite3 då jag hade återkommande problem med .env inställningar för MariaDB på studentservern som jag inte lyckades lösa.
+I databasen lagras spelarna med namn och "kontosaldo". Tabellen Player innehåller Id, Name, Coins. Tabellen Highscore innehåller Id, player_id 
+och coins med en foreign constraint tillbaks till Player.
+  
+När jag skapade Entitied med ORM CLI kunde jag lägga in constraints med en OnToOne relation, vilket fungerade bra även om jag inte fick välja alla detaljer. ORM skapade även get/setHighscore funktion i Player vilket jag använde för att uppdatera highscore för en spelare när de vunnit
+mer pengar än de haft tidigare. Med andra ord lagras endast spelare och antal pengar i databasen medan pågående speldata lagras i sessionen.
+  
+Databas-dokumentationen finns i proj/about/database med ER diagram och beskrivning. Jag implementerade enhetstester på Entity-metoder men 
+inte på Repository metoder. Scrutinizer visar endast ? för ORM tester, men de syns i rapport från PHPUnit.
+Det finns även en beskrivning i proj/about/database hur jag upplevde fördelar, nackdelar, likheter och skillnader mellan ORM och det sätt vi jobbade med databasen i databaskursen.
+  
+Det finns även en länk från proj/about till proj/about/database.
+
+### Krav 6 Avancerade features
+- Valbart antal kortlekar, 1-8.
+Jag fångade upp på wikipedia när jag läste om regler att man på casinon använder 1-8 ihopblandade kortlekar, så tänkte att det kan vara
+något att implementera. Jag gjorde det genom att låta spelaren välja antal kortlekar vid start av spelet. Jag återanvänder Deck-klassen 
+för att skapa kortlekar och la till en ny klass MultiDeck som implementerar den "större" kortleken som sedan används i spelet.
+  
+- Highscore
+Jag implementerade en "Highscore" lista genom att vid varje avslutat spel jämföra nuvarande antal pengar för spelaren med värdet i Highscore.
+Skulle antal pengar vara större så skrivs det nya värdet in.
+  
+För att man inte bara ska kunna få Highscore genom att sätta in mer pengar tog jag bort den möjligheten och bestämde helt enkelt att nya spelare alltid startar med 10 pengar. Är man dålig skulle man kunna hamna på minus, men det är ok att spela på kredit.
+  
+Highscore har en egen websida proj/highscore och man kan även komma åt den via API.
+  
+- Multipla spelare
+Utan flera spelare faller iden med Highscore-lista så behövde även implementera det såklart. Dessutom behövde jag ett use-case för databasen
+så det fick bli lagring av spelardata och highscores.
+Jag skapade formulär för att välja någon befintlig spelare eller skapa en ny vid speluppstart. 
+  
+Namnet på spelare behöver vara unika vilket kontrolleras vid spelstart. 
+
+
+Vid spel via API kan man dels 1. lista befintliga användare med deras unika Id, dels 2. ange vilket Id man ska spela som vid start av spel.
+  
+
+
+
+- Fullständigt spel via API / Gemensam Draw-funktion
+I 21-spelet hade jag olika congtrollers för player_draw och bank_draw, men mycket av koden var samma med små skillnader. Jag ersatte dessa två metoder med en gemensam "draw"-metod där jag håller rätt på om det är spelarens tur (och vilken hand 1-3) eller bankens tur. Genom att återanvända denna även för API controllern undvek jag mycket redundant kod, även om det blev en del extra att hålla rätt på. 
+  
+Jag la stor vikt vid att man ska kunna genomföra ett komplett spel via API'et, vilket nu är möjligt med endast 4 olika anrop (bortser från highscore som bara är för info). Vet man bara sitt spelar-id så skulle man klara sig på 3 olika anrop.
+  
+
+
+### Genomförande
+
+
+Projektet gick bra att genomföra och blev en bra repetition på tidigare kursmoment. Jag lider dock av tidsbrist då jag gör detta utöver fultidsarbete, vilket gör att tiden inte riktigt räcker till. Jag har definitivt spenderat mer än de uppskattade antal timmarna i alla kursmomenten och tycker att kursmomenten kanske är i överkant sett till hur stor arbetsinsats det är. För någon som kan ingående verktyg 
+utvecklings-/studentmiljö sedan tidigare går det nog att komma undan med den tiden, men inte när man ska testa sig fram och lära av sina misstag som man gör när man lär sig nya saker.
+  
+Inget moment är för svårt i kursen utan svårigheten ligger i att hinna med inom den tidsram man har - samt i vissa fall förstå vad som förväntas. Jag valde den enklaste vägen för projektet och arbetsinsatsen var ändå rimlig - dock minst det dubbla mot de angivna 20-40 
+timmar som uppskattats i instruktionen. 
+  
+### Tankar om kursen    
+Betygssättningen baseras på mängd arbete som utförs och inte på kunskapsnivån hos studenten. De optionella kraven upplever jag inte vara svårare men kräver en större arbetsinsats. Det kanske är så det ska fungera, men hade förväntat mig stigande svårighetsgrad för att nå
+högre betyg.
+  
+Det enda jag kan tänka på som var svårt och som jag la åt sidan för att jag inte ville lägga mer tid på det var .env variabler för databasen:
+Hur de uppförde sig i CLI respektive web (olika) och att fel variabler användes på studentservern medan det fungerade i min egen miljö. 
+  
+Likt de tidigare dbwebb kurserna tycker jag materialet är bra och väl genomarbetat - dock lätt att missa i de olika lagren av redovisningskrav.
 
 {% endapply %}
 

@@ -66,7 +66,7 @@ class Player
 
     public function setHighscore(Highscore $highscore): static
     {
-        // set the owning side of the relation if necessary
+        
         if ($highscore->getCategory() !== $this) {
             $highscore->setCategory($this);
         }
