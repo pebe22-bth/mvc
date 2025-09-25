@@ -292,8 +292,11 @@ mer pengar än de haft tidigare. Med andra ord lagras endast spelare och antal p
 Databas-dokumentationen finns i proj/about/database med ER diagram och beskrivning. Jag implementerade enhetstester på Entity-metoder men 
 inte på Repository metoder. Scrutinizer visar endast ? för ORM tester, men de syns i rapport från PHPUnit.
 Det finns även en beskrivning i proj/about/database hur jag upplevde fördelar, nackdelar, likheter och skillnader mellan ORM och det sätt vi jobbade med databasen i databaskursen.
-  
+
 Det finns även en länk från proj/about till proj/about/database.
+  
+Det går att återställa databasen genom att trycka på knappen i proj/about/database.
+
 
 ### Krav 6 Avancerade features
 - Valbart antal kortlekar, 1-8.
@@ -304,46 +307,48 @@ för att skapa kortlekar och la till en ny klass MultiDeck som implementerar den
 - Highscore
 Jag implementerade en "Highscore" lista genom att vid varje avslutat spel jämföra nuvarande antal pengar för spelaren med värdet i Highscore.
 Skulle antal pengar vara större så skrivs det nya värdet in.
-  
-För att man inte bara ska kunna få Highscore genom att sätta in mer pengar tog jag bort den möjligheten och bestämde helt enkelt att nya spelare alltid startar med 10 pengar. Är man dålig skulle man kunna hamna på minus, men det är ok att spela på kredit.
-  
+För att man inte bara ska kunna få Highscore genom att sätta in mer pengar tog jag bort den möjligheten och bestämde helt enkelt att nya 
+spelare alltid startar med 10 pengar. Är man dålig skulle man kunna hamna på minus, men det är ok att spela på kredit.
 Highscore har en egen websida proj/highscore och man kan även komma åt den via API.
   
 - Multipla spelare
 Utan flera spelare faller iden med Highscore-lista så behövde även implementera det såklart. Dessutom behövde jag ett use-case för databasen
 så det fick bli lagring av spelardata och highscores.
 Jag skapade formulär för att välja någon befintlig spelare eller skapa en ny vid speluppstart. 
-  
 Namnet på spelare behöver vara unika vilket kontrolleras vid spelstart. 
-
-
 Vid spel via API kan man dels 1. lista befintliga användare med deras unika Id, dels 2. ange vilket Id man ska spela som vid start av spel.
   
 
 
-
 - Fullständigt spel via API / Gemensam Draw-funktion
-I 21-spelet hade jag olika congtrollers för player_draw och bank_draw, men mycket av koden var samma med små skillnader. Jag ersatte dessa två metoder med en gemensam "draw"-metod där jag håller rätt på om det är spelarens tur (och vilken hand 1-3) eller bankens tur. Genom att återanvända denna även för API controllern undvek jag mycket redundant kod, även om det blev en del extra att hålla rätt på. 
-  
-Jag la stor vikt vid att man ska kunna genomföra ett komplett spel via API'et, vilket nu är möjligt med endast 4 olika anrop (bortser från highscore som bara är för info). Vet man bara sitt spelar-id så skulle man klara sig på 3 olika anrop.
+I 21-spelet hade jag olika congtrollers för player_draw och bank_draw, men mycket av koden var samma med små skillnader. Jag ersatte dessa 
+två metoder med en gemensam "draw"-metod där jag håller rätt på om det är spelarens tur (och vilken hand 1-3) eller bankens tur. Genom att 
+återanvända denna även för API controllern undvek jag mycket redundant kod, även om det blev en del extra att hålla rätt på. 
+Jag la stor vikt vid att man ska kunna genomföra ett komplett spel via API'et, vilket nu är möjligt med endast 4 olika anrop (bortser från 
+highscore som bara är för info). Vet man bara sitt spelar-id så skulle man klara sig på 3 olika anrop.
   
 
 
 ### Genomförande
 
 
-Projektet gick bra att genomföra och blev en bra repetition på tidigare kursmoment. Jag lider dock av tidsbrist då jag gör detta utöver fultidsarbete, vilket gör att tiden inte riktigt räcker till. Jag har definitivt spenderat mer än de uppskattade antal timmarna i alla kursmomenten och tycker att kursmomenten kanske är i överkant sett till hur stor arbetsinsats det är. För någon som kan ingående verktyg 
-utvecklings-/studentmiljö sedan tidigare går det nog att komma undan med den tiden, men inte när man ska testa sig fram och lära av sina misstag som man gör när man lär sig nya saker.
+Projektet gick bra att genomföra och blev en bra repetition på tidigare kursmoment. Jag lider dock av tidsbrist då jag gör detta utöver 
+fultidsarbete, vilket gör att tiden inte riktigt räcker till. Jag har definitivt spenderat mer än de uppskattade antal timmarna i alla 
+kursmomenten och tycker att kursmomenten kanske är i överkant sett till hur stor arbetsinsats det är. För någon som kan ingående verktyg 
+utvecklings-/studentmiljö sedan tidigare går det nog att komma undan med den tiden, men inte när man ska testa sig fram och lära av sina 
+misstag som man gör när man lär sig nya saker.
   
-Inget moment är för svårt i kursen utan svårigheten ligger i att hinna med inom den tidsram man har - samt i vissa fall förstå vad som förväntas. Jag valde den enklaste vägen för projektet och arbetsinsatsen var ändå rimlig - dock minst det dubbla mot de angivna 20-40 
+Inget moment är för svårt i kursen utan svårigheten ligger i att hinna med inom den tidsram man har - samt i vissa fall förstå vad som 
+förväntas. Jag valde den enklaste vägen för projektet och arbetsinsatsen var ändå rimlig - dock minst det dubbla mot de angivna 20-40 
 timmar som uppskattats i instruktionen. 
   
 ### Tankar om kursen    
-Betygssättningen baseras på mängd arbete som utförs och inte på kunskapsnivån hos studenten. De optionella kraven upplever jag inte vara svårare men kräver en större arbetsinsats. Det kanske är så det ska fungera, men hade förväntat mig stigande svårighetsgrad för att nå
+Betygssättningen baseras på mängd arbete som utförs och inte på kunskapsnivån hos studenten. De optionella kraven upplever jag inte 
+vara svårare men kräver en större arbetsinsats. Det kanske är så det ska fungera, men hade förväntat mig stigande svårighetsgrad för att nå
 högre betyg.
   
 Det enda jag kan tänka på som var svårt och som jag la åt sidan för att jag inte ville lägga mer tid på det var .env variabler för databasen:
-Hur de uppförde sig i CLI respektive web (olika) och att fel variabler användes på studentservern medan det fungerade i min egen miljö. 
+Hur de uppförde sig i CLI respektive web (olika) och att olika variabler användes på studentservern och min utvecklingsmiljö. 
   
 Likt de tidigare dbwebb kurserna tycker jag materialet är bra och väl genomarbetat - dock lätt att missa i de olika lagren av redovisningskrav.
 

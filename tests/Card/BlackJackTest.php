@@ -66,5 +66,49 @@ class BlackJackTest extends TestCase
         
         $this->assertEquals(1, $res);
     }
+    public function testgetBankDraw(): void
+    {
+        $game = new BlackJack();
+        $game->startGame(1, 1);
+        $game->playerStop();
+        while ( $game->getTurn() === "player" ){
+            $player = $game->playerDraw();
+            }
+        while ( $game->getTurn() === "bank"){
+            $game->bankDraw();
+        }
+        $res = $game->getWinner();
 
+        $this->assertMatchesRegularExpression("/^(player|bank)$/", $res[0]);
+    }
+    public function testPlayerBust(): void
+    {
+        $game = new BlackJack();
+        $game->startGame(1, 1);
+        
+        while ( $game->getWinner() !== ["bank"] ){
+            $player = $game->playerDraw();
+            }
+        
+        $res = $game->getProfit();
+        $this->assertEquals( -1, $res);
+    }
+    public function testSetPlayer(): void
+    {
+        $game = new BlackJack();
+        $game->setPlayer("1");
+        
+        $res = $game->getPlayer();
+        $this->assertEquals( 1, $res);
+    }
+    public function testgetDeck(): void
+    {
+        $game = new BlackJack();
+        $game->startGame(2,1);
+        $res = $game->getDeck();
+        $exp = 104;
+        $this->assertEquals($exp, count($res));
+
+
+    }
 }

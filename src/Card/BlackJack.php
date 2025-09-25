@@ -140,6 +140,11 @@ class BlackJack
             if ($this->currenthand >= $this->getNumberOfHands()) {
                 $this->turn = "bank";
             }
+            if ( // Bank won all hands already
+                ( array_count_values($this->winner)["bank"] ?? 0 ) === $this->getNumberOfHands()  
+                ){
+                $this->turn = "gameover";
+            }
         }
         return $this->getPlayerValue();
 

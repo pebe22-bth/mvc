@@ -238,5 +238,17 @@ class BlackJackController extends AbstractController
 
         return $this->render('blackjack/api-routes.html.twig');
     }
+    #[Route("/proj/reset_database", name: "blackjack_reset_database", methods: ['POST'])]
+        public function blackjackResetDatabase(
+        PlayerRepository $playerRepository
+    ): Response {
+        $playerRepository->reset();
 
+        $this->addFlash(
+            'notice',
+            'Databasen är återställd!'
+        );
+
+        return $this->redirectToRoute('blackjack_start');
+    }
 }

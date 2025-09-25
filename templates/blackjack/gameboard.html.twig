@@ -13,8 +13,10 @@
 </p>
 {% if turn == "player" %}
     <p>Din tur!</p>
-{% else %}
+{% elseif turn == "bank" %}
     <p>Bankens tur</p>
+{% elseif turn == "gameover" %}
+    <p>Game Over!</p>
 {% endif %}
 <div class="bjhands-row"> 
 {% for i, hand in player_hand %}

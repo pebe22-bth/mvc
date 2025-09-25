@@ -33,7 +33,42 @@ class PlayerRepository extends ServiceEntityRepository
             ->getArrayResult()
         ;
     }
+    public function reset(): void
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            DELETE FROM highscore;
+            ";
+        $conn->executeQuery($sql);
 
+        $sql = "
+            DELETE FROM player;
+            ";
+        $conn->executeQuery($sql);
+
+        $sql = "
+            UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE ( NAME='highscore' OR NAME='player');
+            ";
+        $conn->executeQuery($sql);
+
+        $sql = "
+            INSERT INTO player (name, coins) 
+            VALUES
+                ('Lisa','7'),
+                ('Pelle','11'),
+                ('Berra','28');
+            ";
+        $conn->executeQuery($sql);
+        $sql = "
+            INSERT INTO highscore (category_id, coins) 
+            VALUES
+                ((SELECT id from player WHERE name = 'Lisa'),'7'),
+                ((SELECT id from player WHERE name = 'Pelle'),'11'),
+                ((SELECT id from player WHERE name = 'Berra'),'28');
+            ";
+        $conn->executeQuery($sql);
+
+    }
     //    /**
     //     * @return Player[] Returns an array of Player objects
     //     */

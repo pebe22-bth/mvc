@@ -35,7 +35,7 @@
                     <form method="post" action="{{ path('api_blackjack_start') }}">
                         <input type="hidden" name="numberOfDecks" value="3">
                         <input type="hidden" name="numberOfHands" value="3">
-                        <input type="hidden" name="playerId" value="27">
+                        <input type="hidden" name="playerId" value="1">
                         <button type="submit" name="doit" value="start">api_blackjack_start</button>
                     </form>
                 </td>
@@ -71,10 +71,10 @@
 {% apply markdown_to_html %}
 ##  Att spela över API'et
 
-Du kan spela hela spelet över API'er. 
-Samma användardatabas används, men du kan inte lägga upp nya spelare.
-Pågående spel lagras i sessionen, så se till att enabla cookies om du kör CLI.
-api_blackjack_draw används både för att dra kort till spelaren och banken.
+Du kan spela hela spelet över API'et. 
+Samma användardatabas används som i websidan, men du kan inte lägga upp nya spelare.
+Pågående spel lagras i sessionen, så se till att enabla cookies om du kör CLI som t.ex curl.
+api_blackjack_draw används både för att dra kort både när det är spelaren och bankens tur.
 
 ## Metoder
 

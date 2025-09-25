@@ -8,11 +8,15 @@
 {%include('card/flash.html.twig') %}
 
 
-    <h1>Databasen</h1>
-    <p> 
-        
-
-    </p>
+  
+    <p>
+          
+    
+    <form method="post" action="{{ path('blackjack_reset_database') }}" >
+            <button type="submit" name="id" value="doit"> Återställ databasen</button>
+    </form>
+    <p></p>
+    </p>    
     {% apply markdown_to_html %}
     ## ER
     
