@@ -64,6 +64,14 @@
                         <a href="{{ path('api_blackjack_highscore') }}" target="_blank">api_blackjack_highscore</a>
                 </td>
             </tr>
+            <tr>
+                <td>api_blackjack_deck</td>
+                <td>GET</td>
+                <td>api/blackjack/deck</td>
+                <td>
+                        <a href="{{ path('api_blackjack_deck') }}" target="_blank">api_blackjack_deck</a>
+                </td>
+            </tr>
         </tbody>
         </table>
 </div>
@@ -105,6 +113,11 @@ Returns the highest number of coins for all players
 |parameter|Type|Description|
 |--|--|--|
 |(none)|
-
+### api_blackjack_deck
+Returns the remaining deck. Top card is the last in the array.
+NOTE: This is cheating!. 
+|parameter|Type|Description|
+|--|--|--|
+|(none)|
 {% endapply %}
 {% endblock %}

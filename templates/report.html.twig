@@ -324,8 +324,8 @@ Vid spel via API kan man dels 1. lista befintliga användare med deras unika Id,
 I 21-spelet hade jag olika congtrollers för player_draw och bank_draw, men mycket av koden var samma med små skillnader. Jag ersatte dessa 
 två metoder med en gemensam "draw"-metod där jag håller rätt på om det är spelarens tur (och vilken hand 1-3) eller bankens tur. Genom att 
 återanvända denna även för API controllern undvek jag mycket redundant kod, även om det blev en del extra att hålla rätt på. 
-Jag la stor vikt vid att man ska kunna genomföra ett komplett spel via API'et, vilket nu är möjligt med endast 4 olika anrop (bortser från 
-highscore som bara är för info). Vet man bara sitt spelar-id så skulle man klara sig på 3 olika anrop.
+Jag la stor vikt vid att man ska kunna genomföra ett komplett spel via API'et, vilket nu är möjligt med endast 4 olika anrop.
+Dessutom kan man se highscore och har möjlighet att tjuvkika i leken. Vet man bara sitt spelar-id så skulle man klara sig på 3 olika anrop.
   
 
 

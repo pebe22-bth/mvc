@@ -232,4 +232,34 @@ class BlackJackAPIController extends AbstractController
         return $response;
 
     }
+    #[Route("/api/blackjack/deck", name: "api_blackjack_deck")]
+    public function apiBlackJackDeck(
+        SessionInterface $session,
+        PlayerRepository $playerRepository,
+        ManagerRegistry $doctrine
+    ): Response {
+        $game = $session->get("api_blackjack");
+        if ($game instanceof BlackJack) {
+        $deck = $game->getDeck();
+
+        $returnCode = "OK";
+        $data = [
+           "returnCode" => $returnCode,
+           "deck" => $deck
+        ];
+
+        } else {
+            $returnCode = "Error: Not Player turn, or no game started";
+            $data = [
+                "returnCode" => $returnCode
+            ];
+        }
+              
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+
+    }
 }

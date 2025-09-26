@@ -491,6 +491,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-BlackJackAPIController.html#method_apiBlackJackHighscore"
         },                {
+            "fqsen": "\\App\\Controller\\BlackJackAPIController\u003A\u003AapiBlackJackDeck\u0028\u0029",
+            "name": "apiBlackJackDeck",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackAPIController.html#method_apiBlackJackDeck"
+        },                {
             "fqsen": "\\App\\Controller\\BlackJackController",
             "name": "BlackJackController",
             "summary": "",
@@ -540,6 +545,11 @@ Search.appendIndex(
             "name": "blackJackAPI",
             "summary": "",
             "url": "classes/App-Controller-BlackJackController.html#method_blackJackAPI"
+        },                {
+            "fqsen": "\\App\\Controller\\BlackJackController\u003A\u003AblackjackResetDatabase\u0028\u0029",
+            "name": "blackjackResetDatabase",
+            "summary": "",
+            "url": "classes/App-Controller-BlackJackController.html#method_blackjackResetDatabase"
         },                {
             "fqsen": "\\App\\Controller\\BookAPIController",
             "name": "BookAPIController",
@@ -1140,6 +1150,11 @@ Search.appendIndex(
             "name": "findAllPlayers",
             "summary": "",
             "url": "classes/App-Repository-PlayerRepository.html#method_findAllPlayers"
+        },                {
+            "fqsen": "\\App\\Repository\\PlayerRepository\u003A\u003Areset\u0028\u0029",
+            "name": "reset",
+            "summary": "",
+            "url": "classes/App-Repository-PlayerRepository.html#method_reset"
         },                {
             "fqsen": "\\",
             "name": "\\",

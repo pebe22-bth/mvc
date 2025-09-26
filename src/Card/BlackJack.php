@@ -269,11 +269,8 @@ class BlackJack
      */
     public function getDeck(): array
     {
-        $values = [];
-        foreach ($this->deck as $card) {
-            $values[] = $card->getAsString();
-        }
-        return $values;
+       
+        return $this->deck->getDeck() ;
     }
     /**
      * getPlayer
