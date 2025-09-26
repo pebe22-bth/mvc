@@ -91,7 +91,12 @@ class MultiDeckOfCards
         }
         return $values;
     }
-    public function getNumberOfDecks()
+    /**
+     * getNumberOfDecks
+     *
+     * @return int
+     */
+    public function getNumberOfDecks(): int
     {
         return $this->numberOfDecks;
     }

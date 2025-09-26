@@ -49,8 +49,6 @@ class BlackJackAPIController extends AbstractController
 
         if ($playerId) { // existing player
             $player = $playerRepository->find($playerId);
-            $playerName = $player->getName();
-    
             $game = new BlackJack();
             $game->startGame($numberOfDecks, $numberOfHands);
             $game->setPlayer($player->getId());
@@ -76,7 +74,7 @@ class BlackJackAPIController extends AbstractController
             "current_hand" => $currentHand,
             "profit" => $game->getProfit()
             ];
-        } else { 
+        } else {
             $returnCode = "Error: Id does not exist";
             $data = [
             "returnCode" => $returnCode
@@ -97,10 +95,11 @@ class BlackJackAPIController extends AbstractController
     ): Response {
         $game = $session->get("api_blackjack");
         $player = null;
-        if (($game->getPlayer()) && ($game->getTurn() !== "gameover") ){
+        if (($game->getPlayer()) && ($game->getTurn() !== "gameover")) {
             $player = $playerRepository->find($game->getPlayer());
-            $playerName = $player->getName();;
-        
+
+            ;
+
             if ($game->getTurn() == "player") {
                 $game->playerDraw();
             } elseif ($game->getTurn() == "bank") {
@@ -163,43 +162,41 @@ class BlackJackAPIController extends AbstractController
     #[Route("/api/blackjack/stop", name: "api_blackjack_stop")]
     public function apiBlackJackStop(
         SessionInterface $session,
-        PlayerRepository $playerRepository,
-        ManagerRegistry $doctrine
+        PlayerRepository $playerRepository
     ): Response {
         $game = $session->get("api_blackjack");
-        if (($game instanceof BlackJack) && ( $game->getTurn() === "player" )) {
+        if (($game instanceof BlackJack) && ($game->getTurn() === "player")) {
 
-                $player = null;
-                if ($game->getPlayer()) {
-                    $player = $playerRepository->find($game->getPlayer());
-                }
-                $game->playerStop();
-                $session->set("api_blackjack", $game);
+            $player = null;
+            if ($game->getPlayer()) {
+                $player = $playerRepository->find($game->getPlayer());
+            }
+            $game->playerStop();
+            $session->set("api_blackjack", $game);
 
-                $playerHand = $game->getPlayerHandsAsString();
-                $playerValue = $game->getPlayerValue();
-                $bankHand = $game->getBankHand();
-                $bankValue = $game->getHandValue($bankHand);
-                $winner = $game->getWinner();
-                $turn = $game->getTurn();
-                $profit = $game->getProfit();
-                $currentHand = $game->getCurrentHand();
+            $playerHand = $game->getPlayerHandsAsString();
+            $playerValue = $game->getPlayerValue();
+            $bankHand = $game->getBankHand();
+            $bankValue = $game->getHandValue($bankHand);
+            $winner = $game->getWinner();
+            $turn = $game->getTurn();
+            $profit = $game->getProfit();
+            $currentHand = $game->getCurrentHand();
 
-                $returnCode = "OK";
-                $data = [
-                    "returnCode" => $returnCode,
-                    "returnCode" => "OK",
-                    "player" => $player->getName(),
-                    "player_hand" =>  $playerHand,
-                    "player_handValue" => $playerValue,
-                    "bank_hand" => $bankHand->getString(),
-                    "bank_handValue" => $bankValue,
-                    "winner" => $winner,
-                    "turn" => $turn,
-                    "current_hand" => $currentHand,
-                    "profit" => $profit,
-                    "coins" => $player->getCoins()
-                ];
+            $returnCode = "OK";
+            $data = [
+                "returnCode" => $returnCode,
+                "player" => $player->getName(),
+                "player_hand" =>  $playerHand,
+                "player_handValue" => $playerValue,
+                "bank_hand" => $bankHand->getString(),
+                "bank_handValue" => $bankValue,
+                "winner" => $winner,
+                "turn" => $turn,
+                "current_hand" => $currentHand,
+                "profit" => $profit,
+                "coins" => $player->getCoins()
+            ];
         } else {
             $returnCode = "Error: Not Player turn, or no game started";
             $data = [
@@ -215,7 +212,7 @@ class BlackJackAPIController extends AbstractController
 
     #[Route("/api/blackjack/highscore", name: "api_blackjack_highscore")]
     public function apiBlackJackHighscore(
-            HighscoreRepository $highscoreRepository
+        HighscoreRepository $highscoreRepository
     ): Response {
 
         $highscores = $highscoreRepository->getHighscores();
@@ -224,7 +221,7 @@ class BlackJackAPIController extends AbstractController
            "returnCode" => $returnCode,
            "highscores" => $highscores
         ];
-              
+
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -234,19 +231,17 @@ class BlackJackAPIController extends AbstractController
     }
     #[Route("/api/blackjack/deck", name: "api_blackjack_deck")]
     public function apiBlackJackDeck(
-        SessionInterface $session,
-        PlayerRepository $playerRepository,
-        ManagerRegistry $doctrine
+        SessionInterface $session
     ): Response {
         $game = $session->get("api_blackjack");
         if ($game instanceof BlackJack) {
-        $deck = $game->getDeck();
+            $deck = $game->getDeck();
 
-        $returnCode = "OK";
-        $data = [
-           "returnCode" => $returnCode,
-           "deck" => $deck
-        ];
+            $returnCode = "OK";
+            $data = [
+               "returnCode" => $returnCode,
+               "deck" => $deck
+            ];
 
         } else {
             $returnCode = "Error: Not Player turn, or no game started";
@@ -254,7 +249,7 @@ class BlackJackAPIController extends AbstractController
                 "returnCode" => $returnCode
             ];
         }
-              
+
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT

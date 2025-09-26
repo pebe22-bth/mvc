@@ -15,6 +15,12 @@ class PlayerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Player::class);
     }
+    /**
+     * findName
+     *
+     * @param  mixed $value
+     * @return Player
+     */
     public function findName($value): ?Player
     {
         return $this->createQueryBuilder('p')
@@ -25,6 +31,26 @@ class PlayerRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+    /**
+     * findId
+     *
+     * @param  int $value
+     * @return Player
+     */
+    public function findId($value): ?Player
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    /**
+     * findAllPlayers
+     *
+     * @return array<mixed>
+     */
     public function findAllPlayers(): ?array
     {
         return $this->createQueryBuilder('p')

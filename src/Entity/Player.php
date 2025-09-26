@@ -23,6 +23,11 @@ class Player
     private ?Highscore $highscore = null;
 
 
+    /**
+     * getId
+     *
+     * @return int
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,11 @@ class Player
         return $this;
     }
 
+    /**
+     * getName
+     *
+     * @return string
+     */
     public function getName(): ?string
     {
         return $this->name;
@@ -47,6 +57,11 @@ class Player
         return $this;
     }
 
+    /**
+     * getCoins
+     *
+     * @return int
+     */
     public function getCoins(): ?int
     {
         return $this->coins;
@@ -59,6 +74,11 @@ class Player
         return $this;
     }
 
+    /**
+     * getHighscore
+     *
+     * @return Highscore
+     */
     public function getHighscore(): ?Highscore
     {
         return $this->highscore;
@@ -66,7 +86,7 @@ class Player
 
     public function setHighscore(Highscore $highscore): static
     {
-        
+
         if ($highscore->getCategory() !== $this) {
             $highscore->setCategory($this);
         }

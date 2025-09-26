@@ -15,7 +15,6 @@ use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-
 class BlackJackController extends AbstractController
 {
     #[Route("/proj", name: "blackjack_home")]
@@ -55,7 +54,7 @@ class BlackJackController extends AbstractController
 
         $playerId = $request->request->get('playerId');
         if ($playerId) { // existing player
-            $player = $doctrine->getRepository(Player::class)->find($playerId);
+            $player = $playerRepository->findId($playerId);
             $playerName = $player->getName();
         } else { // New player
             $playerName = $request->request->get('playerName');
@@ -111,12 +110,13 @@ class BlackJackController extends AbstractController
     #[Route("/proj/draw", name: "blackjack_draw")]
     public function blackJackDraw(
         SessionInterface $session,
-        ManagerRegistry $doctrine
+        ManagerRegistry $doctrine,
+        PlayerRepository $playerRepository
     ): Response {
         $game = $session->get("blackjack");
-        $player = null;
+
         if ($game->getPlayer()) {
-            $player = $doctrine->getRepository(Player::class)->find($game->getPlayer());
+            $player = $playerRepository->findId($playerId);
         } else {
             throw new Exception("Player in session doesn't exist in the database, or database problem.");
         }
@@ -175,7 +175,7 @@ class BlackJackController extends AbstractController
     #[Route("/blackjack/player_stop", name: "blackjack_player_stop")]
     public function blackJackPlayerStop(
         SessionInterface $session,
-        ManagerRegistry $doctrine
+        PlayerRepository $playerRepository
     ): Response {
         $game = $session->get("blackjack");
         if (($game instanceof BlackJack) === false) {
@@ -183,7 +183,7 @@ class BlackJackController extends AbstractController
         }
         $player = null;
         if ($game->getPlayer()) {
-            $player = $doctrine->getRepository(Player::class)->find($game->getPlayer());
+            $player = $playerRepository->findId($playerId);
         }
         $game->playerStop();
         $session->set("blackjack", $game);
@@ -239,7 +239,7 @@ class BlackJackController extends AbstractController
         return $this->render('blackjack/api-routes.html.twig');
     }
     #[Route("/proj/reset_database", name: "blackjack_reset_database", methods: ['POST'])]
-        public function blackjackResetDatabase(
+    public function blackjackResetDatabase(
         PlayerRepository $playerRepository
     ): Response {
         $playerRepository->reset();

@@ -24,7 +24,7 @@ class BlackJackTest extends TestCase
         $game = new BlackJack();
         $game->startGame(1, 1);
         $res = $game->getPlayerValue();
-        $this->assertTrue(( $res[0] >= 2 ) && ( $res[0] <= 21) );
+        $this->assertTrue(($res[0] >= 2) && ($res[0] <= 21));
 
         $game->playerStop();
         $res = $game->getTurn();
@@ -42,7 +42,7 @@ class BlackJackTest extends TestCase
         $game = new BlackJack();
         $game->startGame(1, 1);
         $res = $game->getNumberOfDecks();
-        
+
         $this->assertEquals(1, $res);
     }
     public function testgetNumberOfhands(): void
@@ -50,7 +50,7 @@ class BlackJackTest extends TestCase
         $game = new BlackJack();
         $game->startGame(1, 1);
         $res = $game->getNumberOfHands();
-        
+
         $this->assertEquals(1, $res);
     }
     public function testgetBankDraw(): void
@@ -58,10 +58,10 @@ class BlackJackTest extends TestCase
         $game = new BlackJack();
         $game->startGame(1, 1);
         $game->playerStop();
-        while ( $game->getTurn() === "player" ){
+        while ($game->getTurn() === "player") {
             $player = $game->playerDraw();
-            }
-        while ( $game->getTurn() === "bank"){
+        }
+        while ($game->getTurn() === "bank") {
             $game->bankDraw();
         }
         $res = $game->getWinner();
@@ -72,60 +72,58 @@ class BlackJackTest extends TestCase
     {
         $game = new BlackJack();
         $game->startGame(1, 1);
-        while ( $game->getWinner() !== ["bank"] ){
+        while ($game->getWinner() !== ["bank"]) {
             $player = $game->playerDraw();
-            }
-        
+        }
+
         $res = $game->getProfit();
-        $this->assertEquals( -1, $res);
+        $this->assertEquals(-1, $res);
     }
     public function testBankBust(): void
     {
         $winner = [];
         $bankValue = 0;
-        while ( ( $winner !== ["player"] ) && ( $bankValue < 22 ) ){
+        while (($winner !== ["player"]) && ($bankValue < 22)) {
             $game = new BlackJack();
             $game->startGame(1, 1);
             $game->playerStop();
-            while ( $game->getTurn() !== "gameover" )
-                {
+            while ($game->getTurn() !== "gameover") {
                 $game->bankDraw();
-                }
+            }
             $winner = $game->getWinner();
             $bank = $game->getBankHand();
             $bankValue = $game->getHandValue($bank);
         }
         $res = $game->getProfit();
-        $this->assertEquals( 1, $res);
+        $this->assertEquals(1, $res);
     }
     public function testBankWins(): void
     {
         $winner = [];
-        while ( $winner !== ["bank"] ){
+        while ($winner !== ["bank"]) {
             $game = new BlackJack();
             $game->startGame(1, 1);
             $game->playerStop();
-            while ( $game->getTurn() !== "gameover" )
-                {
+            while ($game->getTurn() !== "gameover") {
                 $game->bankDraw();
-                }
+            }
             $winner = $game->getWinner();
         }
         $res = $game->getProfit();
-        $this->assertEquals( -1, $res);
+        $this->assertEquals(-1, $res);
     }
     public function testSetPlayer(): void
     {
         $game = new BlackJack();
-        $game->setPlayer("1");
-        
+        $game->setPlayer(1);
+
         $res = $game->getPlayer();
-        $this->assertEquals( 1, $res);
+        $this->assertEquals(1, $res);
     }
     public function testGetDeck(): void
     {
         $game = new BlackJack();
-        $game->startGame(2,1);
+        $game->startGame(2, 1);
         $res = $game->playerDraw();
         $exp = 1;
         $this->assertEquals($exp, count($res));
@@ -137,7 +135,7 @@ class BlackJackTest extends TestCase
     public function testGetPlayerAndBankHand(): void
     {
         $game = new BlackJack();
-        $game->startGame(1,1);
+        $game->startGame(1, 1);
         $hand = $game->getPlayerHand(0);
 
         $res = $game->getHandValue($hand);
@@ -151,7 +149,7 @@ class BlackJackTest extends TestCase
     public function testGetPlayerHandAsString(): void
     {
         $game = new BlackJack();
-        $game->startGame(1,1);
+        $game->startGame(1, 1);
         $hand = $game->getPlayerHandsAsString();
         $exp = 2;
         $this->assertEquals($exp, count($hand[0]));
@@ -161,32 +159,42 @@ class BlackJackTest extends TestCase
     public function testGetCurrentHand(): void
     {
         $game = new BlackJack();
-        $game->startGame(1,1);
+        $game->startGame(1, 1);
         $res = $game->getCurrentHand();
         $exp = 0;
         $this->assertEquals($exp, $res);
 
 
     }
+    /**
+     * testBankDrawTooEarly
+     *
+     * @return void
+     */
     public function testBankDrawTooEarly(): void
     {
         $game = new BlackJack();
-        $game->startGame(1,1);
+        $game->startGame(1, 1);
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Player has not stopped");
-        $res = $game->bankDraw();
+        $game->bankDraw();
 
     }
+    /**
+     * testPlayerDrawTooLate
+     *
+     * @return void
+     */
     public function testPlayerDrawTooLate(): void
     {
         $game = new BlackJack();
-        $game->startGame(1,1);
+        $game->startGame(1, 1);
         $game->playerStop();
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Player has stopped or game not started");
         $res = $game->playerDraw();
     }
-    
-   
+
+
 
 }

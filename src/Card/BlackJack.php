@@ -141,8 +141,8 @@ class BlackJack
                 $this->turn = "bank";
             }
             if ( // Bank won all hands already
-                ( array_count_values($this->winner)["bank"] ?? 0 ) === $this->getNumberOfHands()  
-                ){
+                (array_count_values($this->winner)["bank"] ?? 0) === $this->getNumberOfHands()
+            ) {
                 $this->turn = "gameover";
             }
         }
@@ -217,6 +217,11 @@ class BlackJack
     {
         return $this->playerHand[$number];
     }
+    /**
+     * getPlayerHandsAsString
+     *
+     * @return array<array<string|null>>
+     */
     public function getPlayerHandsAsString(): array
     {
         $data = [];
@@ -245,10 +250,20 @@ class BlackJack
     {
         return $this->turn;
     }
+    /**
+     * getCurrentHand
+     *
+     * @return int
+     */
     public function getCurrentHand(): int
     {
         return $this->currenthand;
     }
+    /**
+     * getNumberOfHands
+     *
+     * @return int
+     */
     public function getNumberOfHands(): int
     {
         return count($this->playerHand);
@@ -256,7 +271,7 @@ class BlackJack
     /**
      * getWinner - returns the winner.
      *
-     * @return array
+     * @return array<string>
      */
     public function getWinner(): array
     {
@@ -269,7 +284,7 @@ class BlackJack
      */
     public function getDeck(): array
     {
-       
+
         return $this->deck->getDeck() ;
     }
     /**

@@ -22,7 +22,8 @@ class HighscoreTest extends TestCase
         $highscore = new Highscore();
         $player = new Player();
         $highscore->setCategory($player);
-        $res = $highscore->getCategory()->getId();
+        $hplayer = $highscore->getCategory();
+        $res = $hplayer->getId();
         $exp = $player->getId();
         $this->assertEquals($exp, $res);
     }

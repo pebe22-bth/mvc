@@ -20,7 +20,7 @@ class HighscoreRepository extends ServiceEntityRepository
     /**
      * getHighscores
      *
-     * @return array
+     * @return array<int>
      */
     public function getHighscores(): array
     {
