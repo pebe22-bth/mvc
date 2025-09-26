@@ -114,9 +114,9 @@ class BlackJackController extends AbstractController
         PlayerRepository $playerRepository
     ): Response {
         $game = $session->get("blackjack");
-
+        
         if ($game->getPlayer()) {
-            $player = $playerRepository->findId($playerId);
+            $player = $playerRepository->findId($game->getPlayer());
         } else {
             throw new Exception("Player in session doesn't exist in the database, or database problem.");
         }
@@ -183,7 +183,7 @@ class BlackJackController extends AbstractController
         }
         $player = null;
         if ($game->getPlayer()) {
-            $player = $playerRepository->findId($playerId);
+            $player = $playerRepository->findId($game->getPlayer());
         }
         $game->playerStop();
         $session->set("blackjack", $game);
