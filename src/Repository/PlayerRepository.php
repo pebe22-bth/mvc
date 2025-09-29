@@ -88,9 +88,9 @@ class PlayerRepository extends ServiceEntityRepository
         $sql = "
             INSERT INTO highscore (category_id, coins) 
             VALUES
-                ((SELECT id from player WHERE name = 'Lisa'),'7'),
-                ((SELECT id from player WHERE name = 'Pelle'),'11'),
-                ((SELECT id from player WHERE name = 'Berra'),'28');
+                ((SELECT id from player WHERE name = 'Lisa'),'10'),
+                ((SELECT id from player WHERE name = 'Pelle'),'32'),
+                ((SELECT id from player WHERE name = 'Berra'),'29');
             ";
         $conn->executeQuery($sql);
 
